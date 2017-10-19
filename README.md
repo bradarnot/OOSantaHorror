@@ -2,9 +2,11 @@
 
 A Santa themed horror RPG
 
+Ho Ho Ho...You gon die son
+
 Team:
+- Bradley (Brad) Arnot
+- Jeffrey (Jeff) Lipnick
 - Kelsey Dowd
-- Brad Arnot
-- Jeffrey Lipnick
-- Nick Pfeufer
+- Nicholas (Nick) Pfeufer
 

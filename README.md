@@ -7,6 +7,6 @@ Ho Ho Ho...You gon die son
 Team:
 - Bradley (Brad) Arnot
 - Jeffrey (Jeff) Lipnick
-- Kelsey Dowd
+- Kelsey (Kelsey) Dowd
 - Nicholas (Nick) Pfeufer
 

@@ -1,4 +1,4 @@
-public class Subject {
+public abstract class Subject {
 	protected ArrayList<Observer> observers;
 
 	public abstract void notify(Input input);

@@ -1,22 +1,22 @@
 
 public class Mouse {
-	public void mouseClicked(e MouseEvent) {
+	public void mouseClicked(MouseEvent e) {
 		
 	}
 	
-	public void mouseEntered(e MouseEvent) {
+	public void mouseEntered(MouseEvent e) {
 		
 	}
 	
-	public void mouseExited(e MouseEvent) {
+	public void mouseExited(MouseEvent e) {
 		
 	}
 	
-	public void mousePressed(e MouseEvent) {
+	public void mousePressed(MouseEvent e) {
 		
 	}
 	
-	public void mouseReleased(e MouseEvent) {
+	public void mouseReleased(MouseEvent e) {
 		
 	}
 }

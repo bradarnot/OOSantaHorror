@@ -5,9 +5,9 @@ public class Interaction {
 	private boolean swap;
 	private String effectDirection;
 	private int northInteraction;
-	private int easttInteraction;
+	private int eastInteraction;
 	private int southInteraction;
-	private int westtInteraction;
+	private int westInteraction;
 	
 	public String getDialogue() {
 		return dialogue;
@@ -27,17 +27,34 @@ public class Interaction {
 	public void setEffectDirection(String effectDirection) {
 		this.effectDirection = effectDirection;
 	}
+	
+	public int getNextInteraction(String direction) {
+		if(direction.equals("north")) {
+			return northInteraction;
+		}
+		else if(direction.equals("east")) {
+			return eastInteraction;
+		}
+		else if(direction.equals("south")) {
+			return southInteraction;
+		}
+		else if(direction.equals("west")) {
+			return westInteraction;
+		}
+		return -1;
+	}
+	
 	public int getNorthInteraction() {
 		return northInteraction;
 	}
 	public void setNorthInteraction(int northInteraction) {
 		this.northInteraction = northInteraction;
 	}
-	public int getEasttInteraction() {
-		return easttInteraction;
+	public int getEastInteraction() {
+		return eastInteraction;
 	}
-	public void setEasttInteraction(int easttInteraction) {
-		this.easttInteraction = easttInteraction;
+	public void setEastInteraction(int easttInteraction) {
+		this.eastInteraction = easttInteraction;
 	}
 	public int getSouthInteraction() {
 		return southInteraction;
@@ -45,11 +62,11 @@ public class Interaction {
 	public void setSouthInteraction(int southInteraction) {
 		this.southInteraction = southInteraction;
 	}
-	public int getWesttInteraction() {
-		return westtInteraction;
+	public int getWestInteraction() {
+		return westInteraction;
 	}
-	public void setWesttInteraction(int westtInteraction) {
-		this.westtInteraction = westtInteraction;
+	public void setWestInteraction(int westtInteraction) {
+		this.westInteraction = westtInteraction;
 	}
 	
 	

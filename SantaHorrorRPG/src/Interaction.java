@@ -3,43 +3,57 @@ public class Interaction {
 
 	private String dialogue;
 	private boolean swap;
-	private String effect;
-	private int[] nextInteraction;
+	private String effectDirection;
+	private int northInteraction;
+	private int easttInteraction;
+	private int southInteraction;
+	private int westtInteraction;
 	
 	public String getDialogue() {
 		return dialogue;
-		
 	}
-	
-	public boolean getSwap() {
+	public void setDialogue(String dialogue) {
+		this.dialogue = dialogue;
+	}
+	public boolean isSwap() {
 		return swap;
-		
 	}
-	
-	public String getEffect() {
-		return dialogue;
-		
-	}
-	
-	public int getNextInteraction(String direction) {
-		return 0;
-		
-	}
-	
-	public void setDialogue(String words) {
-		
-	}
-	
 	public void setSwap(boolean swap) {
-		
+		this.swap = swap;
+	}
+	public String getEffectDirection() {
+		return effectDirection;
+	}
+	public void setEffectDirection(String effectDirection) {
+		this.effectDirection = effectDirection;
+	}
+	public int getNorthInteraction() {
+		return northInteraction;
+	}
+	public void setNorthInteraction(int northInteraction) {
+		this.northInteraction = northInteraction;
+	}
+	public int getEasttInteraction() {
+		return easttInteraction;
+	}
+	public void setEasttInteraction(int easttInteraction) {
+		this.easttInteraction = easttInteraction;
+	}
+	public int getSouthInteraction() {
+		return southInteraction;
+	}
+	public void setSouthInteraction(int southInteraction) {
+		this.southInteraction = southInteraction;
+	}
+	public int getWesttInteraction() {
+		return westtInteraction;
+	}
+	public void setWesttInteraction(int westtInteraction) {
+		this.westtInteraction = westtInteraction;
 	}
 	
-	public void setEffect(String effect) {
-		
-	}
 	
-	public void setNextInteraction(int interaction) {
-		
-	}
+	
+
 	
 }

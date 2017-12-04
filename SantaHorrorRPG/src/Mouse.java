@@ -1,3 +1,4 @@
+import java.awt.event.MouseEvent;
 
 public class Mouse {
 	public void mouseClicked(MouseEvent e) {

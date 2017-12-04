@@ -14,7 +14,7 @@ public class Monster extends Actor {
 		
 	}
 	
-	public void loadFromFile(String name, Position, position) {
+	public void loadFromFile(String name, Position position) {
 		
 	}
 

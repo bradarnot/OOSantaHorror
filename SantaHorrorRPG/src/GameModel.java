@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import javax.swing.JButton;
+import javax.swing.JPanel;
 
 public class GameModel {
 	
@@ -57,11 +60,11 @@ public class GameModel {
 	}
 	
 	public Position getPosition(GameObj object) {
-		
+		return new Position();
 	}
 	
 	public GameObj getObject(Position pos) {
-		
+		return new GameObj();
 	}
 	
 }

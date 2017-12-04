@@ -25,7 +25,7 @@ public class GameObj {
 	}
 	
 	public Interaction interact(boolean byPlayer, String direction) {
-		
+		return new Interaction();
 	}
 	
 	public void swap() {
@@ -33,7 +33,7 @@ public class GameObj {
 	}
 	
 	public boolean isObject(String name) {
-		
+		return true;
 	}
 	
 }

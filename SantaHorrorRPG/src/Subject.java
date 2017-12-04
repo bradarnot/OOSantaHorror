@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public abstract class Subject {
 	protected ArrayList<Observer> observers;
 

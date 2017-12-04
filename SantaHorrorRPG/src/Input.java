@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 public class Input {
 	private ArrayList<String> inputs;

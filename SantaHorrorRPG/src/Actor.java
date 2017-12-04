@@ -10,7 +10,7 @@ public class Actor extends GameObj {
 	}
 	
 	public boolean damage(int damage) {
-		
+		return true;
 	}
 	
 	public void move() {

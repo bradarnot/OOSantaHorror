@@ -14,7 +14,9 @@ import java.sql.Statement;
 
 public class DBConnection {
 	
-	private Connection connection;
+	private String databaseName;
+	private String user;
+	private String password;
 	
 	public DBConnection(String database, String user, String password) {
 		try {
@@ -23,86 +25,40 @@ public class DBConnection {
 			e.printStackTrace();
 		}
 		
-		createDBIfNotExists(database, user, password);
-		createTables(database, user, password);
+		setDatabaseName(database);
+		setUser(user);
+		setPassword(password);
+		
+		createDBIfNotExists();
+		createTablesIfNotExists();
 	}
 	
-	private Connection connect(String database, String user, String password) {
+	private void createDatabase() {
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		Connection conn = null;
-		try {
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + database, user, password);
-			System.out.println("Connection established.");
-		} catch (SQLException e) {
-			if (e.getErrorCode() == 1049) {
-				System.out.println("Database does not exist. Creating database...");
-				createDatabase(user, password);
-				try {
-					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + database, user, password);
-					System.out.println("Connection established.");
-					
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
-			} else {
-				e.printStackTrace();
-				System.out.println("Unknown SQL Error. Error code:");
-				System.out.println(e.getErrorCode());
-			}
-		}
-		return conn;
-	}
-	
-	private void createDatabase(String user, String password) {
-		try {
-			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/", user, password);
+			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/", this.user, this.password);
 			Statement statement = null;
 			statement = conn.createStatement();
-			String sql = "CREATE DATABASE santa_horror";
+			String sql = "CREATE DATABASE " + this.databaseName;
 			statement.executeUpdate(sql);
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		}		
-	}
-	
-	private void execute(String sql) {
-		try {
-			Statement statement = null;
-			statement = this.connection.createStatement();
-			statement.executeUpdate(sql);
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		}
-	}
-	
-	private void close() {
-		try {
-			this.connection.close();
-			System.out.println("Database connection closed.");
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
+		}		
 	}
 
-	private Boolean createDBIfNotExists(String database, String user, String password) {
-		Boolean exists = false;
+	private void createDBIfNotExists() {
 		Connection conn = null;
 		try {
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + database, user, password);
-			System.out.println("Connection established.");
-			exists = true;
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + this.databaseName, this.user, this.password);
+			conn.close();
+			System.out.println("Database already exists.");
 		} catch (SQLException e) {
 			if (e.getErrorCode() == 1049) {
 				System.out.println("Database does not exist. Creating database...");
-				createDatabase(user, password);
+				createDatabase();
 				try {
-					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + database, user, password);
-					exists = true;
-					System.out.println("Connection established.");
+					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + this.databaseName, this.user, this.password);
+					conn.close();
+					System.out.println("Database created.");
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
@@ -112,23 +68,59 @@ public class DBConnection {
 				System.out.println(e.getErrorCode());
 			}
 		}
-		return exists;
 	}
 	
-	public void createTables(String database, String user, String password) {
-		
-	}
-	
-	public Connection getConnection() {
-		return connection;
+	private void createTablesIfNotExists() {
+		try {
+			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + this.databaseName, this.user, this.password);
+			Statement statement = null;
+			statement = conn.createStatement();
+			String sql = "CREATE TABLE save ("
+					+ "save_id int NOT NULL AUTO_INCREMENT, "
+					+ "player varchar(255), "
+					+ "created DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, "
+					+ "PRIMARY KEY (save_id)"
+					+ ");";
+			statement.executeUpdate(sql);
+			System.out.println("Save table created.");
+		} catch (SQLException e) {
+			if (e.getErrorCode() == 1050) {
+				System.out.println("Save table already exists.");
+			} else {
+				e.printStackTrace();
+				System.out.println("A SQL error occurred. Error code: ");
+				System.out.println(e.getErrorCode());
+			}
+		}	
 	}
 
-	public void setConnection(Connection connection) {
-		this.connection = connection;
+	public String getDatabaseName() {
+		return databaseName;
+	}
+
+	public void setDatabaseName(String databaseName) {
+		this.databaseName = databaseName;
+	}
+
+	public String getUser() {
+		return user;
+	}
+
+	public void setUser(String user) {
+		this.user = user;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	
 	public static void main(String[] argv) {
 		DBConnection conn = new DBConnection("santa_horror", "santa", "password");
-		conn.close();
 	}
+
 }
+

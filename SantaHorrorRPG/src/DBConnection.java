@@ -1,5 +1,7 @@
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -40,6 +42,7 @@ public class DBConnection {
 			statement = conn.createStatement();
 			String sql = "CREATE DATABASE " + this.databaseName;
 			statement.executeUpdate(sql);
+			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}		
@@ -75,13 +78,14 @@ public class DBConnection {
 			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + this.databaseName, this.user, this.password);
 			Statement statement = null;
 			statement = conn.createStatement();
-			String sql = "CREATE TABLE save ("
+			String sql = "CREATE TABLE saves ("
 					+ "save_id int NOT NULL AUTO_INCREMENT, "
 					+ "player varchar(255), "
 					+ "created DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, "
 					+ "PRIMARY KEY (save_id)"
 					+ ");";
 			statement.executeUpdate(sql);
+			conn.close();
 			System.out.println("Save table created.");
 		} catch (SQLException e) {
 			if (e.getErrorCode() == 1050) {
@@ -92,6 +96,35 @@ public class DBConnection {
 				System.out.println(e.getErrorCode());
 			}
 		}	
+	}
+	
+	public ResultSet getSaves() {
+		ResultSet results = null;
+		try {
+			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + this.databaseName, this.user, this.password);
+			Statement statement = null;
+			statement = conn.createStatement();
+			String sql = "SELECT * FROM saves;";
+			results = statement.executeQuery(sql);
+			
+			try {
+				while (results.next()) {
+				    // Read values using column name
+				    int id = results.getInt("save_id");
+				    String player = results.getString("player");
+				    Date date = results.getDate("created");
+				    System.out.printf("%s %s %s \n", id, player, date);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return results;
 	}
 
 	public String getDatabaseName() {
@@ -119,7 +152,8 @@ public class DBConnection {
 	}
 	
 	public static void main(String[] argv) {
-		DBConnection conn = new DBConnection("santa_horror", "santa", "password");
+		DBConnection db = new DBConnection("santa_horror", "santa", "password");
+		db.getSaves();
 	}
 
 }

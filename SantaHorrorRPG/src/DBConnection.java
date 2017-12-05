@@ -1,9 +1,13 @@
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /* Steps to make the DatabaseConnection work
  * 
@@ -98,33 +102,37 @@ public class DBConnection {
 		}	
 	}
 	
-	public ResultSet getSaves() {
+	public List<Map<String, Object>> getSaves() {
 		ResultSet results = null;
+		List<Map<String, Object>> resultsList = null;
 		try {
 			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + this.databaseName, this.user, this.password);
 			Statement statement = null;
 			statement = conn.createStatement();
 			String sql = "SELECT * FROM saves;";
 			results = statement.executeQuery(sql);
-			
-			try {
-				while (results.next()) {
-				    // Read values using column name
-				    int id = results.getInt("save_id");
-				    String player = results.getString("player");
-				    Date date = results.getDate("created");
-				    System.out.printf("%s %s %s \n", id, player, date);
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			
+			resultsList = resultSetToList(results);
 			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
-		return results;
+		return resultsList;
+	}
+	
+	/* Source for resultSetToList() function: https://gist.github.com/cworks/4175942 */
+	private List<Map<String, Object>> resultSetToList(ResultSet rs) throws SQLException {
+	    ResultSetMetaData md = rs.getMetaData();
+	    int columns = md.getColumnCount();
+	    List<Map<String, Object>> rows = new ArrayList<Map<String, Object>>();
+	    while (rs.next()){
+	        Map<String, Object> row = new HashMap<String, Object>(columns);
+	        for(int i = 1; i <= columns; ++i){
+	            row.put(md.getColumnName(i), rs.getObject(i));
+	        }
+	        rows.add(row);
+	    }
+	    return rows;
 	}
 
 	public String getDatabaseName() {
@@ -153,7 +161,8 @@ public class DBConnection {
 	
 	public static void main(String[] argv) {
 		DBConnection db = new DBConnection("santa_horror", "santa", "password");
-		db.getSaves();
+		List<Map<String, Object>> results = db.getSaves();
+		System.out.println(results);
 	}
 
 }

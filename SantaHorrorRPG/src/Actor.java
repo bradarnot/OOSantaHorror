@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public abstract class Actor extends GameObj {
 	protected int speed;
 	protected int currentTic;
@@ -5,6 +7,8 @@ public abstract class Actor extends GameObj {
 	protected int direction;
 	protected int health;
 	protected int moveType;
+	protected Random random;
+	protected boolean canMove = false;
 	
 	public Actor(int speed, int currentTic, int imageFrame, int direction, int health, int moveType) {
 		super();
@@ -14,6 +18,7 @@ public abstract class Actor extends GameObj {
 		this.setDirection(direction);
 		this.setHealth(health);
 		this.setMoveType(moveType);
+		this.random = new Random();
 	}
 
 	public int getSpeed() {
@@ -93,6 +98,12 @@ public abstract class Actor extends GameObj {
 		
 	}
 	
+	public void exicuteMove() {
+		if(canMove) {
+			this.position = this.potentialMove();
+		}
+	}
+	
 	public void move() {
 		switch (this.moveType){
 			case 0:
@@ -100,6 +111,11 @@ public abstract class Actor extends GameObj {
 			case 1:
 				break;
 			default:
+				int change = random.nextInt(25);
+				if(change < 8) this.direction = change;
+				this.canMove = true;
+				
+				
 				
 				break;
 		}

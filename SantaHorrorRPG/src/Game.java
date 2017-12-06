@@ -18,6 +18,7 @@ public class Game {
 	public void startGame() {
 		state.update(model, null);
 		state.render(model);
+		state = state.getNextState();
 	}
 	
 	public void gameLoop() {

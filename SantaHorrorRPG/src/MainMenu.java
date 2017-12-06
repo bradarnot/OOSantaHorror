@@ -1,5 +1,7 @@
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.event.*;
+
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -26,13 +28,34 @@ public class MainMenu extends GameState {
 		
 		layout = new GridLayout();
 		
+		GameState firstLevel = new Zone();
+		GameState loadMenu = new LoadMenu();
+		//GameState saveMenu = new SaveMenu();
+		//GameState tutorial = new Zone();
+		
+		
+		start.addActionListener(new ActionListener() {
+	         public void actionPerformed(ActionEvent e) {
+	            nextState = firstLevel;
+	         }          
+	      });
+		loadGame.addActionListener(new ActionListener() {
+	         public void actionPerformed(ActionEvent e) {
+	            nextState = loadMenu;
+	         }          
+	      });
+		quit.addActionListener(new ActionListener() {
+	         public void actionPerformed(ActionEvent e) {
+	            
+	         }          
+	      });
+		
+		
 		mainMenu.add(start);
 		mainMenu.add(loadGame);
 		mainMenu.add(tutorial);
 		mainMenu.add(quit);
 		mainMenu.setLayout(layout);
-		
-		
 	}
 	
 	public int getScreenWidth() {

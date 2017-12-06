@@ -1,5 +1,5 @@
 
-public class Zone {
+public class Zone extends GameState {
 
 	private int zoneid;
 	

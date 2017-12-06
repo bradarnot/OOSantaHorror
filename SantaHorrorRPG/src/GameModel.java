@@ -1,6 +1,5 @@
 import java.util.ArrayList;
-import javax.swing.JButton;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 public class GameModel {
 	
@@ -8,8 +7,15 @@ public class GameModel {
 	private ArrayList<Actor> actors;
 	private FileManager fileManager;
 	private Player player;
-	private JPanel menu;
-	private ArrayList<JButton> buttons;
+	private JFrame f;
+	
+	public GameModel() {
+		objects = new ArrayList<GameObj>();
+		actors = new ArrayList<Actor>();
+		fileManager = new FileManager();
+		player = new Player();
+		f = new JFrame();
+	}
 	
 	public ArrayList<GameObj> getObjects() {
 		return objects;
@@ -27,6 +33,10 @@ public class GameModel {
 		this.actors = actors;
 	}
 	
+	public JFrame getFrame() {
+		return f;
+	}
+	
 	public FileManager getFileManager() {
 		return fileManager;
 	}
@@ -41,22 +51,6 @@ public class GameModel {
 	
 	public void setPlayer(Player player) {
 		this.player = player;
-	}
-	
-	public JPanel getMenu() {
-		return menu;
-	}
-	
-	public void setMenu(JPanel menu) {
-		this.menu = menu;
-	}
-	
-	public ArrayList<JButton> getButtons() {
-		return buttons;
-	}
-	
-	public void setButtons(ArrayList<JButton> buttons) {
-		this.buttons = buttons;
 	}
 	
 	public Position getPosition(GameObj object) {

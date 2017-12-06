@@ -6,15 +6,18 @@ public class Game {
 	private FileManager fileManager;
 	private int zoneid;
 	private int deaths;
-	//private GameState state;
-	//private GameModel model;
+	private GameState state;
+	private GameModel model;
 	
 	public Game() {
-		
+		state = new MainMenu();
+		zoneid = 0;
+		model = new GameModel();
 	}
 	
 	public void startGame() {
-		
+		state.update(model, null);
+		state.render(model);
 	}
 	
 	public void gameLoop() {
@@ -33,16 +36,9 @@ public class Game {
 		
 	}
 	
-	public void update(Input input) {
-		
-	}
-	
-	public void render() {
-		
-	}
-	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		Game g = new Game();
+		g.startGame();
 
 	}
 

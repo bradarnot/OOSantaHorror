@@ -18,7 +18,27 @@ public class NPC extends Actor {
 	
 	public void update(Zone zone) {
 		super.update(zone);
+		if(this.fear == 0) {
+			super.move();			
+		}else {
+			this.fear -= 1;
+			if( zone.canMoveTo(this.potentialMove())) {
+				this.position = this.potentialMove();
+			}else {
+				int temp = random.nextInt(8);
+				while (temp == this.direction) {
+					temp = random.nextInt(8);
+				}
+				this.direction = temp;
+			}
+			
+		}
 		
+	}
+	
+	public boolean damage(int damage) {
+		this.setFear(damage);
+		return super.damage(damage);
 	}
 	
 	public void loadFromFile(String name, Position position) {

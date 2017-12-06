@@ -73,8 +73,7 @@ public abstract class Actor extends GameObj {
 		this.currentTic = (this.currentTic++)%this.speed;
 		if(this.currentTic == 0) {
 			this.move();
-			zone.canMoveTo(this.potentialMove());
-			this.exicuteMove();
+			if(zone.canMoveTo(this.potentialMove())) this.exicuteMove();
 		}
 
 		
@@ -82,8 +81,8 @@ public abstract class Actor extends GameObj {
 	
 	//If it dies it returns false
 	public boolean damage(int damage) {
-		this.health -= damage;
-		return this.health <= 0;
+		this.setHealth(this.getHealth() - damage);
+		return this.getHealth() <= 0;
 	}
 	
 	public Position potentialMove() {

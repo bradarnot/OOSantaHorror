@@ -85,6 +85,8 @@ public abstract class Actor extends GameObj {
 		return this.getHealth() <= 0;
 	}
 	
+	
+	// 0 is north and the directions go around clockwise including diagonals i.e. 6 is west 
 	public Position potentialMove() {
 		int x = this.position.getX();
 		int y = this.position.getY();

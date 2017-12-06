@@ -85,8 +85,8 @@ public class DBConnection {
 			statement = conn.createStatement();
 			String sql = "CREATE TABLE saves ("
 					+ "save_id int NOT NULL AUTO_INCREMENT, "
-					+ "player varchar(255), "
-					+ "created DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, "
+					+ "player varchar(255) UNIQUE, "
+					+ "modified DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, "
 					+ "PRIMARY KEY (save_id)"
 					+ ");";
 			statement.executeUpdate(sql);

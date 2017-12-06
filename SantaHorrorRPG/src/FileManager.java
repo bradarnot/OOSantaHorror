@@ -39,7 +39,7 @@ public class FileManager {
 	public static void main(String[] argv) {
 		JSONObject obj = new JSONObject();
         obj.put("foo", "bar");
-        obj.put("name", "Geraldson");
+        obj.put("name", "Jeff");
         
 		saveToFile("jeff", obj);
 		System.out.println(getSaveFile("jeff"));

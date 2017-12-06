@@ -9,6 +9,12 @@ public class Position {
 		
 	}
 	
+	public Position(int x, int y) {
+		super();
+		this.setX(x);
+		this.setY(y);
+	}
+
 	public int getY() {
 		return x;
 		

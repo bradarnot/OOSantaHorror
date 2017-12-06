@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -100,6 +101,21 @@ public class DBConnection {
 				System.out.println(e.getErrorCode());
 			}
 		}	
+	}
+	
+	public void saveGame(String player) {
+		try {
+			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + this.databaseName, this.user, this.password);
+			String sql = "INSERT INTO saves (player) VALUES (?)";
+			PreparedStatement s = null;
+			s = conn.prepareStatement(sql);
+			s.setString(1, player);
+			s.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 	
 	public List<Map<String, Object>> getSaves() {

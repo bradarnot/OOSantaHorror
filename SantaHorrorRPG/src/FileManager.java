@@ -1,3 +1,4 @@
+import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 public class FileManager {
@@ -24,13 +25,24 @@ public class FileManager {
 	
 	}
 	
-	public String[] getSaveFiles() {
-		return null;
-		
+	public static JSONObject getSaveFile(String player) {
+		String filename = player + ".json";
+		return SavedData.getSavedData(filename);
 	}
 	
-	public void saveToFile() {
-		
+	public static void saveToFile(String player, JSONObject json) {
+		DBConnection db = new DBConnection("santa_horror", "santa", "password");
+		db.saveGame(player);
+		SavedData.save(player, json);
+	}
+	
+	public static void main(String[] argv) {
+		JSONObject obj = new JSONObject();
+        obj.put("foo", "bar");
+        obj.put("name", "Geraldson");
+        
+		saveToFile("jeff", obj);
+		System.out.println(getSaveFile("jeff"));
 	}
 
 }

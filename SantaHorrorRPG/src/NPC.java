@@ -17,6 +17,7 @@ public class NPC extends Actor {
 	}
 	
 	public void update(Zone zone) {
+		super.update(zone);
 		
 	}
 	

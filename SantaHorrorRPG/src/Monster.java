@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 public class Monster extends Actor {
 	public Monster(int speed, int currentTic, int imageFrame, int direction, int health, int moveType, int attackPower) {
@@ -17,7 +18,15 @@ public class Monster extends Actor {
 	}
 	
 	public void update(Zone zone) {
-		
+		super.update(zone);
+		if(this.currentTic == speed-1) {
+			ArrayList<GameObj> adjacent = zone.getAdjacent(this.position);
+			for(int i = 0; i<adjacent.size(); i++) {
+				if(adjacent.get(i) instanceof Player || (this.attackPower > 20 && adjacent.get(i) instanceof NPC))
+					this.attack((Actor) adjacent.get(i));
+			}
+		}
+
 	}
 	
 	public void loadFromFile(String name, Position position) {

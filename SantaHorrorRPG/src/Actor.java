@@ -73,7 +73,10 @@ public abstract class Actor extends GameObj {
 		this.currentTic = (this.currentTic++)%this.speed;
 		if(this.currentTic == 0) {
 			this.move();
+			zone.canMoveTo(this.potentialMove());
+			this.exicuteMove();
 		}
+
 		
 	}
 	

@@ -65,6 +65,10 @@ public abstract class Actor extends GameObj {
 	}
 
 	public void update(Zone zone) {
+		this.currentTic = (this.currentTic++)%this.speed;
+		if(this.currentTic == 0) {
+			this.move();
+		}
 		
 	}
 	
@@ -74,7 +78,31 @@ public abstract class Actor extends GameObj {
 		return this.health <= 0;
 	}
 	
+	public Position potentialMove() {
+		int x = this.position.getX();
+		int y = this.position.getY();
+		if(this.direction == 0 || this.direction == 1 || this.direction == 7)
+			y++;
+		if(this.direction == 3 || this.direction == 4 || this.direction == 5)
+			y--;
+		if(this.direction == 1 || this.direction == 2 || this.direction == 3)
+			x++;
+		if(this.direction == 5 || this.direction == 6 || this.direction == 7)
+			x--;
+		return new Position(x,y);
+		
+	}
+	
 	public void move() {
+		switch (this.moveType){
+			case 0:
+				break;
+			case 1:
+				break;
+			default:
+				
+				break;
+		}
 		
 	}
 

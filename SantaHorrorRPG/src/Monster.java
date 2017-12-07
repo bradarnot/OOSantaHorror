@@ -16,10 +16,10 @@ public class Monster extends Actor {
 		this.attackPower = attackPower;
 	}
 	
-	public void update(Zone zone) {
-		super.update(zone);
+	public void update(GameModel gm) {
+		super.update(gm);
 		if(this.currentTic == speed-1) {
-			ArrayList<GameObj> adjacent = zone.getAdjacent(this.position);
+			ArrayList<GameObj> adjacent = gm.getAdjacent(this.position, 1);
 			for(int i = 0; i<adjacent.size(); i++) {
 				if(adjacent.get(i) instanceof Player || (this.attackPower > 20 && adjacent.get(i) instanceof NPC))
 					this.attack((Actor) adjacent.get(i));

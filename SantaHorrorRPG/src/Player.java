@@ -15,8 +15,8 @@ public class Player extends Actor {
 		this.gender = gender;
 	}
 	
-	public void update(Zone zone) {
-		super.update(zone);
+	public void update(GameModel gm) {
+		super.update(gm);
 		
 	}
 	

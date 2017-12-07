@@ -20,6 +20,7 @@ public class MainMenu extends GameState {
 		screenHeight = height;
 		
 		Image background = Toolkit.getDefaultToolkit().createImage("img" + File.separator +"fireplace.jpg");
+		System.out.println(background);
 		mainMenu = new Menu(background);
 		buttonPanel = new JPanel();
 		quit = new JButton("Quit");
@@ -83,6 +84,11 @@ public class MainMenu extends GameState {
 	}
 	
 	public void render(GameModel gm) {
+		System.out.println("Hi");
+		gm.getFrame().repaint();
+	}
+	
+	public void update(GameModel gm, Input input) {
 		mainMenu.setBounds(0,0,screenWidth-20,screenHeight-20);    
         //mainMenu.setBackground(Color.gray); 
         
@@ -90,11 +96,6 @@ public class MainMenu extends GameState {
 		gm.getFrame().setSize(screenWidth, screenHeight);  
 		gm.getFrame().setLayout(null);  
 		gm.getFrame().setVisible(true);
-		gm.getFrame().repaint();
-	}
-	
-	public void update(GameModel gm, Input input) {
-		
 	}
 	
 	public String toString() {

@@ -66,6 +66,11 @@ public class LoadMenu extends GameState {
 	}
 	
 	public void render(GameModel gm) {
+		
+		gm.getFrame().repaint();
+	}
+	
+	public void update(GameModel gm, Input input) {
 		loadMenu.setBounds(0,0,screenWidth-20,screenHeight-20);    
         loadMenu.setBackground(Color.gray); 
         
@@ -73,11 +78,6 @@ public class LoadMenu extends GameState {
 		gm.getFrame().setSize(screenWidth, screenHeight);  
 		gm.getFrame().setLayout(null);  
 		gm.getFrame().setVisible(true);
-		gm.getFrame().repaint();
-	}
-	
-	public void update(GameModel gm, Input input) {
-		
 	}
 	
 	public String toString() {

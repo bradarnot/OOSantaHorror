@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Zone {
+public class Zone extends GameState {
 
 	private int zoneid;
 	

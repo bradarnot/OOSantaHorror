@@ -1,17 +1,71 @@
-import java.awt.GridLayout;
-import javax.swing.JButton;
-import javax.swing.JPanel;
+import java.awt.*;
+import java.awt.event.*;
+import java.io.File;
+
+import javax.swing.*;
 
 public class MainMenu extends GameState {
 
 	private int screenWidth;
 	private int screenHeight;
-	private JPanel mainMenu;
+	private Menu mainMenu;
+	private JPanel buttonPanel;
 	private JButton quit;
 	private JButton start;
 	private JButton loadGame;
 	private JButton tutorial;
-	private GridLayout layout;
+	
+	public MainMenu(GameModel gm, int width, int height) {
+		screenWidth = width;
+		screenHeight = height;
+		
+		Image background = Toolkit.getDefaultToolkit().createImage("img" + File.separator +"fireplace.jpg");
+		System.out.println(background);
+		mainMenu = new Menu(background);
+		buttonPanel = new JPanel();
+		quit = new JButton("Quit");
+		start = new JButton("Start New Game");
+		loadGame = new JButton("Load Game");
+		tutorial = new JButton("Tutorial");
+		
+		
+		start.addActionListener(new ActionListener() {
+	         public void actionPerformed(ActionEvent e) {
+	            nextState = new Zone();
+	            gm.getFrame().remove(mainMenu);
+	         }          
+	      });
+		loadGame.addActionListener(new ActionListener() {
+	         public void actionPerformed(ActionEvent e) {
+	            nextState = new LoadMenu(gm, screenWidth, screenHeight);
+	            gm.getFrame().remove(mainMenu);
+	         }
+	      });
+		quit.addActionListener(new ActionListener() {
+	         public void actionPerformed(ActionEvent e) {
+	            gm.stop = true;
+	            gm.getFrame().dispose();
+	         }
+	      });
+		
+		buttonPanel.add(start);
+		buttonPanel.add(loadGame);
+		buttonPanel.add(tutorial);
+		buttonPanel.add(quit);
+		
+		buttonPanel.setOpaque(false);
+		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
+		mainMenu.setLayout(new BorderLayout());
+		
+		mainMenu.add(buttonPanel,BorderLayout.EAST);
+		
+		gm.getFrame().add(mainMenu);
+		gm.getFrame().setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		
+		nextState = this;
+		
+		
+	}
 	
 	public int getScreenWidth() {
 		return screenWidth;
@@ -30,11 +84,22 @@ public class MainMenu extends GameState {
 	}
 	
 	public void render(GameModel gm) {
-		
+		System.out.println("Hi");
+		gm.getFrame().repaint();
 	}
 	
 	public void update(GameModel gm, Input input) {
+		mainMenu.setBounds(0,0,screenWidth-20,screenHeight-20);    
+        //mainMenu.setBackground(Color.gray); 
+        
 		
+		gm.getFrame().setSize(screenWidth, screenHeight);  
+		gm.getFrame().setLayout(null);  
+		gm.getFrame().setVisible(true);
+	}
+	
+	public String toString() {
+		return "MainMenu";
 	}
 	
 }

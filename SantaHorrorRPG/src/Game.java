@@ -6,19 +6,27 @@ public class Game {
 	private FileManager fileManager;
 	private int zoneid;
 	private int deaths;
-	//private GameState state;
-	//private GameModel model;
+	private GameState state;
+	private GameModel model;
 	
 	public Game() {
+		model = new GameModel();
+		state = new MainMenu(model, 900, 500);
+		zoneid = 0;
 		
 	}
 	
 	public void startGame() {
-		
+		gameLoop();
 	}
 	
 	public void gameLoop() {
-		
+		while(!model.stop) {
+			state.update(model, null);
+			state.render(model);
+			state = state.getNextState();
+			System.out.println(state);
+		}
 	}
 	
 	public void loadLevel() {
@@ -33,16 +41,9 @@ public class Game {
 		
 	}
 	
-	public void update(Input input) {
-		
-	}
-	
-	public void render() {
-		
-	}
-	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		Game g = new Game();
+		g.startGame();
 
 	}
 

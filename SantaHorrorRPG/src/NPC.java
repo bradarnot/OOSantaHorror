@@ -1,5 +1,10 @@
 
 public class NPC extends Actor {
+	public NPC(int speed, int currentTic, int imageFrame, int direction, int health, int moveType, int fear) {
+		super(speed, currentTic, imageFrame, direction, health, moveType);
+		this.setFear(fear);
+	}
+
 	private int fear;
 
 	public int getFear() {
@@ -11,7 +16,28 @@ public class NPC extends Actor {
 	}
 	
 	public void update(Zone zone) {
+		super.update(zone);
+		if(this.fear == 0) {
+			super.move();			
+		}else {
+			this.fear -= 1;
+			if( zone.canMoveTo(this.potentialMove())) {
+				this.position = this.potentialMove();
+			}else {
+				int temp = random.nextInt(8);
+				while (temp == this.direction) {
+					temp = random.nextInt(8);
+				}
+				this.direction = temp;
+			}
+			
+		}
 		
+	}
+	
+	public boolean damage(int damage) {
+		this.setFear(damage);
+		return super.damage(damage);
 	}
 	
 	public void loadFromFile(String name, Position position) {

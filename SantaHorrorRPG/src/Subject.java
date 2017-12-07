@@ -6,10 +6,10 @@ public abstract class Subject {
 	public abstract void notify(Input input);
 	
 	public void attach(Observer o) {
-		
+		observers.add(o);
 	}
 	
 	public void dettach(Observer o) {
-		
+		observers.remove(o);
 	}
 }

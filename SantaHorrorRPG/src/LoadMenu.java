@@ -1,17 +1,49 @@
-import java.awt.GridLayout;
+import java.awt.*;
+import java.awt.event.*;
+import java.io.File;
 
-import javax.swing.JButton;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 public class LoadMenu extends GameState {
 
 	private int screenWidth;
 	private int screenHeight;
-	private JPanel loadMenu;
-	private JButton loads;
+	private Menu loadMenu;
+	private JPanel buttonPanel;
+	private JButton[] loads;
 	private JButton cancel;
-	private GridLayout layout;
 	private FileManager fileManager;
+	
+	public LoadMenu(GameModel gm, int width, int height) {
+		screenWidth = width;
+		screenHeight = height;
+		
+		Image background = Toolkit.getDefaultToolkit().createImage("img" + File.separator +"fireplace.jpg");
+		loadMenu = new Menu(background);
+		buttonPanel = new JPanel();
+		loads = new JButton[3];
+		cancel = new JButton("Cancel");
+		
+		
+		cancel.addActionListener(new ActionListener() {
+	         public void actionPerformed(ActionEvent e) {
+	            nextState = new MainMenu(gm, screenWidth, screenHeight);
+	            gm.getFrame().remove(loadMenu);
+	         }          
+	      });
+		
+		buttonPanel.setOpaque(false);
+		buttonPanel.add(cancel);
+		
+		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.PAGE_AXIS));
+		loadMenu.setLayout(new BorderLayout());
+	
+		loadMenu.add(buttonPanel, BorderLayout.EAST);
+		
+		gm.getFrame().add(loadMenu);
+		
+		nextState = this;
+	}
 	
 	public int getScreenWidth() {
 		return screenWidth;
@@ -30,15 +62,26 @@ public class LoadMenu extends GameState {
 	}
 	
 	public void setFileManager(FileManager fm) {
-		
+		this.fileManager = fileManager;
 	}
 	
 	public void render(GameModel gm) {
+		loadMenu.setBounds(0,0,screenWidth-20,screenHeight-20);    
+        loadMenu.setBackground(Color.gray); 
+        
 		
+		gm.getFrame().setSize(screenWidth, screenHeight);  
+		gm.getFrame().setLayout(null);  
+		gm.getFrame().setVisible(true);
+		gm.getFrame().repaint();
 	}
 	
 	public void update(GameModel gm, Input input) {
 		
+	}
+	
+	public String toString() {
+		return "LoadMenu";
 	}
 	
 }

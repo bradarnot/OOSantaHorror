@@ -8,6 +8,7 @@ public class GameModel {
 	private FileManager fileManager;
 	private Player player;
 	private JFrame f;
+	public boolean stop = false;
 	
 	public GameModel() {
 		objects = new ArrayList<GameObj>();

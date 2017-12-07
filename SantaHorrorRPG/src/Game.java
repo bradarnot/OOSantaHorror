@@ -10,19 +10,23 @@ public class Game {
 	private GameModel model;
 	
 	public Game() {
-		state = new MainMenu();
-		zoneid = 0;
 		model = new GameModel();
+		state = new MainMenu(model, 900, 500);
+		zoneid = 0;
+		
 	}
 	
 	public void startGame() {
-		state.update(model, null);
-		state.render(model);
-		state = state.getNextState();
+		gameLoop();
 	}
 	
 	public void gameLoop() {
-		
+		while(!model.stop) {
+			state.update(model, null);
+			state.render(model);
+			state = state.getNextState();
+			System.out.println(state);
+		}
 	}
 	
 	public void loadLevel() {

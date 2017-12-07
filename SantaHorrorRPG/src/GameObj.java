@@ -18,6 +18,7 @@ public class GameObj {
 	protected String swapInTo;
 	protected Image appearance;
 	
+	
 	public Image getAppearance() {
 		return appearance;
 	}

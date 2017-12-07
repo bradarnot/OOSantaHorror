@@ -32,13 +32,14 @@ public class FileManager {
 		DBConnection db = DBConnection.getInstance();
 		Number saveID = db.getSaveID(player);
 		String filename = saveID + ".json";
-		return SavedData.getSavedData(filename);
+		return JsonParser.getJson("saves", filename);
 	}
 	
-	public static void saveToFile(String player, JSONObject json) {
+	public static void createSaveFile(String player, JSONObject json) {
 		DBConnection db = DBConnection.getInstance();
 		Number fileID = db.saveGame(player);
-		SavedData.save(fileID, json);
+		String filename = String.format ("%d", fileID) + ".json";
+		JsonParser.saveJson("saves", filename, json);
 	}
 	
 	public static void main(String[] argv) {
@@ -46,8 +47,8 @@ public class FileManager {
         obj.put("foo", "bar");
         obj.put("name", "jeff");
         
-		saveToFile("jeff", obj);
-		System.out.println(getSaveFile("foo"));
+		createSaveFile("jeff", obj);
+		System.out.println(getSaveFile("jeff"));
 	}
 
 }

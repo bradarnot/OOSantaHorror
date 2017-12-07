@@ -14,7 +14,7 @@ public class GameModel {
 		objects = new ArrayList<GameObj>();
 		actors = new ArrayList<Actor>();
 		fileManager = new FileManager();
-		player = new Player();
+		player = new Player(0, 0, 0, 0, 0, 0, 0);
 		f = new JFrame();
 	}
 	
@@ -55,7 +55,19 @@ public class GameModel {
 	}
 	
 	public Position getPosition(GameObj object) {
-		return new Position();
+		for(int i=0;i<this.objects.size();i++) {
+			if (this.objects.get(i).isObject(object.getName())) return this.objects.get(i).getPosition();
+		}
+		return null;
+	}
+	
+	public GameObj getObjectAtPosition(Position position) {
+		for(int index=0;index<this.objects.size();index++) {
+			if (this.objects.get(index).getPosition().equalPos(position)) {
+				return this.objects.get(index);
+			}
+		}
+		return null;
 	}
 	
 	public GameObj getObject(Position pos) {

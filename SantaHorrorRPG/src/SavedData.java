@@ -9,7 +9,7 @@ import org.json.simple.JSONObject;
 
 public class SavedData {
 	
-	public static void save(String filename, JSONObject json) {
+	public static void save(Number filename, JSONObject json) {
 		String saveDir = System.getProperty("user.dir") + "/saves/";
 		File file = new File(saveDir + filename + ".json");
 		if(!file.exists()) {
@@ -64,7 +64,7 @@ public class SavedData {
         obj.put("foo", "bar");
         obj.put("name", "Geraldson");
         
-        save("test", obj);
+        save(1000, obj);
         JSONObject saveData = getSavedData("test.json");
         System.out.println(saveData);
 	   

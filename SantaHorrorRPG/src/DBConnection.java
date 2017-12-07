@@ -16,7 +16,7 @@ import java.util.Map;
  * 
  * 2. Create a new user:
  *    CREATE USER 'santa'@'localhost' IDENTIFIED BY 'password';
- * 
+ * 	  GRANT ALL PRIVILEGES ON * . * TO 'santa'@'localhost';
  */
 
 public class DBConnection {
@@ -24,6 +24,8 @@ public class DBConnection {
 	private String databaseName;
 	private String user;
 	private String password;
+	private static DBConnection db = null;
+	
 	
 	public DBConnection(String database, String user, String password) {
 		try {
@@ -38,6 +40,13 @@ public class DBConnection {
 		
 		createDBIfNotExists();
 		createTablesIfNotExists();
+	}
+	
+	public static synchronized DBConnection getInstance() {
+		if (db == null) {
+			db = new DBConnection("santa_horror", "santa", "password");
+		}
+		return db;
 	}
 	
 	private void createDatabase() {
@@ -103,7 +112,9 @@ public class DBConnection {
 		}	
 	}
 	
-	public void saveGame(String player) {
+	public Number saveGame(String player) {
+		List<Map<String, Object>> resultsList = null;
+		Number saveID = -1;
 		try {
 			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + this.databaseName, this.user, this.password);
 			String sql = "INSERT INTO saves (player) VALUES (?)";
@@ -111,10 +122,17 @@ public class DBConnection {
 			s = conn.prepareStatement(sql);
 			s.setString(1, player);
 			s.executeUpdate();
+			sql = "SELECT LAST_INSERT_ID();";
+			s = conn.prepareStatement(sql);
+			ResultSet results = s.executeQuery();
+			resultsList = resultSetToList(results);
+			saveID = (Number) resultsList.get(0).get("LAST_INSERT_ID()");
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Player already exists.  Getting save_id...");
+			saveID = this.getInstance().getSaveID(player);
 		}
+		
+		return saveID;
 
 	}
 	
@@ -134,6 +152,25 @@ public class DBConnection {
 		}
 		
 		return resultsList;
+	}
+	
+	public Number getSaveID(String player) {
+		List<Map<String, Object>> resultsList = null;
+		Number saveID = -1;
+		try {
+			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + this.databaseName, this.user, this.password);
+			String sql = "SELECT save_id FROM saves WHERE player=?;";
+			PreparedStatement s = null;
+			s = conn.prepareStatement(sql);
+			s.setString(1, player);
+			ResultSet results = s.executeQuery();
+			resultsList = resultSetToList(results);
+			saveID = (Number) resultsList.get(0).get("save_id");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return saveID;
 	}
 	
 	/* Source for resultSetToList() function: https://gist.github.com/cworks/4175942 */
@@ -175,11 +212,5 @@ public class DBConnection {
 		this.password = password;
 	}
 	
-	public static void main(String[] argv) {
-		DBConnection db = new DBConnection("santa_horror", "santa", "password");
-		List<Map<String, Object>> results = db.getSaves();
-		System.out.println(results);
-	}
-
 }
 

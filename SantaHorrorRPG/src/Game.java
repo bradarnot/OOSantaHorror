@@ -1,5 +1,5 @@
 
-public class Game {
+public class Game extends Observer{
 
 	private int oldTime;
 	private Zone zone;
@@ -9,11 +9,15 @@ public class Game {
 	private int deaths;
 	private GameState state;
 	private GameModel model;
+	private Keyboard keyboard;
+	private Input input;
 	
 	public Game() {
 		model = new GameModel();
 		state = new MainMenu(model, 900, 500);
 		zoneid = 0;
+		keyboard = new Keyboard();
+		keyboard.attach(this);
 	}
 	
 	public void startGame() {
@@ -45,6 +49,13 @@ public class Game {
 		Game g = new Game();
 		g.startGame();
 
+	}
+
+	@Override
+	public void update(Input input) {
+		// TODO Auto-generated method stub
+		this.input = input;
+		System.out.println("YAY :) ");
 	}
 
 }

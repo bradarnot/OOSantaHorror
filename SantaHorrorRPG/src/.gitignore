@@ -18,3 +18,5 @@
 /Player.class
 /Monster.class
 /GameState.class
+/DBConnection.class
+/SavedData.class

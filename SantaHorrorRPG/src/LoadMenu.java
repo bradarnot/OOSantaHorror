@@ -1,6 +1,8 @@
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
+import java.util.*;
+import java.util.List;
 
 import javax.swing.*;
 
@@ -10,20 +12,39 @@ public class LoadMenu extends GameState {
 	private int screenHeight;
 	private Menu loadMenu;
 	private JPanel buttonPanel;
-	private JButton[] loads;
+	private ArrayList<JButton> loads;
 	private JButton cancel;
 	private FileManager fileManager;
 	
-	public LoadMenu(GameModel gm, int width, int height) {
+	public LoadMenu(GameModel gm, int width, int height, DBConnection dbc) {
 		screenWidth = width;
 		screenHeight = height;
+		
+		List<Map<String, Object>> saves = dbc.getSaves();
+		System.out.println(saves.size());
 		
 		Image background = Toolkit.getDefaultToolkit().createImage("img" + File.separator +"fireplace.jpg");
 		loadMenu = new Menu(background);
 		buttonPanel = new JPanel();
-		loads = new JButton[3];
+		loads = new ArrayList<JButton>();
 		cancel = new JButton("Cancel");
 		
+		for(Map<String,Object> map : saves) {
+			for(String key : map.keySet()) {
+				//System.out.println(key);
+				if(key.equals("player")) {
+					JButton load = new JButton((String)map.get(key));
+					load.addActionListener(new ActionListener() {
+				         public void actionPerformed(ActionEvent e) {
+				            nextState = new Zone();
+				            gm.getFrame().remove(loadMenu);
+				         }          
+				      });
+					
+					loads.add(load);
+				}
+			}
+		}
 		
 		cancel.addActionListener(new ActionListener() {
 	         public void actionPerformed(ActionEvent e) {
@@ -32,7 +53,14 @@ public class LoadMenu extends GameState {
 	         }          
 	      });
 		
+		if(loads.isEmpty()) {
+			loads.add(new JButton("No Save Files"));
+		}
+		
 		buttonPanel.setOpaque(false);
+		for(JButton load : loads) {
+			buttonPanel.add(load);
+		}
 		buttonPanel.add(cancel);
 		
 		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.PAGE_AXIS));
@@ -44,7 +72,7 @@ public class LoadMenu extends GameState {
 		
 		nextState = this;
 	}
-	
+
 	public int getScreenWidth() {
 		return screenWidth;
 	}

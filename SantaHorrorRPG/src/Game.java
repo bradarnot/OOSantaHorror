@@ -4,6 +4,7 @@ public class Game {
 	private int oldTime;
 	private Zone zone;
 	private FileManager fileManager;
+	private DBConnection dbc;
 	private int zoneid;
 	private int deaths;
 	private GameState state;
@@ -13,7 +14,7 @@ public class Game {
 		model = new GameModel();
 		state = new MainMenu(model, 900, 500);
 		zoneid = 0;
-		
+		dbc = new DBConnection("santa_horror", "santa", "password");
 	}
 	
 	public void startGame() {
@@ -23,9 +24,10 @@ public class Game {
 	public void gameLoop() {
 		while(!model.stop) {
 			state.update(model, null);
+			state.setDBConnection(dbc);
 			state.render(model);
 			state = state.getNextState();
-			System.out.println(state);
+			//System.out.println(state);
 		}
 	}
 	

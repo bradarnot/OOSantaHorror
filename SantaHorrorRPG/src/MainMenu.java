@@ -18,7 +18,6 @@ public class MainMenu extends GameState {
 		screenHeight = height;
 		
 		Image background = Toolkit.getDefaultToolkit().createImage("img" + File.separator +"fireplace.jpg");
-		System.out.println(background);
 		mainMenu = new Menu(background);
 		buttonPanel = new JPanel();
 		quit = new JButton("Quit");

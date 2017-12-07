@@ -21,6 +21,7 @@ public class Game extends Observer{
 	}
 	
 	public void startGame() {
+		model.getFrame().addKeyListener(keyboard);
 		gameLoop();
 	}
 	
@@ -29,7 +30,7 @@ public class Game extends Observer{
 			state.update(model, null);
 			state.render(model);
 			state = state.getNextState();
-			//System.out.println(state);
+			System.out.println(model.getFrame().getKeyListeners()[0]);
 		}
 	}
 	

@@ -11,7 +11,8 @@ public class Keyboard extends Subject implements KeyListener {
 	}
 
 	@Override
-	public void keyTyped(KeyEvent arg0) {		
+	public void keyTyped(KeyEvent arg0) {
+		System.out.println("Typed");
 	}
 
 	@Override
@@ -84,5 +85,9 @@ public class Keyboard extends Subject implements KeyListener {
 			this.observers.get(index).update(input);
 		}
 		
+	}
+	
+	public String toString() {
+		return "Keyboard:)";
 	}
 }

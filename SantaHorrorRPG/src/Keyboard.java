@@ -7,6 +7,7 @@ public class Keyboard extends Subject implements KeyListener {
 	public Keyboard() {
 		super();
 		this.input = new Input();
+		System.out.println("Initialized");
 	}
 
 	@Override
@@ -42,6 +43,7 @@ public class Keyboard extends Subject implements KeyListener {
 				this.input.setInteract(true);
 				break;
 		}
+		this.notify(input);
 	}
 
 	@Override
@@ -73,6 +75,7 @@ public class Keyboard extends Subject implements KeyListener {
 				this.input.setInteract(false);
 				break;
 		}
+		this.notify(input);
 	}
 
 	@Override

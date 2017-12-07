@@ -12,7 +12,6 @@ public class Keyboard extends Subject implements KeyListener {
 
 	@Override
 	public void keyTyped(KeyEvent arg0) {
-		System.out.println("Typed");
 	}
 
 	@Override

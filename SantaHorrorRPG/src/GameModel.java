@@ -1,4 +1,5 @@
-import java.util.ArrayList;
+import java.awt.event.*;
+import java.util.*;
 import javax.swing.*;
 
 public class GameModel {
@@ -8,14 +9,17 @@ public class GameModel {
 	private FileManager fileManager;
 	private Player player;
 	private JFrame f;
+	private KeyListener kl;
 	public boolean stop = false;
 	
-	public GameModel() {
+	public GameModel(KeyListener k) {
 		objects = new ArrayList<GameObj>();
 		actors = new ArrayList<Actor>();
 		fileManager = new FileManager();
 		player = new Player(0, 0, 0, 0, 0, 0, 0);
 		f = new JFrame();
+		kl = k;
+		f.addKeyListener(kl);
 	}
 	
 	public ArrayList<GameObj> getObjects() {
@@ -36,6 +40,10 @@ public class GameModel {
 	
 	public JFrame getFrame() {
 		return f;
+	}
+	
+	public KeyListener getKeyListener() {
+		return kl;
 	}
 	
 	public FileManager getFileManager() {

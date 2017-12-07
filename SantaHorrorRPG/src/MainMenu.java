@@ -54,6 +54,8 @@ public class MainMenu extends GameState {
 		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
 		mainMenu.setLayout(new BorderLayout());
 		
+		
+		
 		mainMenu.add(buttonPanel,BorderLayout.EAST);
 		
 		gm.getFrame().add(mainMenu);

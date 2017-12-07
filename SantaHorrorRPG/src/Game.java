@@ -13,15 +13,14 @@ public class Game extends Observer{
 	private Input input;
 	
 	public Game() {
-		model = new GameModel();
-		state = new MainMenu(model, 900, 500);
-		zoneid = 0;
 		keyboard = new Keyboard();
 		keyboard.attach(this);
+		model = new GameModel(keyboard);
+		state = new MainMenu(model, 900, 500);
+		zoneid = 0;
 	}
 	
 	public void startGame() {
-		model.getFrame().addKeyListener(keyboard);
 		gameLoop();
 	}
 	
@@ -30,7 +29,8 @@ public class Game extends Observer{
 			state.update(model, null);
 			state.render(model);
 			state = state.getNextState();
-			System.out.println(model.getFrame().getKeyListeners()[0]);
+			model.getFrame().setFocusable(true);
+			//System.out.println(model.getFrame().getKeyListeners()[0]);
 		}
 	}
 	
@@ -56,7 +56,6 @@ public class Game extends Observer{
 	public void update(Input input) {
 		// TODO Auto-generated method stub
 		this.input = input;
-		System.out.println("YAY :) ");
 	}
 
 }

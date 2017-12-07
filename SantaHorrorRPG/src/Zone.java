@@ -37,14 +37,6 @@ public class Zone extends GameState {
 		
 	}
 	
-	public boolean canMoveTo(Position tile) {
-		return true;
-		
-	}
-	
-	public ArrayList<GameObj> getAdjacent(Position tile){
-		return new ArrayList<GameObj>();
-	}
 	
 	public void update(GameModel gm, Input input) {
 		

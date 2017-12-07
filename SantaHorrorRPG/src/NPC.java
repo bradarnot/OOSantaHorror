@@ -15,13 +15,13 @@ public class NPC extends Actor {
 		this.fear = fear;
 	}
 	
-	public void update(Zone zone) {
-		super.update(zone);
+	public void update(GameModel gm) {
+		super.update(gm);
 		if(this.fear == 0) {
 			super.move();			
 		}else {
 			this.fear -= 1;
-			if( zone.canMoveTo(this.potentialMove())) {
+			if( gm.canMoveTo(this.potentialMove())) {
 				this.position = this.potentialMove();
 			}else {
 				int temp = random.nextInt(8);

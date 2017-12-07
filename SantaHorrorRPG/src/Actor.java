@@ -69,11 +69,11 @@ public abstract class Actor extends GameObj {
 		this.moveType = moveType;
 	}
 
-	public void update(Zone zone) {
+	public void update(GameModel gm) {
 		this.currentTic = (this.currentTic++)%this.speed;
 		if(this.currentTic == 0) {
 			this.move();
-			if(zone.canMoveTo(this.potentialMove())) this.exicuteMove();
+			if(gm.canMoveTo(this.potentialMove())) this.exicuteMove();
 		}
 
 		

@@ -22,6 +22,70 @@ public class GameObj {
 		return appearance;
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getNonPlayerInteractState() {
+		return nonPlayerInteractState;
+	}
+
+	public void setNonPlayerInteractState(int nonPlayerInteractState) {
+		this.nonPlayerInteractState = nonPlayerInteractState;
+	}
+
+	public ArrayList<Interaction> getNonPlayerInteractions() {
+		return nonPlayerInteractions;
+	}
+
+	public void setNonPlayerInteractions(ArrayList<Interaction> nonPlayerInteractions) {
+		this.nonPlayerInteractions = nonPlayerInteractions;
+	}
+
+	public int getPlayerInteractState() {
+		return playerInteractState;
+	}
+
+	public void setPlayerInteractState(int playerInteractState) {
+		this.playerInteractState = playerInteractState;
+	}
+
+	public ArrayList<Interaction> getPlayerInteractions() {
+		return playerInteractions;
+	}
+
+	public void setPlayerInteractions(ArrayList<Interaction> playerInteractions) {
+		this.playerInteractions = playerInteractions;
+	}
+
+	public String getSwapInTo() {
+		return swapInTo;
+	}
+
+	public void setSwapInTo(String swapInTo) {
+		this.swapInTo = swapInTo;
+	}
+
+	public boolean isSolid() {
+		return solid;
+	}
+
+	public void setSolid(boolean solid) {
+		this.solid = solid;
+	}
+
+	public Position getPosition() {
+		return position;
+	}
+
+	public void setPosition(Position position) {
+		this.position = position;
+	}
+
 	public void setAppearance(Image appearance) {
 		this.appearance = appearance;
 	}

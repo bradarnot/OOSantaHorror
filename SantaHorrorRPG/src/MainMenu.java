@@ -6,8 +6,6 @@ import javax.swing.*;
 
 public class MainMenu extends GameState {
 
-	private int screenWidth;
-	private int screenHeight;
 	private Menu mainMenu;
 	private JPanel buttonPanel;
 	private JButton quit;
@@ -31,7 +29,7 @@ public class MainMenu extends GameState {
 		
 		start.addActionListener(new ActionListener() {
 	         public void actionPerformed(ActionEvent e) {
-	            nextState = new Zone();
+	            nextState = new Zone(gm, screenWidth, screenHeight);
 	            gm.getFrame().remove(mainMenu);
 	         }          
 	      });

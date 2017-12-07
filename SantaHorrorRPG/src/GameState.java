@@ -1,7 +1,9 @@
 
 public class GameState {
+	protected int screenWidth;
+	protected int screenHeight;
 	protected GameState nextState;
-
+	
 	public GameState getNextState() {
 		return nextState;
 	}

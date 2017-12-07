@@ -8,8 +8,6 @@ import javax.swing.*;
 
 public class LoadMenu extends GameState {
 
-	private int screenWidth;
-	private int screenHeight;
 	private Menu loadMenu;
 	private JPanel buttonPanel;
 	private ArrayList<JButton> loads;
@@ -37,7 +35,7 @@ public class LoadMenu extends GameState {
 					JButton load = new JButton((String)map.get(key));
 					load.addActionListener(new ActionListener() {
 				         public void actionPerformed(ActionEvent e) {
-				            nextState = new Zone();
+				            nextState = new Zone(gm, screenWidth, screenHeight);
 				            gm.getFrame().remove(loadMenu);
 				         }          
 				      });

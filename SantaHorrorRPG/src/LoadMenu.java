@@ -16,9 +16,10 @@ public class LoadMenu extends GameState {
 	private JButton cancel;
 	private FileManager fileManager;
 	
-	public LoadMenu(GameModel gm, int width, int height, DBConnection dbc) {
+	public LoadMenu(GameModel gm, int width, int height) {
 		screenWidth = width;
 		screenHeight = height;
+		DBConnection dbc = DBConnection.getInstance();
 		
 		List<Map<String, Object>> saves = dbc.getSaves();
 		System.out.println(saves.size());

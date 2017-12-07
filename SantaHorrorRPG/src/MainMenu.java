@@ -37,7 +37,7 @@ public class MainMenu extends GameState {
 	      });
 		loadGame.addActionListener(new ActionListener() {
 	         public void actionPerformed(ActionEvent e) {
-	            nextState = new LoadMenu(gm, screenWidth, screenHeight, dbc);
+	            nextState = new LoadMenu(gm, screenWidth, screenHeight);
 	            gm.getFrame().remove(mainMenu);
 	         }
 	      });

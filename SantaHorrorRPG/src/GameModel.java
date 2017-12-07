@@ -74,4 +74,26 @@ public class GameModel {
 		return new GameObj();
 	}
 	
+	public boolean canMoveTo(Position tile) {
+		GameObj object = this.getObject(tile);
+		if(object != null && object.isSolid()) {
+			return false;
+		}
+		return true;
+		
+	}
+	
+	public ArrayList<GameObj> getAdjacent(Position tile, int range){
+		ArrayList<GameObj> result = new ArrayList<GameObj>();
+		for(int x = -range; x<range+1; x++) {
+			for(int y = -range; y<range+1; y++) {
+				GameObj temp = this.getObject(new Position(tile.getX() + x, tile.getY()+y));
+				if((x != 0 || y !=0) && temp != null) {
+					result.add(temp);
+				}
+			}
+		}
+		return result;
+	}
+	
 }

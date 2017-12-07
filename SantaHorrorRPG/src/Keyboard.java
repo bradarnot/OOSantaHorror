@@ -10,14 +10,11 @@ public class Keyboard extends Subject implements KeyListener {
 	}
 
 	@Override
-	public void keyTyped(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
+	public void keyTyped(KeyEvent arg0) {		
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
 		System.out.println("Pressed");
 		switch (e.getKeyCode()) {
 			case KeyEvent.VK_S:
@@ -40,12 +37,15 @@ public class Keyboard extends Subject implements KeyListener {
 				System.out.println("Right");
 				this.input.setRight(true);
 				break;
+			case KeyEvent.VK_SPACE:
+				System.out.println("Space");
+				this.input.setInteract(true);
+				break;
 		}
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
 		System.out.println("Released");
 		switch (e.getKeyCode()) {
 			case KeyEvent.VK_S:
@@ -67,6 +67,10 @@ public class Keyboard extends Subject implements KeyListener {
 			case KeyEvent.VK_RIGHT:
 				System.out.println("Right");
 				this.input.setRight(false);
+				break;
+			case KeyEvent.VK_SPACE:
+				System.out.println("Space");
+				this.input.setInteract(false);
 				break;
 		}
 	}

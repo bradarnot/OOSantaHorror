@@ -109,15 +109,14 @@ public class GameObj {
 		this.appearance = (BufferedImage) appearance;
 	}
 	
-	public void loadFromFile(String filename) {
+	public void loadFromFile(String filename, Position position) {
 		JSONObject json = JsonParser.getJson("objects", filename);
 		this.setName(filename);
 		this.setNonPlayerInteractState((int) json.get("nonPlayerInteractState"));
 		this.setPlayerInteractState((int) json.get("playerInteractState"));
 		this.loadImage((String) json.get("src"));
 		this.setSolid((boolean) json.get("solid"));
-		int[] position = (int[]) json.get("position");
-		this.setPosition(new Position(position[0], position[1]));
+		this.setPosition(position);
 		this.setSwapInTo((String) json.get("swapInTo"));
 	}
 	
@@ -134,7 +133,7 @@ public class GameObj {
 	}
 	
 	public void swap() {
-		this.loadFromFile(swapInTo);		
+		this.loadFromFile(swapInTo, this.getPosition());		
 	}
 	
 	public boolean isObject(String name) {

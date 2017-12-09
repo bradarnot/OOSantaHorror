@@ -6,6 +6,8 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
+import org.json.simple.JSONObject;
+
 /**
  * 
  */
@@ -25,9 +27,9 @@ public class GameObj {
 	protected boolean solid;
 	protected Position position;
 	
-	public void loadImage() {
+	public void loadImage(String filename) {
 		try {
-			appearance = ImageIO.read(new File("img" + File.separator +"alicesheet.jpg"));
+			this.setAppearance(ImageIO.read(new File("img" + File.separator + filename)));
 		} catch (IOException e) {
 			System.out.println("Could not load image!!");
 			e.printStackTrace();
@@ -107,8 +109,16 @@ public class GameObj {
 		this.appearance = (BufferedImage) appearance;
 	}
 	
-	public void loadFromFile(String name, Position position) {
-		
+	public void loadFromFile(String filename) {
+		JSONObject json = JsonParser.getJson("objects", filename);
+		this.setName(filename);
+		this.setNonPlayerInteractState((int) json.get("nonPlayerInteractState"));
+		this.setPlayerInteractState((int) json.get("playerInteractState"));
+		this.loadImage((String) json.get("src"));
+		this.setSolid((boolean) json.get("solid"));
+		int[] position = (int[]) json.get("position");
+		this.setPosition(new Position(position[0], position[1]));
+		this.setSwapInTo((String) json.get("swapInTo"));
 	}
 	
 	public Interaction interact(boolean byPlayer, String direction) {
@@ -124,7 +134,7 @@ public class GameObj {
 	}
 	
 	public void swap() {
-		this.loadFromFile(swapInTo, position);		
+		this.loadFromFile(swapInTo);		
 	}
 	
 	public boolean isObject(String name) {

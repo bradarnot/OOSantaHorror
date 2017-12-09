@@ -44,5 +44,9 @@ public class Input {
 	public void setRight(boolean right) {
 		this.right = right;
 	}
+	
+	public boolean movement() {
+		return this.up || this.right || this.down || this.left;
+	}
 
 }

@@ -11,16 +11,23 @@ public class GameModel {
 	private JFrame f;
 	private KeyListener kl;
 	private DrawPanel drawScreen;
+	private int tileSize;
 	public boolean stop = false;
 	
 	public GameModel(KeyListener k) {
 		objects = new ArrayList<GameObj>();
 		actors = new ArrayList<Actor>();
 		fileManager = new FileManager();
-		player = new Player(0, 0, 0, 0, 0, 0, 0);
+		player = new Player(0, 0, 0, 0, 0, 0);
+		player.setPosition(new Position(3,3));
 		f = new JFrame();
 		kl = k;
 		f.addKeyListener(kl);
+		tileSize = 32;
+	}
+	
+	public int getTileSize() {
+		return tileSize;
 	}
 	
 	public DrawPanel getScreen() {

@@ -4,7 +4,10 @@ public class Position {
 	private int x;
 	private int y;
 	
-
+	public Position() {
+		this.setX(0);
+		this.setY(0);
+	}
 	
 	public Position(int x, int y) {
 		super();

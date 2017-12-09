@@ -95,6 +95,7 @@ public class DBConnection {
 			String sql = "CREATE TABLE saves ("
 					+ "save_id int NOT NULL AUTO_INCREMENT, "
 					+ "player varchar(255) UNIQUE, "
+					+ "zone_id int, "
 					+ "modified DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, "
 					+ "PRIMARY KEY (save_id)"
 					+ ");";
@@ -112,28 +113,32 @@ public class DBConnection {
 		}	
 	}
 	
-	public Number saveGame(String player) {
-		List<Map<String, Object>> resultsList = null;
-		Number saveID = -1;
+	public void saveGame(String player, int zoneID) {
 		try {
 			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + this.databaseName, this.user, this.password);
-			String sql = "INSERT INTO saves (player) VALUES (?)";
+			String sql = "INSERT INTO saves (player,zone_id) VALUES (?,?)";
 			PreparedStatement s = null;
 			s = conn.prepareStatement(sql);
 			s.setString(1, player);
+			s.setInt(2, zoneID);
 			s.executeUpdate();
-			sql = "SELECT LAST_INSERT_ID();";
-			s = conn.prepareStatement(sql);
-			ResultSet results = s.executeQuery();
-			resultsList = resultSetToList(results);
-			saveID = (Number) resultsList.get(0).get("LAST_INSERT_ID()");
+			System.out.println("Game saved.");
 		} catch (SQLException e) {
-			System.out.println("Player already exists.  Getting save_id...");
-			saveID = this.getInstance().getSaveID(player);
+			System.out.println("Player already exists. Updating zoneID");
+			Connection conn;
+			try {
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + this.databaseName, this.user, this.password);
+				String sql = "UPDATE saves SET zone_id = ? WHERE player=?;";
+				PreparedStatement s = null;
+				s = conn.prepareStatement(sql);
+				s.setInt(1, zoneID);
+				s.setString(2, player);
+				s.executeUpdate();
+				System.out.println("Game saved.");
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 		}
-		
-		return saveID;
-
 	}
 	
 	public List<Map<String, Object>> getSaves() {
@@ -154,18 +159,18 @@ public class DBConnection {
 		return resultsList;
 	}
 	
-	public Number getSaveID(String player) {
+	public Number getZoneID(String player) {
 		List<Map<String, Object>> resultsList = null;
 		Number saveID = -1;
 		try {
 			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + this.databaseName, this.user, this.password);
-			String sql = "SELECT save_id FROM saves WHERE player=?;";
+			String sql = "SELECT zone_id FROM saves WHERE player=?;";
 			PreparedStatement s = null;
 			s = conn.prepareStatement(sql);
 			s.setString(1, player);
 			ResultSet results = s.executeQuery();
 			resultsList = resultSetToList(results);
-			saveID = (Number) resultsList.get(0).get("save_id");
+			saveID = (Number) resultsList.get(0).get("zone_id");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

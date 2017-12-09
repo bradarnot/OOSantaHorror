@@ -4,10 +4,12 @@ import java.awt.*;
 public class DrawPanel extends JPanel {
 
 	Image cSprite;
+	GameModel gm;
 	
-	public DrawPanel(Image character) {
+	public DrawPanel(Image character, GameModel model) {
 		super();
 		cSprite = character;
+		gm = model;
 	}
 	
 	@Override
@@ -15,7 +17,8 @@ public class DrawPanel extends JPanel {
 
 	    super.paintComponents(g);
 	    g.setColor(Color.WHITE);
-	    g.drawImage(cSprite, 0, 0,32,32,0,0,32,32, null);
+	    //g.drawImage(gm.getPlayer().getAppearance(), 0, 0,32,32,0,0,32,32, null);
+	    gm.getPlayer().render(gm, g);
 	}
 	
 }

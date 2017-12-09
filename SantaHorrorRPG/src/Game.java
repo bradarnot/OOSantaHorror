@@ -1,3 +1,4 @@
+import org.json.simple.JSONObject;
 
 public class Game extends Observer{
 
@@ -34,8 +35,8 @@ public class Game extends Observer{
 		}
 	}
 	
-	public void loadLevel() {
-		
+	public static void loadLevel(JSONObject zone) {
+	
 	}
 	
 	public void save() {

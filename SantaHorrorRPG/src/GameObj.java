@@ -103,7 +103,7 @@ public class GameObj {
 	}
 
 	public void setAppearance(Image appearance) {
-		this.appearance = appearance;
+		this.appearance = (BufferedImage) appearance;
 	}
 	
 	public void loadFromFile(String name, Position position) {

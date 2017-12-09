@@ -25,7 +25,9 @@ public class Zone extends GameState {
 			System.out.println("Could not load character image");
 			e.printStackTrace();
 		}
-		screen = new DrawPanel(character);
+		screen = new DrawPanel(character, gm);
+		
+		gm.getPlayer().loadImage();
 		
 		gm.getFrame().add(screen);
 		
@@ -51,7 +53,7 @@ public class Zone extends GameState {
 	
 	public void render(GameModel gm)
 	{
-		gm.getPlayer().render(gm);
+		//gm.getPlayer().render(gm, g);
 		gm.getFrame().repaint();
 	}
 	

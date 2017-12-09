@@ -1,3 +1,4 @@
+import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.File;
@@ -80,8 +81,8 @@ public abstract class Actor extends GameObj {
 		}		
 	}
 	
-	public void render(GameModel gm) {
-		//gm.getScreen().getGraphics().drawImage(appearance, 0, 0, 32, 32, 0, 0, 32, 32, null);
+	public void render(GameModel gm, Graphics g) {
+		g.drawImage(appearance, 32, 32, 64, 64, 0, 0, 32, 32, null);
 	}
 	
 	//If it dies it returns false

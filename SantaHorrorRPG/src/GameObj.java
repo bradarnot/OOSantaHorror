@@ -32,6 +32,7 @@ public class GameObj {
 			System.out.println("Could not load image!!");
 			e.printStackTrace();
 		}
+		System.out.println("Image Loaded");
 	}
 	
 	public Image getAppearance() {

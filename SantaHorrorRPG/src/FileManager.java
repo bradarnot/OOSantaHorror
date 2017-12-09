@@ -8,8 +8,8 @@ public class FileManager {
 
 	private JSONParser parser;
 	
-	public void loadZone(String name) {
-
+	public static JSONObject loadZone(String zoneFile) {
+		return JsonParser.getJson("zones", zoneFile);
 	}
 	
 	public void loadGameObj(String name) {
@@ -28,27 +28,21 @@ public class FileManager {
 	
 	}
 	
-	public static JSONObject getSaveFile(String player) {
+	public static JSONObject loadSaveFile(String player) {
 		DBConnection db = DBConnection.getInstance();
-		Number saveID = db.getSaveID(player);
-		String filename = saveID + ".json";
-		return JsonParser.getJson("saves", filename);
+		Number zoneID = db.getZoneID(player);
+		String filename = zoneID + ".json";
+		return loadZone(filename);
 	}
 	
-	public static void createSaveFile(String player, JSONObject json) {
+	public static void saveGame(String player, int zoneID) {
 		DBConnection db = DBConnection.getInstance();
-		Number fileID = db.saveGame(player);
-		String filename = String.format ("%d", fileID) + ".json";
-		JsonParser.saveJson("saves", filename, json);
+		db.saveGame(player, zoneID);
 	}
 	
 	public static void main(String[] argv) {
-		JSONObject obj = new JSONObject();
-        obj.put("foo", "bar");
-        obj.put("name", "jeff");
-        
-		createSaveFile("jeff", obj);
-		System.out.println(getSaveFile("jeff"));
+		saveGame("Jeff", 1);
+		System.out.println(loadSaveFile("Jeff"));
 	}
 
 }

@@ -1,5 +1,10 @@
 import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+
+import javax.imageio.ImageIO;
 
 /**
  * 
@@ -16,8 +21,18 @@ public class GameObj {
 	protected int playerInteractState;
 	protected ArrayList<Interaction> playerInteractions;
 	protected String swapInTo;
-	protected Image appearance;
+	protected BufferedImage appearance;
+	protected boolean solid;
+	protected Position position;
 	
+	public void loadImage() {
+		try {
+			appearance = ImageIO.read(new File("img" + File.separator +"alicesheet.jpg"));
+		} catch (IOException e) {
+			System.out.println("Could not load image!!");
+			e.printStackTrace();
+		}
+	}
 	
 	public Image getAppearance() {
 		return appearance;
@@ -90,9 +105,6 @@ public class GameObj {
 	public void setAppearance(Image appearance) {
 		this.appearance = appearance;
 	}
-
-	protected boolean solid;
-	protected Position position;
 	
 	public void loadFromFile(String name, Position position) {
 		

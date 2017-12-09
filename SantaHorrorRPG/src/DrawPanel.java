@@ -3,11 +3,11 @@ import java.awt.*;
 
 public class DrawPanel extends JPanel {
 
-	Image bgImage;
+	Image cSprite;
 	
-	public DrawPanel(Image background) {
+	public DrawPanel(Image character) {
 		super();
-		bgImage = background;
+		cSprite = character;
 	}
 	
 	@Override
@@ -15,7 +15,7 @@ public class DrawPanel extends JPanel {
 
 	    super.paintComponents(g);
 	    g.setColor(Color.WHITE);
-	    g.drawImage(bgImage, 0, 0, null);
+	    g.drawImage(cSprite, 0, 0,32,32,0,0,32,32, null);
 	}
 	
 }

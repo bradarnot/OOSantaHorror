@@ -16,8 +16,8 @@ public class Monster extends Actor {
 		this.attackPower = attackPower;
 	}
 	
-	public void update(GameModel gm) {
-		super.update(gm);
+	public void update(GameModel gm, Input input) {
+		super.update(gm, input);
 		if(this.currentTic == speed-1) {
 			ArrayList<GameObj> adjacent = gm.getAdjacent(this.position, 1);
 			for(int i = 0; i<adjacent.size(); i++) {

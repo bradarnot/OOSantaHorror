@@ -10,6 +10,7 @@ public class GameModel {
 	private Player player;
 	private JFrame f;
 	private KeyListener kl;
+	private DrawPanel drawScreen;
 	public boolean stop = false;
 	
 	public GameModel(KeyListener k) {
@@ -20,6 +21,10 @@ public class GameModel {
 		f = new JFrame();
 		kl = k;
 		f.addKeyListener(kl);
+	}
+	
+	public DrawPanel getScreen() {
+		return this.drawScreen;
 	}
 	
 	public ArrayList<GameObj> getObjects() {

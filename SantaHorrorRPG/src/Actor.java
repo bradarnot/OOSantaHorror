@@ -1,3 +1,6 @@
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.io.File;
 import java.util.Random;
 
 public abstract class Actor extends GameObj {
@@ -45,7 +48,7 @@ public abstract class Actor extends GameObj {
 		this.imageFrame = imageFrame;
 	}
 
-	public int getDirection() {
+	public int getDirection() { 
 		return direction;
 	}
 
@@ -69,14 +72,16 @@ public abstract class Actor extends GameObj {
 		this.moveType = moveType;
 	}
 
-	public void update(GameModel gm) {
-		this.currentTic = (this.currentTic++)%this.speed;
+	public void update(GameModel gm, Input i) {
+		this.currentTic = (this.currentTic+1)%this.speed;
 		if(this.currentTic == 0) {
 			this.move();
-			if(gm.canMoveTo(this.potentialMove())) this.exicuteMove();
-		}
-
-		
+			if(gm.canMoveTo(this.potentialMove())) this.executeMove();
+		}		
+	}
+	
+	public void render(GameModel gm) {
+		//gm.getScreen().getGraphics().drawImage(appearance, 0, 0, 32, 32, 0, 0, 32, 32, null);
 	}
 	
 	//If it dies it returns false
@@ -102,7 +107,7 @@ public abstract class Actor extends GameObj {
 		
 	}
 	
-	public void exicuteMove() {
+	public void executeMove() {
 		if(canMove) {
 			this.position = this.potentialMove();
 		}

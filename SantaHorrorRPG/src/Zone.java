@@ -1,16 +1,12 @@
-import java.awt.BorderLayout;
-import java.awt.Image;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.*;
+import java.awt.event.*;
+import java.awt.image.*;
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.io.IOException;
+import java.util.*;
 
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JPanel;
+import javax.imageio.ImageIO;
+import javax.swing.*;
 
 public class Zone extends GameState {
 
@@ -21,8 +17,15 @@ public class Zone extends GameState {
 		screenWidth = width;
 		screenHeight = height;
 
-		Image background = Toolkit.getDefaultToolkit().createImage("img" + File.separator +"fireplace.jpg");
-		screen = new DrawPanel(background);
+		//Image character = Toolkit.getDefaultToolkit().createImage("img" + File.separator +"alicesheet.png");
+		BufferedImage character = null;
+		try {
+			character = ImageIO.read(new File("img" + File.separator +"alicesheet.jpg"));
+		} catch (IOException e) {
+			System.out.println("Could not load character image");
+			e.printStackTrace();
+		}
+		screen = new DrawPanel(character);
 		
 		gm.getFrame().add(screen);
 		
@@ -39,11 +42,17 @@ public class Zone extends GameState {
 	
 	
 	public void update(GameModel gm, Input input) {
-		
+		screen.setBounds(0,0,screenWidth-20,screenHeight-20);    
+        
+		gm.getFrame().setSize(screenWidth, screenHeight);  
+		gm.getFrame().setLayout(null);  
+		gm.getFrame().setVisible(true);
 	}
 	
-	public void render(GameModel gm) {
-		
+	public void render(GameModel gm)
+	{
+		gm.getPlayer().render(gm);
+		gm.getFrame().repaint();
 	}
 	
 }

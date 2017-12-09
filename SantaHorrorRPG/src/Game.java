@@ -1,3 +1,7 @@
+import java.util.ArrayList;
+import java.util.Iterator;
+
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 public class Game extends Observer{
@@ -9,7 +13,7 @@ public class Game extends Observer{
 	private int zoneid;
 	private int deaths;
 	private GameState state;
-	private GameModel model;
+	private static GameModel model;
 	private Keyboard keyboard;
 	private Input input;
 	
@@ -36,7 +40,18 @@ public class Game extends Observer{
 	}
 	
 	public static void loadLevel(JSONObject zone) {
-	
+		JSONArray objects = (JSONArray) zone.get("objects");
+		ArrayList<GameObj> gameObjects = new ArrayList<GameObj>();
+		for (int i=0; i < objects.size(); i++) {
+			JSONObject jsonObj = (JSONObject) objects.get(i);
+			String name = (String) jsonObj.get("name");
+			int[] position = (int[]) jsonObj.get("position");
+			Position pos = new Position(position[0], position[1]);
+			GameObj temp = new GameObj();
+			temp.loadFromFile(name, pos);
+			gameObjects.add(temp);
+		}
+		model.setObjects(gameObjects);
 	}
 	
 	public void save() {
@@ -58,5 +73,7 @@ public class Game extends Observer{
 		// TODO Auto-generated method stub
 		this.input = input;
 	}
+	
+	
 
 }

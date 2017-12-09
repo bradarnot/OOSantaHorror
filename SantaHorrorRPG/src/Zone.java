@@ -27,7 +27,7 @@ public class Zone extends GameState {
 		}
 		screen = new DrawPanel(character, gm);
 		
-		gm.getPlayer().loadImage();
+		gm.getPlayer().loadImage("alicesheet.jpg");
 		
 		gm.getFrame().add(screen);
 		

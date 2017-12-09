@@ -1,3 +1,6 @@
+import java.util.Iterator;
+
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 public class Game extends Observer{
@@ -36,7 +39,10 @@ public class Game extends Observer{
 	}
 	
 	public static void loadLevel(JSONObject zone) {
-	
+		JSONArray objects = (JSONArray) zone.get("objects");
+		for (int i=0; i < objects.size(); i++) {
+			System.out.println(objects.get(i));
+		}
 	}
 	
 	public void save() {
@@ -58,5 +64,7 @@ public class Game extends Observer{
 		// TODO Auto-generated method stub
 		this.input = input;
 	}
+	
+	
 
 }

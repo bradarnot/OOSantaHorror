@@ -1,0 +1,17 @@
+{
+	"nonPlayerInteractState": 0,
+	"playerInteractState": 0,
+	"nonPlayerInteractions": [],
+	"playerInteractions": [],
+	"swapInTo": "",
+	"src": "firesprite.png",
+	"solid": 1,
+	"animationSpeed": 1,
+	"direction": 0,
+	"health": 100,
+	"moveType": -1,
+	"attackPower": 40,
+	"frameLength": 4,
+	"imageSize" : 64,
+	"moveSpeed" : 0
+}

@@ -61,6 +61,17 @@ public class Game extends Observer{
 			temp.loadFromFile(name, pos);
 			gameObjects.add(temp);
 		}
+		JSONArray triggers = (JSONArray) zone.get("triggers");
+		ArrayList<Trigger> gameTriggers = new ArrayList<Trigger>();
+		for (int i=0; i < objects.size(); i++) {
+			JSONObject jsonObj = (JSONObject) objects.get(i);
+			String name = (String) jsonObj.get("name");
+			int[] position = (int[]) jsonObj.get("position");
+			Position pos = new Position(position[0], position[1]);
+			GameObj temp = new GameObj();
+			temp.loadFromFile(name, pos);
+			gameObjects.add(temp);
+		}
 		model.setObjects(gameObjects);
 	}
 	

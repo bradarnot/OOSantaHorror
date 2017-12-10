@@ -34,7 +34,6 @@ public class Player extends Actor {
 			this.setDirection(6);
 			this.setImageFrame(new Position(this.getImageFrame().getX(),1));
 		}
-		System.out.println("Update");
 		
 		if(input.movement()) {
 			if(this.currentTic%(speed*3)==0)

@@ -43,7 +43,6 @@ public class Zone extends GameState {
 	public void update(GameModel gm, Input input) {
 		screen.setBounds(0,0,screenWidth-20,screenHeight-20);  
 		
-		System.out.println("Update Zone");
 		gm.getPlayer().update(gm, input);
         
 		gm.getFrame().setSize(screenWidth, screenHeight);  

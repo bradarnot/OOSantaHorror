@@ -101,15 +101,17 @@ public abstract class Actor extends GameObj {
 	public void clipToTile(GameModel gm) {
 		int xdir = this.position.getX()%32;
 		int ydir = this.position.getY()%32;
+		System.out.println(xdir);
+		System.out.println(ydir);
 		if (xdir <= 15) {
 			this.position.setX(this.position.getX()-xdir);
 		} else {
-			this.position.setX(this.position.getX()+xdir);
+			this.position.setX(this.position.getX()+32-xdir);
 		}
 		if (ydir <= 15) {
 			this.position.setY(this.position.getY()-ydir);
 		} else {
-			this.position.setY(this.position.getY()+ydir);
+			this.position.setY(this.position.getY()+32-ydir);
 		}
 	}
 	

@@ -20,7 +20,6 @@ public class Player extends Actor {
 	}
 	
 	public void update(GameModel gm, Input input) {
-		super.update(gm, input);
 		this.currentTic++;
 		if(input.isDown()) {
 			if(this.getDirection() != 4) {
@@ -55,9 +54,11 @@ public class Player extends Actor {
 		}
 		
 		if(input.movement()) {
-			if(this.currentTic%(speed*3)==0)
-				this.getImageFrame().setX((this.getImageFrame().getX()-1)<=0?animLength-1:(this.getImageFrame().getX()-1));
+			
+			if(this.currentTic%(12/speed)==0)
+				this.getImageFrame().setX((this.getImageFrame().getX()-1)<0?animLength-1:(this.getImageFrame().getX()-1));
 			if(gm.canMoveTo(this.potentialMove(), this.name)) this.executeMove();
+			System.out.println(this.currentTic);
 		} else {
 			this.getImageFrame().setX(1);
 			this.clipToTile(gm);

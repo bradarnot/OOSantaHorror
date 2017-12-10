@@ -30,11 +30,6 @@ public abstract class Actor extends GameObj {
 		this.random = new Random();
 	}
 
-	
-
-
-
-
 	int getAnimLength() {
 		return this.animLength;
 	}
@@ -104,13 +99,11 @@ public abstract class Actor extends GameObj {
 
 	public void update(GameModel gm, Input input) {
 		this.currentTic++;
-		if(this.currentTic%(speed*15)==0) {
+		if(this.currentTic%(15/speed)==0) {
 			this.getImageFrame().setX((this.getImageFrame().getX()+1)%animLength);
-			
-		
 			this.move(gm);
-
 		}
+		
 		
 		if(this.getDirection() == 4) {
 			this.setImageFrame(new Position(this.getImageFrame().getX(),3));

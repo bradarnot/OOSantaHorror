@@ -21,12 +21,12 @@ public class Keyboard extends Subject implements KeyListener {
 			case KeyEvent.VK_S:
 			case KeyEvent.VK_DOWN:
 //				System.out.println("Down");
-				this.input.setDown(true);
+				this.input.setUp(true);
 				break;
 			case KeyEvent.VK_W:
 			case KeyEvent.VK_UP:
 //				System.out.println("Up");
-				this.input.setUp(true);
+				this.input.setDown(true);
 				break;
 			case KeyEvent.VK_A:
 			case KeyEvent.VK_LEFT:
@@ -53,12 +53,12 @@ public class Keyboard extends Subject implements KeyListener {
 			case KeyEvent.VK_S:
 			case KeyEvent.VK_DOWN:
 //				System.out.println("Down");
-				this.input.setDown(false);
+				this.input.setUp(false);
 				break;
 			case KeyEvent.VK_W:
 			case KeyEvent.VK_UP:
 //				System.out.println("Up");
-				this.input.setUp(false);
+				this.input.setDown(false);
 				break;
 			case KeyEvent.VK_A:
 			case KeyEvent.VK_LEFT:

@@ -34,12 +34,11 @@ public class Player extends Actor {
 			this.setDirection(6);
 			this.setImageFrame(new Position(this.getImageFrame().getX(),1));
 		}
-		System.out.println("Update");
 		
 		if(input.movement()) {
 			if(this.currentTic%(speed*3)==0)
 				this.getImageFrame().setX((this.getImageFrame().getX()-1)<=0?animLength-1:(this.getImageFrame().getX()-1));
-			if(gm.canMoveTo(this.potentialMove())) this.executeMove();
+			if(gm.canMoveTo(this.potentialMove(), this.name)) this.executeMove();
 		} else {
 			this.getImageFrame().setX(1);
 			this.clipToTile(gm);

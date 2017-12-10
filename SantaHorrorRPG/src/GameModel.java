@@ -26,6 +26,7 @@ public class GameModel {
 
 
 	public GameModel(KeyListener k) {
+		this.setNextZoneTrigger(new ArrayList<Trigger>());
 		objects = new ArrayList<GameObj>();
 		actors = new ArrayList<Actor>();
 		fileManager = new FileManager();

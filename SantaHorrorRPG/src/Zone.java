@@ -1,11 +1,10 @@
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.*;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
+import sun.audio.*;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public class Zone extends GameState {
@@ -24,6 +23,7 @@ public class Zone extends GameState {
 		//Image character = Toolkit.getDefaultToolkit().createImage("img" + File.separator +"alicesheet.png");
 		screen = new DrawPanel(gm, screenWidth, screenHeight);
 		
+		music();
 		
 		gm.getFrame().add(screen);
 		
@@ -34,7 +34,32 @@ public class Zone extends GameState {
 		
 	}
 	
+	public static void music(String path) 
+    {       
+        AudioPlayer MGP = AudioPlayer.player;
+        AudioStream BGM;
+        AudioData MD;
 
+        ContinuousAudioDataStream loop = null;
+
+        try
+        {
+            InputStream test = new FileInputStream(path);
+            BGM = new AudioStream(test);
+            AudioPlayer.player.start(BGM);
+            //MD = BGM.getData();
+            //loop = new ContinuousAudioDataStream(MD);
+
+        }
+        catch(FileNotFoundException e){
+            System.out.print(e.toString());
+        }
+        catch(IOException error)
+        {
+            System.out.print(error.toString());
+        }
+        MGP.start(loop);
+    }
 	
 	
 	public void update(GameModel gm, Input input) {

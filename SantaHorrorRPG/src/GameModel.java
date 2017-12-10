@@ -121,8 +121,9 @@ public class GameModel {
 	}*/
 	
 	public boolean canMoveTo(Position tile) {
-		tile.setX(tile.getX() - (tile.getX() % 32) + 32);
-		tile.setY(tile.getY() - (tile.getY() % 32) + 32);
+		tile.setX(tile.getX() - (tile.getX() % 32));
+		tile.setY(tile.getY() - (tile.getY() % 32));
+		
 		ArrayList<GameObj> objects = this.getObjectsAtPosition(tile);
 		for(int index = 0; index < objects.size(); index++) {
 			GameObj object = objects.get(index);

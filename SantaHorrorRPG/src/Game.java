@@ -160,7 +160,6 @@ public class Game extends Observer{
 	@Override
 	public void update(Input input) {
 		// TODO Auto-generated method stub
-		System.out.println(input);
 		this.input = input;
 	}
 	

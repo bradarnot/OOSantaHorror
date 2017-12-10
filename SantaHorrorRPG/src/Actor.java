@@ -18,6 +18,7 @@ public abstract class Actor extends GameObj {
 	protected int moveType;
 	protected Random random;
 	protected boolean canMove = true;
+	protected int moveSpeed = 0;
 	
 	public Actor() {
 		super();
@@ -89,6 +90,25 @@ public abstract class Actor extends GameObj {
 	public void setMoveType(int moveType) {
 		this.moveType = moveType;
 	}
+	
+
+	public int getMoveSpeed() {
+		return moveSpeed;
+	}
+
+
+
+
+
+
+	public void setMoveSpeed(int moveSpeed) {
+		this.moveSpeed = moveSpeed;
+	}
+
+
+
+
+
 
 	public void update(GameModel gm, Input input) {
 		this.currentTic++;
@@ -135,13 +155,13 @@ public abstract class Actor extends GameObj {
 		int x = this.position.getX();
 		int y = this.position.getY();
 		if(this.direction == 0 || this.direction == 1 || this.direction == 7)
-			y+=speed;
+			y+=this.getMoveSpeed();
 		if(this.direction == 3 || this.direction == 4 || this.direction == 5)
-			y-=speed;
+			y-=this.getMoveSpeed();
 		if(this.direction == 1 || this.direction == 2 || this.direction == 3)
-			x+=speed;
+			x+=this.getMoveSpeed();
 		if(this.direction == 5 || this.direction == 6 || this.direction == 7)
-			x-=speed;
+			x-=this.getMoveSpeed();
 		return new Position(x,y);
 		
 	}
@@ -157,11 +177,11 @@ public abstract class Actor extends GameObj {
 		switch (this.moveType){
 			case 0:
 				if(this.getPosition().inTile(gm.getTileSize())) {
-					int change = random.nextInt(12);
-					if(change < 3) this.direction = change*2;
+					int change = random.nextInt(8);
+					if(change < 4) this.direction = change*2;
 					while(!gm.canMoveTo(this.potentialMove(), this.getName())) {
-						change = random.nextInt(12);
-						if(change < 3) this.direction = change*2;
+						change = random.nextInt(4);
+						if(change < 4) this.direction = change*2;
 					}	
 				}
 				this.canMove = true;
@@ -181,7 +201,7 @@ public abstract class Actor extends GameObj {
 
 		int speed;
 		try{
-			speed = toIntExact((Long) json.get("speed"));			
+			speed = toIntExact((Long) json.get("animationSpeed"));			
 		}
 		catch(Exception e) {
 			speed = 1;
@@ -214,6 +234,13 @@ public abstract class Actor extends GameObj {
 		catch(Exception e) {
 			frame = 0;
 		}
+		int moveSpeed;
+		try{
+			moveSpeed = toIntExact((long) json.get("moveSpeed"));
+		}
+		catch(Exception e) {
+			moveSpeed = 4;
+		}
 
 		
 		this.setSpeed(speed);
@@ -221,6 +248,7 @@ public abstract class Actor extends GameObj {
 		this.setHealth(health);
 		this.setMoveType(moveType);
 		this.setAnimLength(frame);
+		this.setMoveSpeed(moveSpeed);
 	}
 
 }

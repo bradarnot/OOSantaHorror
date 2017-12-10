@@ -336,8 +336,6 @@ public class GameObj {
 	}
 	
 	public boolean isObject(String name) {
-		System.out.println(name);
-		System.out.println(this.getName());
 		return name.equals(this.getName());
 	}
 	

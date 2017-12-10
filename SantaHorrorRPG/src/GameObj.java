@@ -347,8 +347,8 @@ public class GameObj {
 		this.loadFromFile(swapInTo, this.getPosition());		
 	}
 	
-	public boolean isObject(String name) {
-		return name.equals(this.getName());
+	public boolean equals(GameObj go) {
+		return go.getName().equals(this.getName()) && this.position.equalPos(go.getPosition());
 	}
 	
 }

@@ -175,12 +175,12 @@ public abstract class Actor extends GameObj {
 				if(this.getPosition().inTile(gm.getTileSize())) {
 					int change = random.nextInt(8);
 					if(change < 4) this.direction = change*2;
-					while(!gm.canMoveTo(this.potentialMove(), this.getName())) {
+					while(!gm.canMoveTo(this.potentialMove(), this)) {
 						change = random.nextInt(4);
 						if(change < 4) this.direction = change*2;
 					}	
 				}
-				if(gm.canMoveTo(this.potentialMove(), this.name)) {
+				if(gm.canMoveTo(this.potentialMove(), this)) {
 					this.executeMove();
 				}
 				break;

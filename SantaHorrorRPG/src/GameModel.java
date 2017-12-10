@@ -245,7 +245,7 @@ public class GameModel {
 	
 	public Position getPosition(GameObj object) {
 		for(int i=0;i<this.objects.size();i++) {
-			if (this.objects.get(i).isObject(object.getName())) return this.objects.get(i).getPosition();
+			if (this.objects.get(i).equals(object)) return this.objects.get(i).getPosition();
 		}
 		return null;
 	}
@@ -278,7 +278,7 @@ public class GameModel {
 		return new GameObj();
 	}*/
 	
-	public boolean canMoveTo(Position tile, String ignore) {
+	public boolean canMoveTo(Position tile, GameObj ignore) {
 		Position topLeft = new Position(tile.getX()+1,tile.getY()+1);
 		
 		topLeft.setX(tile.getX() - (tile.getX() % this.getTileSize()));
@@ -296,7 +296,7 @@ public class GameModel {
 		
 		for(int index = 0; index < objectsTopLeft.size(); index++) {
 			GameObj object = objectsTopLeft.get(index);
-			if(object != null && object.isSolid() && !object.isObject(ignore)) {
+			if(object != null && object.isSolid() && !object.equals(ignore)) {
 				return false;
 			}	
 		}
@@ -304,7 +304,7 @@ public class GameModel {
 		
 		for(int index = 0; index < objectsBotRight.size(); index++) {
 			GameObj object = objectsBotRight.get(index);
-			if(object != null && object.isSolid() && !object.isObject(ignore)) {
+			if(object != null && object.isSolid() && !object.equals(ignore)) {
 				return false;
 			}	
 		}

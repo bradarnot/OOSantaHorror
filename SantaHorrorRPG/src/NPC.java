@@ -23,7 +23,7 @@ public class NPC extends Actor {
 			super.move(gm);			
 		}else {
 			this.fear -= 1;
-			if( gm.canMoveTo(this.potentialMove(), this.name)) {
+			if( gm.canMoveTo(this.potentialMove(), this)) {
 				this.position = this.potentialMove();
 			}else {
 				int temp = random.nextInt(8);

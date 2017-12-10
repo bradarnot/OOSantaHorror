@@ -9,6 +9,8 @@ import javax.imageio.ImageIO;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.omg.CORBA.SystemException;
+
 import static java.lang.Math.toIntExact;
 /**
  * 
@@ -36,7 +38,7 @@ public class GameObj {
 			System.out.println("Could not load image!!");
 			e.printStackTrace();
 		}
-		System.out.println("Image Loaded");
+		//System.out.println("Image Loaded");
 	}
 	
 	public Image getAppearance() {
@@ -199,7 +201,7 @@ public class GameObj {
 	}
 	
 	public boolean isObject(String name) {
-		return name.equals(this.name);
+		return name.equals(this.getName());
 	}
 	
 }

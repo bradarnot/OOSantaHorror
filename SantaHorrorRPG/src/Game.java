@@ -83,13 +83,18 @@ public class Game extends Observer{
 		for (int i=0; i < monsters.size(); i++) {
 			JSONObject jsonObj = (JSONObject) monsters.get(i);
 			String name = (String) jsonObj.get("name");
-			int[] position = (int[]) jsonObj.get("position");
+			
+			JSONArray jsonPosition = (JSONArray) jsonObj.get("position");
+			int[] position = new int[2];
+			for (int j=0; j < jsonPosition.size(); j++) {
+				position[i] = toIntExact((Long) jsonPosition.get(i));
+			}
 			Position pos = new Position(position[0], position[1]);
-			int speed = (int) jsonObj.get("speed");
-			int direction = (int) jsonObj.get("direction");
-			int health = (int) jsonObj.get("health");
-			int moveType = (int) jsonObj.get("moveType");
-			int attackPower = (int) jsonObj.get("attackPower");
+			int speed = toIntExact((Long) jsonObj.get("speed"));
+			int direction = toIntExact((Long) jsonObj.get("direction"));
+			int health = toIntExact((Long) jsonObj.get("health"));
+			int moveType = toIntExact((Long) jsonObj.get("moveType"));
+			int attackPower = toIntExact((Long) jsonObj.get("attackPower"));
 			int frame = toIntExact((long) jsonObj.get("frameLength"));
 			Monster temp = new Monster(speed, direction, health, moveType, frame, attackPower);
 			temp.loadFromFile(name, pos);
@@ -101,13 +106,17 @@ public class Game extends Observer{
 		for (int i=0; i < npcs.size(); i++) {
 			JSONObject jsonObj = (JSONObject) npcs.get(i);
 			String name = (String) jsonObj.get("name");
-			int[] position = (int[]) jsonObj.get("position");
+			JSONArray jsonPosition = (JSONArray) jsonObj.get("position");
+			int[] position = new int[2];
+			for (int j=0; j < jsonPosition.size(); j++) {
+				position[i] = toIntExact((Long) jsonPosition.get(i));
+			}
 			Position pos = new Position(position[0], position[1]);
-			int speed = (int) jsonObj.get("speed");
-			int direction = (int) jsonObj.get("direction");
-			int health = (int) jsonObj.get("health");
-			int moveType = (int) jsonObj.get("moveType");
-			int fear = (int) jsonObj.get("fear");
+			int speed = toIntExact((Long) jsonObj.get("speed"));
+			int direction = toIntExact((Long) jsonObj.get("direction"));
+			int health = toIntExact((Long) jsonObj.get("health"));
+			int moveType = toIntExact((Long) jsonObj.get("moveType"));
+			int fear = toIntExact((Long) jsonObj.get("fear"));
 			int frame = toIntExact((long) jsonObj.get("frameLength"));
 			NPC temp = new NPC(speed, direction, health, moveType, frame, fear);
 			temp.loadFromFile(name, pos);

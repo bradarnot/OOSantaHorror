@@ -101,8 +101,14 @@ public class Game extends Observer{
 		}
 		
 		ArrayList<Actor> gameActors = new ArrayList<Actor>();
+		for(int index = 0; index < gameMonsters.size(); index++) {
+			gameActors.add(gameMonsters.get(index));
+		}
+		for(int index = 0; index < gameNPCs.size(); index++) {
+			gameActors.add(gameNPCs.get(index));
+		}
 		
-		model.setObjects(gameObjects);		
+		model.setActors(gameActors);		
 		
 		JSONArray triggers = (JSONArray) zone.get("triggers");
 		ArrayList<Trigger> gameTriggers = new ArrayList<Trigger>();

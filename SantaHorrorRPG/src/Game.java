@@ -65,14 +65,12 @@ public class Game extends Observer{
 		ArrayList<Trigger> gameTriggers = new ArrayList<Trigger>();
 		for (int i=0; i < triggers.size(); i++) {
 			JSONObject jsonObj = (JSONObject) triggers.get(i);
-			String name = (String) jsonObj.get("name");
+			String nextZone = (String) jsonObj.get("next_zone");
 			int[] position = (int[]) jsonObj.get("position");
-			Position pos = new Position(position[0], position[1]);
-			GameObj temp = new GameObj();
-			temp.loadFromFile(name, pos);
-			gameObjects.add(temp);
+			Trigger temp = new Trigger(position[0], position[1], nextZone);
+			gameTriggers.add(temp);
 		}
-		model.setObjects(gameObjects);
+		model.setNextZoneTrigger(gameTriggers);
 	}
 	
 	public void save() {

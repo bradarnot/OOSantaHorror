@@ -49,4 +49,8 @@ public class Position {
 		return "(" + this.x + "," + this.y + ")";
 	}
 	
+	public boolean inTile(int tileSize) {
+		return (this.getX() % tileSize == 0) && (this.getY() % tileSize == 0);
+	}
+	
 }

@@ -26,6 +26,7 @@ public abstract class Actor extends GameObj {
 		this.setAnimLength(0);
 		this.setImageFrame(new Position(0,0));
 		this.setDirection(0);
+		this.random = new Random();
 	}
 
 	
@@ -91,8 +92,14 @@ public abstract class Actor extends GameObj {
 
 	public void update(GameModel gm, Input input) {
 		this.currentTic++;
-		if(this.currentTic%(speed*15)==0)
+		if(this.currentTic%(speed*15)==0) {
 			this.getImageFrame().setX((this.getImageFrame().getX()+1)%animLength);
+		
+			this.move(gm);
+			if(gm.canMoveTo(this.potentialMove(), this.name)) {
+				this.executeMove();
+			}
+		}
 	}
 	
 	public void clipToTile(GameModel gm) {
@@ -146,19 +153,22 @@ public abstract class Actor extends GameObj {
 		}
 	}
 	
-	public void move() {
+	public void move(GameModel gm) {
 		switch (this.moveType){
 			case 0:
+				if(this.getPosition().inTile(gm.getTileSize())) {
+					int change = random.nextInt(12);
+					if(change < 3) this.direction = change*2;
+					while(!gm.canMoveTo(this.potentialMove(), this.getName())) {
+						change = random.nextInt(12);
+						if(change < 3) this.direction = change*2;
+					}	
+				}
+				this.canMove = true;
 				break;
 			case 1:
 				break;
 			default:
-				int change = random.nextInt(25);
-				if(change < 8) this.direction = change;
-				this.canMove = true;
-				
-				
-				
 				break;
 		}
 		

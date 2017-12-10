@@ -62,6 +62,7 @@ public class Game extends Observer{
 		//objects
 		JSONArray objects = (JSONArray) zone.get("objects");
 		ArrayList<GameObj> gameObjects = new ArrayList<GameObj>();
+		System.out.println(objects.size());
 		for (int i=0; i < objects.size(); i++) {
 			JSONObject jsonObj = (JSONObject) objects.get(i);
 			String name = (String) jsonObj.get("name");

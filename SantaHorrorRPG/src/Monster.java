@@ -25,7 +25,9 @@ public class Monster extends Actor {
 			ArrayList<GameObj> adjacent = gm.getAdjacent(this.position, 1);
 			for(int i = 0; i<adjacent.size(); i++) {
 				if(adjacent.get(i) instanceof Player || (this.attackPower > 20 && adjacent.get(i) instanceof NPC))
-					this.attack((Actor) adjacent.get(i));
+					if(this.attack((Actor) adjacent.get(i))) {
+						System.out.println(adjacent.get(i).getName() + " has died.");
+					}
 			}
 		}
 
@@ -45,7 +47,7 @@ public class Monster extends Actor {
 		
 	}
 
-	public void attack(Actor victim) {
-		victim.damage(attackPower);
+	public boolean attack(Actor victim) {
+		return victim.damage(attackPower);
 	}
 }

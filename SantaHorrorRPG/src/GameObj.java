@@ -130,7 +130,7 @@ public class GameObj {
 	public void loadFromFile(String filename, Position position) {
 		//System.out.println(filename);
 		JSONObject json = JsonParser.getJson("objects", filename + ".json");
-		this.setName(filename);		
+		this.setName(filename);
 		try{
 			this.setNonPlayerInteractState(toIntExact((Long) json.get("nonPlayerInteractState")));			
 		}
@@ -336,6 +336,8 @@ public class GameObj {
 	}
 	
 	public boolean isObject(String name) {
+		System.out.println(name);
+		System.out.println(this.getName());
 		return name.equals(this.getName());
 	}
 	

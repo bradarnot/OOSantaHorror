@@ -1,9 +1,27 @@
 {
 	"zone_id": 1,
-	"objects": [{
+	"objects": 
+	[
+	{
 		"name": "fireplace",
 		"position": [128, 128]
-	}],
+	},{
+		"name": "fireplace",
+		"position": [256, 128]
+	},{
+		"name": "fireplace",
+		"position": [384, 128]
+	},{
+		"name": "fireplace",
+		"position": [512, 128]
+	},{
+		"name": "fireplace",
+		"position": [640, 128]
+	},{
+		"name": "fireplace",
+		"position": [768, 128]
+	}
+	],
 	"triggers": [{
 		"next_zone": "2",
 		"position": [-32, -32]

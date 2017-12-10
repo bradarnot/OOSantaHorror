@@ -20,7 +20,7 @@ public class NPC extends Actor {
 	public void update(GameModel gm, Input i) {
 		super.update(gm, i);
 		if(this.fear == 0) {
-			super.move();			
+			super.move(gm);			
 		}else {
 			this.fear -= 1;
 			if( gm.canMoveTo(this.potentialMove(), this.name)) {

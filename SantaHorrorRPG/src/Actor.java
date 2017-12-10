@@ -131,7 +131,6 @@ public abstract class Actor extends GameObj {
 	}
 	
 	public void render(GameModel gm, Graphics g) {
-		
 		g.drawImage(appearance, this.position.getX(), this.position.getY(), (this.position.getX()+32), (this.position.getY()+32),
 				this.imageFrame.getX()*32, this.imageFrame.getY()*32, (this.imageFrame.getX()+1)*32, (this.imageFrame.getY()+1)*32, null);
 	}
@@ -182,6 +181,10 @@ public abstract class Actor extends GameObj {
 				break;
 		}
 		
+	}
+	
+	public void loadFromFile(String name, Position position) {
+		super.loadFromFile(name, position);
 	}
 
 }

@@ -41,7 +41,7 @@ public class NPC extends Actor {
 	}
 	
 	public void loadFromFile(String name, Position position) {
-		
+		super.loadFromFile(name, position);
 	}
 
 }

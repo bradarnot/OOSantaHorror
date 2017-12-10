@@ -38,7 +38,6 @@ public class DrawPanel extends JPanel {
 
 	    super.paintComponents(g);
 	    g.setColor(Color.WHITE);
-	    //g.drawImage(gm.getPlayer().getAppearance(), 0, 0,32,32,0,0,32,32, null);
 	    gm.getPlayer().render(gm, g);
 	}
 	

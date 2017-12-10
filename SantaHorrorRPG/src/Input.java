@@ -5,6 +5,14 @@ public class Input {
 	private boolean right;
 	private boolean interact; 
 	
+	public Input() {
+		up = false;
+		down = false;
+		left = false;
+		right = false;
+		interact = false;
+	}
+	
 	public boolean isInteract() {
 		return interact;
 	}
@@ -43,6 +51,10 @@ public class Input {
 	
 	public void setRight(boolean right) {
 		this.right = right;
+	}
+	
+	public boolean movement() {
+		return this.up || this.right || this.down || this.left;
 	}
 
 }

@@ -7,22 +7,22 @@ import java.util.Random;
 public abstract class Actor extends GameObj {
 	protected int speed;
 	protected int currentTic;
-	protected int imageFrame;
+	protected Position imageFrame;
 	protected int direction;
 	protected int health;
 	protected int moveType;
 	protected Random random;
-	protected boolean canMove = false;
+	protected boolean canMove = true;
 	
-	public Actor(int speed, int currentTic, int imageFrame, int direction, int health, int moveType) {
+	public Actor(int speed, int currentTic, int direction, int health, int moveType) {
 		super();
 		this.setSpeed(speed);
 		this.setCurrentTic(currentTic);
-		this.setImageFrame(imageFrame);
 		this.setDirection(direction);
 		this.setHealth(health);
 		this.setMoveType(moveType);
 		this.random = new Random();
+		this.imageFrame = new Position();
 	}
 
 	public int getSpeed() {
@@ -41,11 +41,11 @@ public abstract class Actor extends GameObj {
 		this.currentTic = currentTic;
 	}
 
-	public int getImageFrame() {
+	public Position getImageFrame() {
 		return imageFrame;
 	}
 
-	public void setImageFrame(int imageFrame) {
+	public void setImageFrame(Position imageFrame) {
 		this.imageFrame = imageFrame;
 	}
 
@@ -73,16 +73,35 @@ public abstract class Actor extends GameObj {
 		this.moveType = moveType;
 	}
 
-	public void update(GameModel gm, Input i) {
-		this.currentTic = (this.currentTic+1)%this.speed;
-		if(this.currentTic == 0) {
-			this.move();
+	public void update(GameModel gm, Input input) {
+		if(input.isDown()) this.setDirection(4);
+		if(input.isUp()) this.setDirection(0);
+		if(input.isRight()) this.setDirection(2);
+		if(input.isLeft()) this.setDirection(6);
+		
+		//System.out.println("move? " + input.movement());
+		if(input.movement()) {
 			if(gm.canMoveTo(this.potentialMove())) this.executeMove();
-		}		
+			//System.out.println("Moving: " + gm.canMoveTo(this.potentialMove()));
+		} else {
+			this.clipToTile(gm);
+		}
+		System.out.println(this.position);
+//		this.currentTic = (this.currentTic+1)%this.speed;
+//		if(this.currentTic == 0) {
+//			this.move();
+//			if(gm.canMoveTo(this.potentialMove())) this.executeMove();
+//		}	
+	}
+	
+	public void clipToTile(GameModel gm) {
+		this.position = new Position((this.position.getX()/32)*32, (this.position.getY()/32)*32);
 	}
 	
 	public void render(GameModel gm, Graphics g) {
-		g.drawImage(appearance, 32, 32, 64, 64, 0, 0, 32, 32, null);
+		
+		g.drawImage(appearance, this.position.getX(), this.position.getY(), (this.position.getX()+32), (this.position.getY()+32),
+				this.imageFrame.getX()*32, this.imageFrame.getY()*32, (this.imageFrame.getX()+1)*32, (this.imageFrame.getY()+1)*32, null);
 	}
 	
 	//If it dies it returns false
@@ -96,14 +115,16 @@ public abstract class Actor extends GameObj {
 	public Position potentialMove() {
 		int x = this.position.getX();
 		int y = this.position.getY();
+		System.out.println(this.direction);
 		if(this.direction == 0 || this.direction == 1 || this.direction == 7)
-			y++;
+			y+=speed;
 		if(this.direction == 3 || this.direction == 4 || this.direction == 5)
-			y--;
+			y-=speed;
 		if(this.direction == 1 || this.direction == 2 || this.direction == 3)
-			x++;
+			x+=speed;
 		if(this.direction == 5 || this.direction == 6 || this.direction == 7)
-			x--;
+			x-=speed;
+		System.out.println(new Position(x,y));
 		return new Position(x,y);
 		
 	}
@@ -111,6 +132,7 @@ public abstract class Actor extends GameObj {
 	public void executeMove() {
 		if(canMove) {
 			this.position = this.potentialMove();
+			
 		}
 	}
 	

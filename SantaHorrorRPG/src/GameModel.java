@@ -15,6 +15,20 @@ public class GameModel {
 	private int zone_id;
 	public boolean stop = false;
 	private ArrayList<Trigger> nextZoneTrigger;
+
+
+	public GameModel(KeyListener k) {
+		this.setNextZoneTrigger(new ArrayList<Trigger>());
+		objects = new ArrayList<GameObj>();
+		actors = new ArrayList<Actor>();
+		fileManager = new FileManager();
+		player = new Player(2, 0, 0, 0, 0, 0);
+		player.setPosition(new Position(3,3));
+		f = new JFrame();
+		kl = k;
+		f.addKeyListener(kl);
+		tileSize = 32;
+	}
 	
 	public ArrayList<Trigger> getNextZoneTrigger() {
 		return nextZoneTrigger;
@@ -23,20 +37,6 @@ public class GameModel {
 
 	public void setNextZoneTrigger(ArrayList<Trigger> nextZoneTrigger) {
 		this.nextZoneTrigger = nextZoneTrigger;
-	}
-
-
-	public GameModel(KeyListener k) {
-		this.setNextZoneTrigger(new ArrayList<Trigger>());
-		objects = new ArrayList<GameObj>();
-		actors = new ArrayList<Actor>();
-		fileManager = new FileManager();
-		player = new Player(1, 0, 0, 0, 0, 0);
-		player.setPosition(new Position(3,3));
-		f = new JFrame();
-		kl = k;
-		f.addKeyListener(kl);
-		tileSize = 32;
 	}
 	
 	public int getTileSize() {

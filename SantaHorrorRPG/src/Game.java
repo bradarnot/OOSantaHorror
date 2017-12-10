@@ -6,7 +6,8 @@ import org.json.simple.JSONObject;
 
 public class Game extends Observer{
 
-	private int oldTime;
+	private double oldTime;
+	private int targetfps;
 	private Zone zone;
 	private FileManager fileManager;
 	private DBConnection dbc;
@@ -24,6 +25,7 @@ public class Game extends Observer{
 		state = new MainMenu(model, 900, 500);
 		zoneid = 0;
 		input = new Input();
+		targetfps = 60;
 	}
 	
 	public void startGame() {
@@ -32,20 +34,24 @@ public class Game extends Observer{
 	
 	public void gameLoop() {
 		while(!model.stop) {
-			//System.out.println(input);
-			state.update(model, input);
-			state.render(model);
-			state = state.getNextState();
-			model.getFrame().setFocusable(true);
-			Position playerPos = model.getPlayer().getPosition();
-			
-			for(int index = 0; index<model.getNextZoneTrigger().size();index++) {
-				Trigger potential = model.getNextZoneTrigger().get(index);
-				if(potential.inRange(playerPos)) {
-					Game.loadLevel(FileManager.loadZone( potential.getNextZone() + ".json"));
+			double time = System.currentTimeMillis();
+			if((time-oldTime) > (1000/targetfps)) {
+				//System.out.println(input);
+				state.update(model, input);
+				state.render(model);
+				state = state.getNextState();
+				model.getFrame().setFocusable(true);
+				Position playerPos = model.getPlayer().getPosition();
+				
+				for(int index = 0; index<model.getNextZoneTrigger().size();index++) {
+					Trigger potential = model.getNextZoneTrigger().get(index);
+					if(potential.inRange(playerPos)) {
+						Game.loadLevel(FileManager.loadZone( potential.getNextZone() + ".json"));
+					}
 				}
+				//System.out.println(model.getFrame().getKeyListeners()[0]);
+				oldTime = time;
 			}
-			//System.out.println(model.getFrame().getKeyListeners()[0]);
 		}
 	}
 	

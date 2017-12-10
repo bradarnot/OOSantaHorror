@@ -167,11 +167,50 @@ public abstract class Actor extends GameObj {
 	public void loadFromFile(String name, Position position) {
 		super.loadFromFile(name, position);
 		JSONObject json = JsonParser.getJson("objects", name + ".json");
-		int speed = toIntExact((Long) json.get("speed"));
-		int direction = toIntExact((Long) json.get("direction"));
-		int health = toIntExact((Long) json.get("health"));
-		int moveType = toIntExact((Long) json.get("moveType"));
-		int frame = toIntExact((long) json.get("frameLength"));
+		
+		try{
+			
+		}
+		catch(Exception e) {
+			
+		}
+		int speed;
+		try{
+			speed = toIntExact((Long) json.get("speed"));			
+		}
+		catch(Exception e) {
+			speed = 1;
+		}
+		int direction;
+		try{
+			direction = toIntExact((Long) json.get("direction"));
+		}
+		catch(Exception e) {
+			direction = 4;
+		}
+		int health;
+		try{
+			health = toIntExact((Long) json.get("health"));
+		}
+		catch(Exception e) {
+			health = 100;
+		}
+		int moveType;
+		try{
+			moveType = toIntExact((Long) json.get("moveType"));
+		}
+		catch(Exception e) {
+			moveType = 0;
+		}
+		int frame;
+		try{
+			frame = toIntExact((long) json.get("frameLength"));
+		}
+		catch(Exception e) {
+			frame = 0;
+		}
+
+		
 		this.setSpeed(speed);
 		this.setDirection(direction);
 		this.setHealth(health);

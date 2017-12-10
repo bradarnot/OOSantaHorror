@@ -175,12 +175,6 @@ public class GameObj {
 		}
 		this.setImageSize(imageSize);
 		
-		try{
-			
-		}
-		catch(Exception e) {
-			
-		}
 		JSONArray fileInteractions = (JSONArray) json.get("nonPlayerInteractions");
 		ArrayList<Interaction> nonPlayerInteractions = new ArrayList<Interaction>();
 		for (int i=0; i < fileInteractions.size(); i++) {

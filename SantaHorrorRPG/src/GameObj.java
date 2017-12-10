@@ -131,14 +131,47 @@ public class GameObj {
 		//System.out.println(filename);
 		JSONObject json = JsonParser.getJson("objects", filename + ".json");
 		this.setName(filename);
-		this.setNonPlayerInteractState(
-				toIntExact(
-						(Long) 
-						json.get("nonPlayerInteractState")));
-		this.setPlayerInteractState(toIntExact((Long) json.get("playerInteractState")));
-		this.loadImage((String) json.get("src"));
-		boolean solid = (toIntExact((Long) json.get("solid")) != 0);
+		try{
+			
+		}
+		catch(Exception e) {
+			
+		}
+		
+		
+		try{
+			this.setNonPlayerInteractState(toIntExact((Long) json.get("nonPlayerInteractState")));			
+		}
+		catch(Exception e) {
+			this.setNonPlayerInteractState(0);
+		}
+		try{
+			this.setPlayerInteractState(toIntExact((Long) json.get("playerInteractState")));	
+		}
+		catch(Exception e) {
+			this.setPlayerInteractState(0);
+		}
+		try{
+			this.loadImage((String) json.get("src"));
+		}
+		catch(Exception e) {
+			this.loadImage(this.getName() + ".png");
+		}
+		boolean solid;
+		try{
+			solid = (toIntExact((Long) json.get("solid")) != 0);
+		}
+		catch(Exception e) {
+			solid = false;
+		}
 		this.setSolid(solid);
+		try{
+			
+		}
+		catch(Exception e) {
+			
+		}
+		
 		this.setPosition(position);
 		this.setSwapInTo((String) json.get("swapInTo"));
 		int imageSize;

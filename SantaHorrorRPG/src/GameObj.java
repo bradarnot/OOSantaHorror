@@ -114,7 +114,7 @@ public class GameObj {
 	}
 	
 	public void loadFromFile(String filename, Position position) {
-		System.out.println(filename);
+		//System.out.println(filename);
 		JSONObject json = JsonParser.getJson("objects", filename + ".json");
 		this.setName(filename);
 		this.setNonPlayerInteractState(

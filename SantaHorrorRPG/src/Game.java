@@ -69,7 +69,7 @@ public class Game extends Observer{
 			JSONArray jsonPosition = (JSONArray) jsonObj.get("position");
 			int[] position = new int[2];
 			for (int j=0; j < jsonPosition.size(); j++) {
-				position[i] = toIntExact((Long) jsonPosition.get(i));
+				position[j] = toIntExact((Long) jsonPosition.get(j));
 			}
 			Position pos = new Position(position[0], position[1]);
 			GameObj temp = new GameObj();
@@ -87,7 +87,7 @@ public class Game extends Observer{
 			JSONArray jsonPosition = (JSONArray) jsonObj.get("position");
 			int[] position = new int[2];
 			for (int j=0; j < jsonPosition.size(); j++) {
-				position[i] = toIntExact((Long) jsonPosition.get(i));
+				position[j] = toIntExact((Long) jsonPosition.get(j));
 			}
 			Position pos = new Position(position[0], position[1]);
 			int speed = toIntExact((Long) jsonObj.get("speed"));
@@ -109,7 +109,7 @@ public class Game extends Observer{
 			JSONArray jsonPosition = (JSONArray) jsonObj.get("position");
 			int[] position = new int[2];
 			for (int j=0; j < jsonPosition.size(); j++) {
-				position[i] = toIntExact((Long) jsonPosition.get(i));
+				position[j] = toIntExact((Long) jsonPosition.get(j));
 			}
 			Position pos = new Position(position[0], position[1]);
 			int speed = toIntExact((Long) jsonObj.get("speed"));

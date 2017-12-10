@@ -50,6 +50,9 @@ public class Player extends Actor {
 			this.setDirection(6);
 			this.setImageFrame(new Position(this.getImageFrame().getX(),1));
 		}
+		if(input.isInteract()) {
+			gm.interact(this.getPosition(), true, gm.intToDirection(this.getDirection()));
+		}
 		
 		if(input.movement()) {
 			if(this.currentTic%(speed*3)==0)

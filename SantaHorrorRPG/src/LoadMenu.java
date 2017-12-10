@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.swing.*;
 
+import org.json.simple.JSONObject;
+
 public class LoadMenu extends GameState {
 
 	private Menu loadMenu;
@@ -35,6 +37,9 @@ public class LoadMenu extends GameState {
 					JButton load = new JButton((String)map.get(key));
 					load.addActionListener(new ActionListener() {
 				         public void actionPerformed(ActionEvent e) {
+				        	 	String player = (String) map.get(key);
+				        	 	JSONObject zone = FileManager.loadSaveFile(player);
+				        	 	Game.loadLevel(zone);
 				            nextState = new Zone(gm, screenWidth, screenHeight);
 				            gm.getFrame().remove(loadMenu);
 				         }          

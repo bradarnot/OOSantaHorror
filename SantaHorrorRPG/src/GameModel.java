@@ -15,6 +15,16 @@ public class GameModel {
 	public boolean stop = false;
 	private ArrayList<Trigger> nextZoneTrigger;
 	
+	public ArrayList<Trigger> getNextZoneTrigger() {
+		return nextZoneTrigger;
+	}
+
+
+	public void setNextZoneTrigger(ArrayList<Trigger> nextZoneTrigger) {
+		this.nextZoneTrigger = nextZoneTrigger;
+	}
+
+
 	public GameModel(KeyListener k) {
 		objects = new ArrayList<GameObj>();
 		actors = new ArrayList<Actor>();

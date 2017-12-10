@@ -1,19 +1,19 @@
 
 public class Trigger extends Position {
-	private int nextZone;
+	private String nextZone;
 	
 	
-	public int getNextZone() {
+	public String getNextZone() {
 		return nextZone;
 	}
 
 
-	public void setNextZone(int nextZone) {
+	public void setNextZone(String nextZone) {
 		this.nextZone = nextZone;
 	}
 
 
-	public Trigger(int x, int y, int zone_id) {
+	public Trigger(int x, int y, String zone_id) {
 		super(x, y);
 		this.setNextZone(zone_id);
 		// TODO Auto-generated constructor stub

@@ -37,7 +37,12 @@ public class Game extends Observer{
 			model.getFrame().setFocusable(true);
 			Position playerPos = model.getPlayer().getPosition();
 			
-			if()
+			for(int index = 0; index<model.getNextZoneTrigger().size();index++) {
+				Trigger potential = model.getNextZoneTrigger().get(index);
+				if(potential.inRange(playerPos)) {
+					Game.loadLevel(FileManager.loadZone( potential.getNextZone() + ".json"));
+				}
+			}
 			//System.out.println(model.getFrame().getKeyListeners()[0]);
 		}
 	}

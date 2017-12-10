@@ -1,5 +1,5 @@
 
-public class GameState {
+public abstract class GameState {
 	protected int screenWidth;
 	protected int screenHeight;
 	protected GameState nextState;
@@ -12,12 +12,8 @@ public class GameState {
 		this.nextState = nextState;
 	}
 	
-	public void update(GameModel gm, Input input) {
-		
-	}
+	public abstract void update(GameModel gm, Input input);
 	
-	public void render(GameModel gm) {
-		
-	}
+	public abstract void render(GameModel gm);
 
 }

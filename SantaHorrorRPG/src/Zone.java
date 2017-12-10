@@ -23,7 +23,7 @@ public class Zone extends GameState {
 		//Image character = Toolkit.getDefaultToolkit().createImage("img" + File.separator +"alicesheet.png");
 		screen = new DrawPanel(gm, screenWidth, screenHeight);
 		
-		music("audio" + File.separator + "sugar_plum_fairy.wav");
+		playMusic("audio" + File.separator + "sugar_plum_fairy.wav");
 		
 		gm.getFrame().add(screen);
 		
@@ -34,22 +34,20 @@ public class Zone extends GameState {
 		
 	}
 	
-	public static void music(String path) 
+	// solution adapted from https://stackoverflow.com/questions/20811728/adding-music-sound-to-java-programs
+	public static void playMusic(String path) 
     {       
-        AudioPlayer MGP = AudioPlayer.player;
-        AudioStream BGM;
-        AudioData MD;
+        AudioPlayer player = AudioPlayer.player;
+        AudioStream stream;
+        AudioData data;
 
         ContinuousAudioDataStream loop = null;
 
         try
         {
             InputStream test = new FileInputStream(path);
-            BGM = new AudioStream(test);
-            AudioPlayer.player.start(BGM);
-            //MD = BGM.getData();
-            //loop = new ContinuousAudioDataStream(MD);
-
+            stream = new AudioStream(test);
+            AudioPlayer.player.start(stream);
         }
         catch(FileNotFoundException e){
             System.out.print(e.toString());
@@ -58,7 +56,7 @@ public class Zone extends GameState {
         {
             System.out.print(error.toString());
         }
-        MGP.start(loop);
+        player.start(loop);
     }
 	
 	

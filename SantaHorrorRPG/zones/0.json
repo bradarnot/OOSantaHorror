@@ -1,7 +1,7 @@
 {
 	"zone_id": 1,
 	"objects": [{
-		"name": "fireplace.json",
+		"name": "fireplace",
 		"position": [0, 1]
 	}],
 	"triggers": [{
@@ -11,6 +11,7 @@
 	"monsters": [],
 	"npcs": [],
 	"player": {
+		"name": "player",
 		"speed": 1,
 		"direction": 0,
 		"health": 100,

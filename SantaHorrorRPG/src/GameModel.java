@@ -73,7 +73,7 @@ public class GameModel {
 			for (int j=0; j < (height / 32); j++) {
 				GameObj border = new GameObj();
 				Position position = new Position(i*32, j*32);
-				border.loadFromFile("border.json", position);
+				border.loadFromFile("border", position);
 				this.objects.add(border);
 			}
 		}

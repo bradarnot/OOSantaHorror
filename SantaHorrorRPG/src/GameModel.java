@@ -11,7 +11,9 @@ public class GameModel {
 	private JFrame f;
 	private KeyListener kl;
 	private DrawPanel drawScreen;
+	private int zone_id;
 	public boolean stop = false;
+	private ArrayList<Trigger> nextZoneTrigger;
 	
 	public GameModel(KeyListener k) {
 		objects = new ArrayList<GameObj>();
@@ -23,6 +25,17 @@ public class GameModel {
 		f.addKeyListener(kl);
 	}
 	
+	
+	public int getZone_id() {
+		return zone_id;
+	}
+
+
+	public void setZone_id(int zone_id) {
+		this.zone_id = zone_id;
+	}
+
+
 	public DrawPanel getScreen() {
 		return this.drawScreen;
 	}

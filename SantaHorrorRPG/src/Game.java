@@ -35,11 +35,16 @@ public class Game extends Observer{
 			state.render(model);
 			state = state.getNextState();
 			model.getFrame().setFocusable(true);
+			Position playerPos = model.getPlayer().getPosition();
+			
+			if()
 			//System.out.println(model.getFrame().getKeyListeners()[0]);
 		}
 	}
 	
 	public static void loadLevel(JSONObject zone) {
+		int zone_id = (int) zone.get("zone_id");
+		model.setZone_id(zone_id);
 		JSONArray objects = (JSONArray) zone.get("objects");
 		ArrayList<GameObj> gameObjects = new ArrayList<GameObj>();
 		for (int i=0; i < objects.size(); i++) {

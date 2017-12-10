@@ -38,10 +38,10 @@ public class LoadMenu extends GameState {
 					load.addActionListener(new ActionListener() {
 				         public void actionPerformed(ActionEvent e) {
 				        	 	String player = (String) map.get(key);
-				        	 	JSONObject zone = FileManager.loadSaveFile(player);
-				        	 	Game.loadLevel(zone);
-				            nextState = new Zone(gm, screenWidth, screenHeight);
-				            gm.getFrame().remove(loadMenu);
+				        	 	int zoneID = (int) DBConnection.getInstance().getZoneID(player);
+				        		gm.getFrame().remove(loadMenu);
+					        nextState = new Zone(gm, screenWidth, screenHeight);
+					        Game.loadLevel(FileManager.loadZone(zoneID + ".json"));
 				         }          
 				      });
 					

@@ -85,7 +85,6 @@ public class GameModel {
 		System.out.println(this.width);
 		System.out.println(this.height);
 		for(int i = -32; i<=this.width; i+=32) {
-			System.out.println(i);
 			GameObj border = new GameObj();
 			Position position = new Position(i,-32);
 			border.loadFromFile("border", position);
@@ -168,15 +167,16 @@ public class GameModel {
 		return new GameObj();
 	}*/
 	
-	public boolean canMoveTo(Position tile) {
+	public boolean canMoveTo(Position tile, String ignore) {
 		tile.setX(tile.getX() - (tile.getX() % 32));
 		tile.setY(tile.getY() - (tile.getY() % 32));
 		
 		ArrayList<GameObj> objects = this.getObjectsAtPosition(tile);
 		for(int index = 0; index < objects.size(); index++) {
 			GameObj object = objects.get(index);
-			if(object != null && object.isSolid()) {
-				System.out.println("no move");
+			if(object != null && object.isSolid() && !object.isObject(ignore)) {
+				System.out.println(tile.getX());
+				System.out.println(tile.getY());
 				return false;
 			}	
 		}

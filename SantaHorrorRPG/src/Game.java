@@ -36,6 +36,7 @@ public class Game extends Observer{
 	public void gameLoop() {
 		while(!model.stop) {
 			double time = System.currentTimeMillis();
+			System.out.println("Game loop");
 			if((time-oldTime) > (1000/targetfps)) {
 				//System.out.println(input);
 				state.update(model, input);

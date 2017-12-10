@@ -120,14 +120,14 @@ public class Game extends Observer{
 		
 		JSONObject playerObj = (JSONObject) zone.get("player");
 		String name = (String) playerObj.get("name");
-		int[] position = (int[]) playerObj.get("position");
-		Position pos = new Position(position[0], position[1]);
+		int[] playerPosition = (int[]) playerObj.get("position");
+		Position playerPos = new Position(playerPosition[0], playerPosition[1]);
 		int speed = (int) playerObj.get("speed");
 		int direction = (int) playerObj.get("direction");
 		int health = (int) playerObj.get("health");
 		int moveType = (int) playerObj.get("moveType");
 		Player player = new Player(speed, 0, direction, health, moveType, 0);
-		player.loadFromFile(name, pos);
+		player.loadFromFile(name, playerPos);
 		
 		model.setPlayer(player);
 		

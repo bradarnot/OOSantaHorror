@@ -11,6 +11,7 @@ public class GameModel {
 	private JFrame f;
 	private KeyListener kl;
 	private DrawPanel drawScreen;
+	private int tileSize;
 	private int zone_id;
 	public boolean stop = false;
 	private ArrayList<Trigger> nextZoneTrigger;
@@ -29,10 +30,16 @@ public class GameModel {
 		objects = new ArrayList<GameObj>();
 		actors = new ArrayList<Actor>();
 		fileManager = new FileManager();
-		player = new Player(0, 0, 0, 0, 0, 0, 0);
+		player = new Player(2, 0, 0, 0, 0, 0);
+		player.setPosition(new Position(3,3));
 		f = new JFrame();
 		kl = k;
 		f.addKeyListener(kl);
+		tileSize = 32;
+	}
+	
+	public int getTileSize() {
+		return tileSize;
 	}
 	
 	

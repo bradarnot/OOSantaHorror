@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 
 public class Monster extends Actor {
-	public Monster(int speed, int currentTic, int imageFrame, int direction, int health, int moveType, int attackPower) {
-		super(speed, currentTic, imageFrame, direction, health, moveType);
+	public Monster(int speed, int currentTic, int direction, int health, int moveType, int attackPower) {
+		super(speed, currentTic, direction, health, moveType);
 		this.setAttackPower(attackPower);
 	}
 

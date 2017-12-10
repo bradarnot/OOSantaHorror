@@ -6,13 +6,13 @@
 	}],
 	"triggers": [{
 		"next_zone": "2",
-		"position": [32, 32]
+		"position": [-32, -32]
 	}],
 	"monsters": [],
 	"npcs": [],
 	"player": {
 		"name": "player",
-		"speed": 1,
+		"speed": 2,
 		"direction": 0,
 		"health": 100,
 		"moveType": 0,

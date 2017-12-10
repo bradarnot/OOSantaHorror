@@ -137,7 +137,7 @@ public class Game extends Observer{
 		int direction = toIntExact((Long) playerObj.get("direction"));
 		int health = toIntExact((Long) playerObj.get("health"));
 		int moveType = toIntExact((Long) playerObj.get("moveType"));
-		Player player = new Player(speed, 0, direction, health, moveType, 0);
+		Player player = new Player(speed, direction, health, moveType, 0, 6);
 		player.loadFromFile(name, playerPos);
 		
 		model.setPlayer(player);

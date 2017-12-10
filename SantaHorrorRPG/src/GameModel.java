@@ -84,6 +84,7 @@ public class GameModel {
 		this.objects = objects;
 		System.out.println(this.width);
 		System.out.println(this.height);
+		
 		for(int i = -32; i<=this.width; i+=32) {
 			GameObj border = new GameObj();
 			Position position = new Position(i,-32);

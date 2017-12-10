@@ -34,8 +34,15 @@ public class Monster extends Actor {
 	public void loadFromFile(String name, Position position) {
 		super.loadFromFile(name, position);
 		JSONObject json = JsonParser.getJson("objects", name + ".json");
-		int attackDamage = toIntExact((Long) json.get("attackPower"));
+		int attackDamage;
+		try{
+			attackDamage = toIntExact((Long) json.get("attackPower"));
+		}
+		catch(Exception e) {
+			attackDamage = 10;
+		}
 		this.setAttackPower(attackDamage);
+		
 	}
 
 	public void attack(Actor victim) {

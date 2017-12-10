@@ -45,7 +45,13 @@ public class NPC extends Actor {
 	public void loadFromFile(String name, Position position) {
 		super.loadFromFile(name, position);
 		JSONObject json = JsonParser.getJson("objects", name + ".json");
-		int fear = toIntExact((Long) json.get("fear"));
+		int fear;
+		try{
+			fear = toIntExact((Long) json.get("fear"));
+		}
+		catch(Exception e) {
+			fear = 0;
+		}
 		this.setFear(fear);
 	}
 

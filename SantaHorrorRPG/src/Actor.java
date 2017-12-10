@@ -168,12 +168,7 @@ public abstract class Actor extends GameObj {
 		super.loadFromFile(name, position);
 		JSONObject json = JsonParser.getJson("objects", name + ".json");
 		
-		try{
-			
-		}
-		catch(Exception e) {
-			
-		}
+
 		int speed;
 		try{
 			speed = toIntExact((Long) json.get("speed"));			

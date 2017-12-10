@@ -70,7 +70,14 @@ public class Player extends Actor {
 	public void loadFromFile(String name, Position position) {
 		super.loadFromFile(name, position);
 		JSONObject json = JsonParser.getJson("objects", name + ".json");
-		int gender = toIntExact((Long) json.get("gender"));
+		int gender;
+		try{
+			gender = toIntExact((Long) json.get("gender"));
+		}
+		catch(Exception e) {
+			gender = 0;
+		}
+		this.setGender(gender);
 	}
 
 }

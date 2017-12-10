@@ -145,6 +145,31 @@ public class GameObj {
 		}
 		this.setNonPlayerInteractions(nonPlayerInteractions);
 		
+		JSONArray filepInteractions = (JSONArray) json.get("playerInteractions");
+		ArrayList<Interaction> playerInteractions = new ArrayList<Interaction>();
+		for (int i=0; i < filepInteractions.size(); i++) {
+			JSONObject jsonObj = (JSONObject) filepInteractions.get(i);
+			String dialogue = (String) jsonObj.get("dialog");
+			boolean swap = (boolean) jsonObj.get("swap");
+			String effectDirection = (String) jsonObj.get("effect");
+			int northInteraction = (int) jsonObj.get("north");
+			int eastInteraction = (int) jsonObj.get("east");
+			int southInteraction = (int) jsonObj.get("south");
+			int westInteraction = (int) jsonObj.get("west");	
+			Interaction temp = new Interaction();
+			
+			temp.setDialogue(dialogue);
+			temp.setSwap(swap);
+			temp.setEffectDirection(effectDirection);
+			temp.setNorthInteraction(northInteraction);
+			temp.setEastInteraction(eastInteraction);
+			temp.setSouthInteraction(southInteraction);
+			temp.setWestInteraction(westInteraction);
+			
+			playerInteractions.add(temp);
+		}
+		this.setNonPlayerInteractions(playerInteractions);
+		
 	}
 	
 	public Interaction interact(boolean byPlayer, String direction) {

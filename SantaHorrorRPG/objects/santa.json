@@ -5,5 +5,12 @@
 	"playerInteractions": [],
 	"swapInTo": "",
 	"src": "santasheet.png",
-	"solid": 1
+	"solid": 1,
+	"speed": 1,
+	"direction": 0,
+	"health": 100,
+	"moveType": 0,
+	"attackPower": 40,
+	"frameLength":3,
+	"imageSize" : 48
 }

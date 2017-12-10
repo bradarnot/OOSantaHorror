@@ -131,20 +131,8 @@ public class Game extends Observer{
 			playerPosition[i] = toIntExact((Long) jsonPosition.get(i));
 		}
 		Position playerPos = new Position(playerPosition[0], playerPosition[1]);
-		int speed = toIntExact((Long) playerObj.get("speed"));
-		int direction = toIntExact((Long) playerObj.get("direction"));
-		int health = toIntExact((Long) playerObj.get("health"));
-		int moveType = toIntExact((Long) playerObj.get("moveType"));
-		int frameLength = toIntExact((Long) playerObj.get("frameLength") );
-		int imageSize;
-		try {
-		    imageSize = toIntExact((Long) playerObj.get("imageSize"));
-		}
-		catch(Exception e){
-			imageSize = model.getTileSize();
-		}
-		Player player = new Player(speed, direction, health, moveType, frameLength, 0);
-		player.setImageSize(imageSize);
+		
+		Player player = new Player();
 		player.loadFromFile(name, playerPos);
 		
 		model.setPlayer(player);

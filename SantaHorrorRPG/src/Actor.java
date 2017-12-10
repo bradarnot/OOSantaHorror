@@ -21,6 +21,11 @@ public abstract class Actor extends GameObj {
 	
 	public Actor() {
 		super();
+		this.setSpeed(1);
+		this.setCurrentTic(0);
+		this.setAnimLength(0);
+		this.setImageFrame(new Position(0,0));
+		this.setDirection(0);
 	}
 
 	

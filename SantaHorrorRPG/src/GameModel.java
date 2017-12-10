@@ -25,7 +25,8 @@ public class GameModel {
 		objects = new ArrayList<GameObj>();
 		actors = new ArrayList<Actor>();
 		fileManager = new FileManager();
-		player = new Player(2, 0, 0, 0, 0, 6);
+		player = new Player();
+		player.setAnimLength(6);
 		player.setPosition(new Position(128, 128));
 		f = new JFrame();
 		f.addKeyListener(kl);

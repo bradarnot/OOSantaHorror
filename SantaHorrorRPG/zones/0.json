@@ -10,22 +10,13 @@
 	}],
 	"monsters": [{
 		"name": "santa",
-		"speed": 1,
-		"direction": 0,
-		"health": 100,
-		"moveType": 0,
-		"position": [64,128],
-		"attackPower": 40,
-		"frameLength":3
+		"position": [64,128]
 	}],
-	"npcs": [],
+	"npcs": [
+		
+	],
 	"player": {
 		"name": "player",
-		"speed": 2,
-		"direction": 0,
-		"health": 100,
-		"moveType": 0,
-		"position": [64,64],
-		"frameLength": 6
+		"position": [64,64]		
 	}
 }

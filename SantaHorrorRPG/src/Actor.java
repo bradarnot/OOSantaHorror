@@ -74,24 +74,28 @@ public abstract class Actor extends GameObj {
 	}
 
 	public void update(GameModel gm, Input input) {
-		if(input.isDown()) this.setDirection(4);
-		if(input.isUp()) this.setDirection(0);
-		if(input.isRight()) this.setDirection(2);
-		if(input.isLeft()) this.setDirection(6);
+		if(input.isDown()) {
+			this.setDirection(4);
+			this.setImageFrame(new Position(0,this.getImageFrame().getY()));
+		}
+		if(input.isUp()) {
+			this.setDirection(0);
+			this.setImageFrame(new Position(3,this.getImageFrame().getY()));
+		}
+		if(input.isRight()) {
+			this.setDirection(2);
+			this.setImageFrame(new Position(1,this.getImageFrame().getY()));
+		}
+		if(input.isLeft()) {
+			this.setDirection(6);
+			this.setImageFrame(new Position(2,this.getImageFrame().getY()));
+		}
 		
-		//System.out.println("move? " + input.movement());
 		if(input.movement()) {
 			if(gm.canMoveTo(this.potentialMove())) this.executeMove();
-			//System.out.println("Moving: " + gm.canMoveTo(this.potentialMove()));
 		} else {
 			this.clipToTile(gm);
 		}
-		System.out.println(this.position);
-//		this.currentTic = (this.currentTic+1)%this.speed;
-//		if(this.currentTic == 0) {
-//			this.move();
-//			if(gm.canMoveTo(this.potentialMove())) this.executeMove();
-//		}	
 	}
 	
 	public void clipToTile(GameModel gm) {

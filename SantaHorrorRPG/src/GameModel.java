@@ -172,21 +172,11 @@ public class GameModel {
 	}*/
 	
 	public boolean canMoveTo(Position tile, String ignore) {
-		Position topLeft = new Position(tile.getX() - (tile.getX() % this.getTileSize()),
-				tile.getY() - (tile.getY() % this.getTileSize()));
+		Position topLeft = new Position(tile.getX()+1,tile.getY()+1);
 		
-		Position topRight = new Position(tile.getX(), tile.getY());
-		topRight.setX(tile.getX()+this.getTileSize()-1);
-
-		topRight.setX(tile.getX() - (tile.getX() % this.getTileSize()));
-		topRight.setY(tile.getY() - (tile.getY() % this.getTileSize()));
-		
-		Position botLeft = new Position(tile.getX(), tile.getY());
-		botLeft.setY(tile.getY()+this.getTileSize()-1);
-
-		botLeft.setX(tile.getX() - (tile.getX() % this.getTileSize()));
-		botLeft.setY(tile.getY() - (tile.getY() % this.getTileSize()));
-		
+		topLeft.setX(tile.getX() - (tile.getX() % this.getTileSize()));
+		topLeft.setY(tile.getY() - (tile.getY() % this.getTileSize()));
+			
 		
 		tile.setX(tile.getX()+this.getTileSize()-1);
 		tile.setY(tile.getY()+this.getTileSize()-1);
@@ -195,8 +185,6 @@ public class GameModel {
 		tile.setY(tile.getY() - (tile.getY() % this.getTileSize()));
 		
 		ArrayList<GameObj> objectsTopLeft = this.getObjectsAtPosition(topLeft);
-		ArrayList<GameObj> objectsTopRight = this.getObjectsAtPosition(topRight);
-		ArrayList<GameObj> objectsBotLeft = this.getObjectsAtPosition(botLeft);
 		ArrayList<GameObj> objectsBotRight = this.getObjectsAtPosition(tile);
 		
 		for(int index = 0; index < objectsTopLeft.size(); index++) {
@@ -206,19 +194,6 @@ public class GameModel {
 			}	
 		}
 		
-		for(int index = 0; index < objectsTopRight.size(); index++) {
-			GameObj object = objectsTopRight.get(index);
-			if(object != null && object.isSolid() && !object.isObject(ignore)) {
-				return false;
-			}	
-		}
-		
-		for(int index = 0; index < objectsBotLeft.size(); index++) {
-			GameObj object = objectsBotLeft.get(index);
-			if(object != null && object.isSolid() && !object.isObject(ignore)) {
-				return false;
-			}	
-		}
 		
 		for(int index = 0; index < objectsBotRight.size(); index++) {
 			GameObj object = objectsBotRight.get(index);

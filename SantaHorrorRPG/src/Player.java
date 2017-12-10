@@ -19,18 +19,30 @@ public class Player extends Actor {
 		super.update(gm, input);
 		this.currentTic++;
 		if(input.isDown()) {
+			if(this.getDirection() != 4) {
+				this.clipToTile(gm);
+			}
 			this.setDirection(4);
 			this.setImageFrame(new Position(this.getImageFrame().getX(),3));
 		}
 		if(input.isUp()) {
+			if(this.getDirection() != 0) {
+				this.clipToTile(gm);
+			}
 			this.setDirection(0);
 			this.setImageFrame(new Position(this.getImageFrame().getX(),0));
 		}
 		if(input.isRight()) {
+			if(this.getDirection() != 2) {
+				this.clipToTile(gm);
+			}
 			this.setDirection(2);
 			this.setImageFrame(new Position(this.getImageFrame().getX(),2));
 		}
 		if(input.isLeft()) {
+			if(this.getDirection() != 6) {
+				this.clipToTile(gm);
+			}
 			this.setDirection(6);
 			this.setImageFrame(new Position(this.getImageFrame().getX(),1));
 		}

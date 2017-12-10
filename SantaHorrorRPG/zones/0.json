@@ -26,10 +26,36 @@
 		"next_zone": "1",
 		"position": [800, 128]
 	}],
-	"monsters": [{
+	"monsters": [
+	{
 		"name": "santa",
 		"position": [64,128]
-	}],
+	},
+	{
+		"name": "fire",
+		"position": [32,32]
+	},
+	{
+		"name": "fire",
+		"position": [32,32]
+	},
+	{
+		"name": "fire",
+		"position": [32,192]
+	},
+	{
+		"name": "fire",
+		"position": [32,384]
+	},
+	{
+		"name": "fire",
+		"position": [192,32]
+	},
+	{
+		"name": "fire",
+		"position": [384,32]
+	}
+	],
 	"npcs": [
 		
 	],

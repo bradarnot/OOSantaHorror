@@ -7,14 +7,12 @@ import java.io.IOException;
 
 public class DrawPanel extends JPanel {
 
-	Image cSprite;
 	GameModel gm;
 	int width;
 	int height;
 	
 	public DrawPanel(GameModel model, int width, int height) {
 		super();
-		//cSprite = character;
 		gm = model;
 		this.width = width;
 		this.height = height;
@@ -24,7 +22,6 @@ public class DrawPanel extends JPanel {
 	protected void paintComponent(Graphics g) {
 		super.paintComponents(g);
 	    g.setColor(Color.WHITE);
-		
 		
 		BufferedImage foo = null;
 		try {

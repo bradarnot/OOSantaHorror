@@ -14,11 +14,15 @@ public class Zone extends GameState {
 	private JPanel screen;
 	
 	public Zone(GameModel gm, int width, int height) {
-		screenWidth = width;
-		screenHeight = height;
+		screenWidth = 1024;
+		screenHeight = 1024;
+		
+		gm.setWidth(1024);
+		gm.setHeight(1024);
+		
 		gm.setDimensions(width, height);
 		//Image character = Toolkit.getDefaultToolkit().createImage("img" + File.separator +"alicesheet.png");
-		screen = new DrawPanel(gm, width, height);
+		screen = new DrawPanel(gm, screenWidth, screenHeight);
 		
 		gm.getPlayer().loadImage("alicesheet.png");
 		

@@ -254,13 +254,56 @@ public class GameObj {
 		ArrayList<Interaction> playerInteractions = new ArrayList<Interaction>();
 		for (int i=0; i < filepInteractions.size(); i++) {
 			JSONObject jsonObj = (JSONObject) filepInteractions.get(i);
-			String dialogue = (String) jsonObj.get("dialog");
-			boolean swap = (boolean) jsonObj.get("swap");
-			String effectDirection = (String) jsonObj.get("effect");
-			int northInteraction = (int) jsonObj.get("north");
-			int eastInteraction = (int) jsonObj.get("east");
-			int southInteraction = (int) jsonObj.get("south");
-			int westInteraction = (int) jsonObj.get("west");	
+			String dialogue;
+			try{
+				dialogue = (String) jsonObj.get("dialog");
+			}
+			catch(Exception e) {
+				dialogue = "...";
+			}
+			boolean swap;
+			try{
+				swap = toIntExact((Long) jsonObj.get("swap")) != 0;
+			}
+			catch(Exception e) {
+				swap = false;
+			}
+			String effectDirection;
+			try{
+				effectDirection = (String) jsonObj.get("effect");
+			}
+			catch(Exception e) {
+				effectDirection = null;
+			}
+
+			int northInteraction;
+			try{
+				northInteraction = toIntExact((Long) jsonObj.get("north"));
+			}
+			catch(Exception e) {
+				northInteraction = -1;
+			}
+			int eastInteraction;
+			try{
+				eastInteraction = toIntExact((Long) jsonObj.get("east"));
+			}
+			catch(Exception e) {
+				eastInteraction = -1;
+			}
+			int southInteraction;
+			try{
+				southInteraction = toIntExact((Long) jsonObj.get("south"));
+			}
+			catch(Exception e) {
+				southInteraction = -1;
+			}
+			int westInteraction;
+			try{
+				westInteraction = toIntExact((Long) jsonObj.get("west"));
+			}
+			catch(Exception e) {
+				westInteraction = -1;
+			}	
 			Interaction temp = new Interaction();
 			
 			temp.setDialogue(dialogue);

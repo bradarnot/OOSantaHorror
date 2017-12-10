@@ -35,6 +35,11 @@ public class DrawPanel extends JPanel {
 	    			g.drawImage(foo, i*32, j*32, null);
 			}
 		}
+		
+		// Draw GameObj's
+		for(GameObj obj : gm.getObjects()) {
+			obj.render(gm, g);
+		}
 
 	    super.paintComponents(g);
 	    g.setColor(Color.WHITE);

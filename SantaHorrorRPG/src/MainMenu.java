@@ -12,6 +12,7 @@ public class MainMenu extends GameState {
 	private JButton start;
 	private JButton loadGame;
 	private JButton tutorial;
+	private JLabel title;
 	
 	public MainMenu(GameModel gm, int width, int height) {
 		screenWidth = width;
@@ -24,6 +25,11 @@ public class MainMenu extends GameState {
 		start = new JButton("Start New Game");
 		loadGame = new JButton("Load Game");
 		tutorial = new JButton("Tutorial");
+		title = new JLabel("Welcome to the Workshop Ho ho .... ho", JLabel.CENTER);
+		
+		title.setVerticalTextPosition(JLabel.BOTTOM);
+		title.setHorizontalTextPosition(JLabel.CENTER);
+		title.setForeground(Color.WHITE);
 		
 		
 		start.addActionListener(new ActionListener() {
@@ -58,6 +64,7 @@ public class MainMenu extends GameState {
 		
 		
 		mainMenu.add(buttonPanel,BorderLayout.EAST);
+		mainMenu.add(title, BorderLayout.NORTH);
 		
 		gm.getFrame().add(mainMenu);
 		gm.getFrame().setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

@@ -110,11 +110,43 @@ public class GameModel {
 	}
 	
 	
-	public ArrayList<InteractMoment> interact(Position tile, boolean byPlayer, String direction) {
-		ArrayList<GameObj> objectsToInteractWith = this.getObjectsAtPosition(tile);
+	public String intToDirection(int direction) {
+		switch (direction){
+		case 0:
+			return "north";
+		case 2:
+			return "east";
+		case 4:
+			return "south";
+		case 6:
+			return "west";
+		default:
+			return "";
+		}
+	}
+	 
+	public void interact(Position tile, boolean byPlayer, String direction) {
+		this.addMoment(new InteractMoment(byPlayer, direction, effectPos(tile, direction)));
+	}
+	
+	public void updateInteractions() {
+		ArrayList<InteractMoment> result = new ArrayList<InteractMoment>();
+		ArrayList<InteractMoment> temp;
+ 		for(InteractMoment im : this.getMoments()) {
+			temp = interactAtMoment(im);
+			for(InteractMoment tim : temp) {
+				result.add(tim);
+			}
+		}
+ 		this.setMoments(result);
+	}
+	
+	
+	public ArrayList<InteractMoment> interactAtMoment(InteractMoment im) {
+		ArrayList<GameObj> objectsToInteractWith = this.getObjectsAtPosition(im.getPosition());
 		ArrayList<InteractMoment> result = new ArrayList<InteractMoment>();
 		for(GameObj o : objectsToInteractWith) {
-			Interaction i = o.interact(byPlayer, invertDirection(direction));
+			Interaction i = o.interact(im.isByPlayer(), invertDirection(im.getDirection()));
 			if(i != null) {
 				System.out.println(i.getDialogue());
 				if(i.isSwap()) {
@@ -122,7 +154,7 @@ public class GameModel {
 				}
 				if(i.getEffectDirection() != "") {
 					result.add(new InteractMoment(false, i.getEffectDirection(), 
-							effectPos(tile, i.getEffectDirection())));
+							effectPos(im.getPosition(), i.getEffectDirection())));
 				}
 			}
 		}
@@ -226,10 +258,16 @@ public class GameModel {
 			}
 		}
 		for(int index=0;index<this.actors.size();index++) {
-			if (this.actors.get(index).getPosition().equalPos(position)) {
+			int x = this.actors.get(index).getPosition().getX();
+			int y = this.actors.get(index).getPosition().getY();
+			Position testPos = new Position(x - (x%32), y - (y%32));
+			if (testPos.equalPos(position)) {
 				results.add(this.actors.get(index));
 			}
 		}
+		int x = this.player.getPosition().getX();
+		int y = this.player.getPosition().getY();
+		Position testPos = new Position(x - (x%32), y - (y%32));
 		if (this.player.getPosition().equalPos(position)) {
 			results.add(this.player);
 		}

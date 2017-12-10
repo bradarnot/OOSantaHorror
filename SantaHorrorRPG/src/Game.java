@@ -82,18 +82,26 @@ public class Game extends Observer{
 			temp.loadFromFile(name, pos);
 			gameMonsters.add(temp);
 		}	
-		//Npc
-		JSONArray objects = (JSONArray) zone.get("objects");
-		ArrayList<GameObj> gameObjects = new ArrayList<GameObj>();
-		for (int i=0; i < objects.size(); i++) {
-			JSONObject jsonObj = (JSONObject) objects.get(i);
+		//NPC
+		JSONArray npcs = (JSONArray) zone.get("npcs");
+		ArrayList<NPC> gameNPCs = new ArrayList<NPC>();
+		for (int i=0; i < npcs.size(); i++) {
+			JSONObject jsonObj = (JSONObject) npcs.get(i);
 			String name = (String) jsonObj.get("name");
 			int[] position = (int[]) jsonObj.get("position");
 			Position pos = new Position(position[0], position[1]);
-			GameObj temp = new GameObj();
+			int speed = (int) jsonObj.get("speed");
+			int direction = (int) jsonObj.get("direction");
+			int health = (int) jsonObj.get("health");
+			int moveType = (int) jsonObj.get("moveType");
+			int fear = (int) jsonObj.get("fear");
+			NPC temp = new NPC(speed, 0, direction, health, moveType, fear);
 			temp.loadFromFile(name, pos);
-			gameObjects.add(temp);
+			gameNPCs.add(temp);
 		}
+		
+		ArrayList<Actor> gameActors = new ArrayList<Actor>();
+		
 		model.setObjects(gameObjects);		
 		
 		JSONArray triggers = (JSONArray) zone.get("triggers");

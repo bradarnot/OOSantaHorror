@@ -40,11 +40,13 @@ public class GameModel {
 
 
 
-	public void setMoments(InteractMoment moments) {
-		this.moments.add(moments);
+	public void setMoments(ArrayList<InteractMoment> moments) {
+		this.moments = moments;
 	}
 
-
+	public void addMoment(InteractMoment moments) {
+		this.moments.add(moments);
+	}
 
 	public int getWidth() {
 		return this.width;
@@ -91,9 +93,26 @@ public class GameModel {
 		return "";
 	}
 	
+	public Position effectPos(Position pos, String direction) {
+		if(direction.equals("north")) {
+			return new Position(pos.getX(), pos.getY() + this.getTileSize());
+		}
+		if(direction.equals("east")) {
+			return new Position(pos.getX() + this.getTileSize(), pos.getY());			
+		}
+		if(direction.equals("south")) {
+			return new Position(pos.getX(), pos.getY() - this.getTileSize());
+		}
+		if(direction.equals("west")) {
+			return new Position(pos.getX() - this.getTileSize(), pos.getY());
+		}
+		return pos;
+	}
 	
-	public void interact(Position tile, boolean byPlayer, String direction) {
+	
+	public ArrayList<InteractMoment> interact(Position tile, boolean byPlayer, String direction) {
 		ArrayList<GameObj> objectsToInteractWith = this.getObjectsAtPosition(tile);
+		ArrayList<InteractMoment> result = new ArrayList<InteractMoment>();
 		for(GameObj o : objectsToInteractWith) {
 			Interaction i = o.interact(byPlayer, invertDirection(direction));
 			if(i != null) {
@@ -101,9 +120,13 @@ public class GameModel {
 				if(i.isSwap()) {
 					o.swap();
 				}
-				
+				if(i.getEffectDirection() != "") {
+					result.add(new InteractMoment(false, i.getEffectDirection(), 
+							effectPos(tile, i.getEffectDirection())));
+				}
 			}
 		}
+		return result;
 		
 	}
 	

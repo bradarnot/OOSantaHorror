@@ -199,7 +199,7 @@ public class GameObj {
 	}
 	
 	public boolean isObject(String name) {
-		return name.equals(this.name);
+		return name.equals(this.getName());
 	}
 	
 }

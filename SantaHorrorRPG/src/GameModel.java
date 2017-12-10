@@ -85,25 +85,28 @@ public class GameModel {
 		System.out.println(this.width);
 		System.out.println(this.height);
 		
+		Position position;
 		for(int i = -32; i<=this.width; i+=32) {
-			GameObj border = new GameObj();
-			Position position = new Position(i,-32);
-			border.loadFromFile("border", position);
-			this.objects.add(border);
-			border = new GameObj();
-			position = new Position(i, this.height);
-			border.loadFromFile("border", position);
-			this.objects.add(border);
+			GameObj borderTop = new GameObj();
+			position = new Position(i,0);
+			borderTop.loadFromFile("border", position);
+			this.objects.add(borderTop);
+			
+			GameObj borderBot = new GameObj();
+			position = new Position(i, this.height - 32);
+			borderBot.loadFromFile("border", position);
+			this.objects.add(borderBot);
 		}
 		for(int i = 0; i<this.height; i+=32) {
-			GameObj border = new GameObj();
-			Position position = new Position(-32,i);
-			border.loadFromFile("border", position);
-			this.objects.add(border);
-			border = new GameObj();
-			position = new Position(this.width, i);
-			border.loadFromFile("border", position);
-			this.objects.add(border);
+			GameObj borderLeft = new GameObj();
+			position = new Position(0,i);
+			borderLeft.loadFromFile("border", position);
+			this.objects.add(borderLeft);
+			
+			GameObj borderRight = new GameObj();
+			position = new Position(this.width-32, i);
+			borderRight.loadFromFile("border", position);
+			this.objects.add(borderRight);
 		}		
 	}
 	

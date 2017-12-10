@@ -119,6 +119,19 @@ public abstract class Actor extends GameObj {
 			this.move(gm);
 
 		}
+		
+		if(this.getDirection() == 4) {
+			this.setImageFrame(new Position(this.getImageFrame().getX(),3));
+		}
+		if(this.getDirection() == 0) {
+			this.setImageFrame(new Position(this.getImageFrame().getX(),0));
+		}
+		if(this.getDirection() == 2) {
+			this.setImageFrame(new Position(this.getImageFrame().getX(),2));
+		}
+		if(this.getDirection() == 6) {
+			this.setImageFrame(new Position(this.getImageFrame().getX(),1));
+		}
 	}
 	
 	public void clipToTile(GameModel gm) {

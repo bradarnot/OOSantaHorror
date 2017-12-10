@@ -206,10 +206,35 @@ public class GameObj {
 			catch(Exception e) {
 				effectDirection = null;
 			}
-			int northInteraction = (int) jsonObj.get("north");
-			int eastInteraction = (int) jsonObj.get("east");
-			int southInteraction = (int) jsonObj.get("south");
-			int westInteraction = (int) jsonObj.get("west");
+
+			int northInteraction;
+			try{
+				northInteraction = toIntExact((Long) jsonObj.get("north"));
+			}
+			catch(Exception e) {
+				northInteraction = -1;
+			}
+			int eastInteraction;
+			try{
+				eastInteraction = toIntExact((Long) jsonObj.get("east"));
+			}
+			catch(Exception e) {
+				eastInteraction = -1;
+			}
+			int southInteraction;
+			try{
+				southInteraction = toIntExact((Long) jsonObj.get("south"));
+			}
+			catch(Exception e) {
+				southInteraction = -1;
+			}
+			int westInteraction;
+			try{
+				westInteraction = toIntExact((Long) jsonObj.get("west"));
+			}
+			catch(Exception e) {
+				westInteraction = -1;
+			}
 			
 			Interaction temp = new Interaction();
 			

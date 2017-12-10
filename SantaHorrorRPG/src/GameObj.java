@@ -1,3 +1,4 @@
+import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -182,6 +183,10 @@ public class GameObj {
 		}		
 		return result;
 		
+	}
+	
+	public void render(GameModel gm, Graphics g) {
+		g.drawImage(appearance, this.position.getX(), this.position.getY(), null);
 	}
 	
 	public void swap() {

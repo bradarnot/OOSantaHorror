@@ -1,7 +1,7 @@
 
 public class NPC extends Actor {
-	public NPC(int speed, int currentTic, int direction, int health, int moveType, int fear) {
-		super(speed, currentTic, direction, health, moveType);
+	public NPC(int speed, int direction, int health, int moveType, int fear, int animLength) {
+		super(speed, direction, health, moveType, animLength);
 		this.setFear(fear);
 	}
 

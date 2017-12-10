@@ -15,16 +15,15 @@ public abstract class Actor extends GameObj {
 	protected Random random;
 	protected boolean canMove = true;
 	
-	public Actor(int speed, int currentTic, int direction, int health, int moveType) {
+	public Actor(int speed, int direction, int health, int moveType, int animLength) {
 		super();
 		this.setSpeed(speed);
-		this.setCurrentTic(currentTic);
 		this.setDirection(direction);
 		this.setHealth(health);
 		this.setMoveType(moveType);
 		this.random = new Random();
 		this.imageFrame = new Position();
-		this.animLength = 6;
+		this.animLength = animLength;
 		this.currentTic = 0;
 	}
 	
@@ -104,7 +103,6 @@ public abstract class Actor extends GameObj {
 		}
 		
 		
-		
 		if(input.movement()) {
 			if(this.currentTic%(speed*3)==0)
 				this.getImageFrame().setX((this.getImageFrame().getX()-1)<=0?5:(this.getImageFrame().getX()-1));
@@ -131,7 +129,6 @@ public abstract class Actor extends GameObj {
 	}
 	
 	public void render(GameModel gm, Graphics g) {
-		
 		g.drawImage(appearance, this.position.getX(), this.position.getY(), (this.position.getX()+32), (this.position.getY()+32),
 				this.imageFrame.getX()*32, this.imageFrame.getY()*32, (this.imageFrame.getX()+1)*32, (this.imageFrame.getY()+1)*32, null);
 	}

@@ -1,7 +1,7 @@
 
 public class Player extends Actor {
-	public Player(int speed, int currentTic, int direction, int health, int moveType, int gender) {
-		super(speed, currentTic, direction, health, moveType);
+	public Player(int speed, int direction, int health, int moveType, int gender, int animLength) {
+		super(speed, direction, health, moveType, animLength);
 		this.setGender(gender);
 	}
 

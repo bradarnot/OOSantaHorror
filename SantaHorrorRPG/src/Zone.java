@@ -23,7 +23,7 @@ public class Zone extends GameState {
 		//Image character = Toolkit.getDefaultToolkit().createImage("img" + File.separator +"alicesheet.png");
 		screen = new DrawPanel(gm, screenWidth, screenHeight);
 		
-		music();
+		music("audio" + File.separator + "sugar_plum_fairy.wav");
 		
 		gm.getFrame().add(screen);
 		

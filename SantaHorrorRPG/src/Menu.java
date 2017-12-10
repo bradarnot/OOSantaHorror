@@ -13,7 +13,6 @@ public class Menu extends JPanel {
 	
 	@Override
 	protected void paintComponent(Graphics g) {
-
 	    super.paintComponents(g);
 	    g.setColor(Color.WHITE);
 	    g.drawImage(bgImage, 0, 0, null);

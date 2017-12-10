@@ -22,6 +22,9 @@ public class DrawPanel extends JPanel {
 	
 	@Override
 	protected void paintComponent(Graphics g) {
+		super.paintComponents(g);
+	    g.setColor(Color.WHITE);
+		
 		
 		BufferedImage foo = null;
 		try {
@@ -41,8 +44,7 @@ public class DrawPanel extends JPanel {
 			obj.render(gm, g);
 		}
 
-	    super.paintComponents(g);
-	    g.setColor(Color.WHITE);
+	    
 	    gm.getPlayer().render(gm, g);
 	}
 	

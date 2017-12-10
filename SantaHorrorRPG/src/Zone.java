@@ -56,4 +56,8 @@ public class Zone extends GameState {
 		gm.getFrame().repaint();
 	}
 	
+	public String toString() {
+		return "Zone";
+	}
+	
 }

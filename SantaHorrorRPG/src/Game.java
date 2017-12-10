@@ -108,7 +108,22 @@ public class Game extends Observer{
 			gameActors.add(gameNPCs.get(index));
 		}
 		
-		model.setActors(gameActors);		
+		model.setActors(gameActors);
+		
+		//player
+		
+		JSONObject playerObj = (JSONObject) zone.get("player");
+		String name = (String) playerObj.get("name");
+		int[] position = (int[]) playerObj.get("position");
+		Position pos = new Position(position[0], position[1]);
+		int speed = (int) playerObj.get("speed");
+		int direction = (int) playerObj.get("direction");
+		int health = (int) playerObj.get("health");
+		int moveType = (int) playerObj.get("moveType");
+		Player player = new Player(speed, 0, direction, health, moveType, 0);
+		player.loadFromFile(name, pos);
+		
+		model.setPlayer(player);
 		
 		JSONArray triggers = (JSONArray) zone.get("triggers");
 		ArrayList<Trigger> gameTriggers = new ArrayList<Trigger>();

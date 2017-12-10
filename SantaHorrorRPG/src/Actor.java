@@ -108,9 +108,9 @@ public abstract class Actor extends GameObj {
 		if(input.movement()) {
 			if(this.currentTic%(speed*3)==0)
 				this.getImageFrame().setX((this.getImageFrame().getX()-1)<=0?5:(this.getImageFrame().getX()-1));
-			System.out.println(this.getImageFrame());
 			if(gm.canMoveTo(this.potentialMove())) this.executeMove();
 		} else {
+			this.getImageFrame().setX(1);
 			this.clipToTile(gm);
 		}
 	}

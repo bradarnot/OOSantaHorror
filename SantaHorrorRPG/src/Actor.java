@@ -97,17 +97,9 @@ public abstract class Actor extends GameObj {
 	}
 
 
-
-
-
-
 	public void setMoveSpeed(int moveSpeed) {
 		this.moveSpeed = moveSpeed;
 	}
-
-
-
-
 
 
 	public void update(GameModel gm, Input input) {

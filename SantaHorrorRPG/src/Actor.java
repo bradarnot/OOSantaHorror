@@ -84,7 +84,8 @@ public abstract class Actor extends GameObj {
 	}
 
 	public void update(GameModel gm, Input input) {
-		
+		if(this.currentTic%(speed*3)==0)
+			this.getImageFrame().setX((this.getImageFrame().getX()-1)<=0?animLength-1:(this.getImageFrame().getX()-1));
 	}
 	
 	public void clipToTile(GameModel gm) {

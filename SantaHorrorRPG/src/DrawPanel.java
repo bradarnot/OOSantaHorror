@@ -41,6 +41,9 @@ public class DrawPanel extends JPanel {
 			obj.render(gm, g);
 		}
 
+		for(Actor a : gm.getActors()) {
+			a.render(gm, g);
+		}
 	    
 	    gm.getPlayer().render(gm, g);
 	}

@@ -17,7 +17,6 @@ public class Game extends Observer{
 	private GameState state;
 	private static GameModel model;
 	private Keyboard keyboard;
-	private Input input;
 	
 	public Game() {
 		keyboard = new Keyboard();

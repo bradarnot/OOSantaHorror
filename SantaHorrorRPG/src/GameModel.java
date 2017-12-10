@@ -69,14 +69,26 @@ public class GameModel {
 		this.objects = objects;
 		System.out.println(this.width);
 		System.out.println(this.height);
-		for (int i=0; i < (width / 32); i++) {
-			for (int j=0; j < (height / 32); j++) {
-				GameObj border = new GameObj();
-				Position position = new Position(i*32, j*32);
-				border.loadFromFile("border", position);
-				this.objects.add(border);
-			}
+		for(int i = -32; i<=this.width; i+=32) {
+			GameObj border = new GameObj();
+			Position position = new Position(i,-32);
+			border.loadFromFile("border", position);
+			this.objects.add(border);
+			border = new GameObj();
+			position = new Position(i, this.height);
+			border.loadFromFile("border", position);
+			this.objects.add(border);
 		}
+		for(int i = 0; i<this.height; i+=32) {
+			GameObj border = new GameObj();
+			Position position = new Position(-32,i);
+			border.loadFromFile("border", position);
+			this.objects.add(border);
+			border = new GameObj();
+			position = new Position(this.width, i);
+			border.loadFromFile("border", position);
+			this.objects.add(border);
+		}		
 	}
 	
 	public ArrayList<Actor> getActors() {

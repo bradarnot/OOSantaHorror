@@ -1,11 +1,41 @@
 {
 	"zone_id": 1,
-	"objects": [{
-		"name": "fireplace.jpg",
-		"position": [0, 1]
-	}],
-	"triggers": [{
-		"next_zone": "2",
-		"position": [32,32]
-	}]
+	"objects": [
+
+	],
+	"triggers": [
+		
+	],
+	"monsters": 
+	[
+	{
+		"name": "santa",
+		"position": [64,128]
+	},{
+		"name": "santa",
+		"position": [128, 128]
+	},{
+		"name": "santa",
+		"position": [256, 128]
+	},{
+		"name": "santa",
+		"position": [384, 128]
+	},{
+		"name": "santa",
+		"position": [512, 128]
+	},{
+		"name": "santa",
+		"position": [640, 128]
+	},{
+		"name": "santa",
+		"position": [768, 128]
+	}
+	],
+	"npcs": [
+		
+	],
+	"player": {
+		"name": "player",
+		"position": [800,128]		
+	}
 }

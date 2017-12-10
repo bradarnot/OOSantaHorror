@@ -114,11 +114,10 @@ public abstract class Actor extends GameObj {
 		this.currentTic++;
 		if(this.currentTic%(speed*15)==0) {
 			this.getImageFrame().setX((this.getImageFrame().getX()+1)%animLength);
+			
 		
 			this.move(gm);
-			if(gm.canMoveTo(this.potentialMove(), this.name)) {
-				this.executeMove();
-			}
+
 		}
 	}
 	
@@ -169,7 +168,6 @@ public abstract class Actor extends GameObj {
 	public void executeMove() {
 		if(canMove) {
 			this.position = this.potentialMove();
-			
 		}
 	}
 	
@@ -184,7 +182,9 @@ public abstract class Actor extends GameObj {
 						if(change < 4) this.direction = change*2;
 					}	
 				}
-				this.canMove = true;
+				if(gm.canMoveTo(this.potentialMove(), this.name)) {
+					this.executeMove();
+				}
 				break;
 			case 1:
 				break;
@@ -225,7 +225,7 @@ public abstract class Actor extends GameObj {
 			moveType = toIntExact((Long) json.get("moveType"));
 		}
 		catch(Exception e) {
-			moveType = 0;
+			moveType = -1;
 		}
 		int frame;
 		try{

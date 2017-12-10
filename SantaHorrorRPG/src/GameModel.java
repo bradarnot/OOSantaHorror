@@ -8,7 +8,7 @@ public class GameModel {
 	private ArrayList<GameObj> objects;
 	private ArrayList<Actor> actors;
 	private FileManager fileManager;
-	private Player player;
+	private Player player = null;
 	private JFrame f;
 	private KeyListener kl;
 	private DrawPanel drawScreen;
@@ -25,9 +25,6 @@ public class GameModel {
 		objects = new ArrayList<GameObj>();
 		actors = new ArrayList<Actor>();
 		fileManager = new FileManager();
-		player = new Player();
-		player.setAnimLength(6);
-		player.setPosition(new Position(128, 128));
 		f = new JFrame();
 		f.addKeyListener(kl);
 		tileSize = 32;
@@ -60,6 +57,31 @@ public class GameModel {
 	
 	public int getTileSize() {
 		return tileSize;
+	}
+	
+	public String invertDirection(String direction) {
+		if(direction.equals("north")) {
+			return "south";
+		}
+		if(direction.equals("east")) {
+			return "west";
+		}
+		if(direction.equals("south")) {
+			return "north";
+		}
+		if(direction.equals("west")) {
+			return "east";
+		}
+		return "";
+	}
+	
+	
+	public void interact(Position tile, boolean byPlayer, String direction) {
+		ArrayList<GameObj> objectsToInteractWith = this.getObjectsAtPosition(tile);
+		for(GameObj o : objectsToInteractWith) {
+			Interaction i = o.interact(byPlayer, invertDirection(direction));
+		}
+		
 	}
 	
 	

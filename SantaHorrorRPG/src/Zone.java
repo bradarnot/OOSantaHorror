@@ -24,7 +24,6 @@ public class Zone extends GameState {
 		//Image character = Toolkit.getDefaultToolkit().createImage("img" + File.separator +"alicesheet.png");
 		screen = new DrawPanel(gm, screenWidth, screenHeight);
 		
-		gm.getPlayer().loadImage("alicesheet.png");
 		
 		gm.getFrame().add(screen);
 		
@@ -35,15 +34,15 @@ public class Zone extends GameState {
 		
 	}
 	
-	public void interact(Position tile) {
-		
-	}
+
 	
 	
 	public void update(GameModel gm, Input input) {
-		screen.setBounds(0,0,screenWidth-20,screenHeight-20);  
+		screen.setBounds(0,0,screenWidth-20,screenHeight-20);
 		
-		gm.getPlayer().update(gm, input);
+		if(gm.getPlayer() != null) {
+			gm.getPlayer().update(gm, input);
+		}
 		for(Actor a : gm.getActors()) {
 			a.update(gm, input);
 		}

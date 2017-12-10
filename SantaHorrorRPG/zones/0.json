@@ -23,8 +23,8 @@
 	}
 	],
 	"triggers": [{
-		"next_zone": "2",
-		"position": [-32, -32]
+		"next_zone": "1",
+		"position": [800, 128]
 	}],
 	"monsters": [{
 		"name": "santa",

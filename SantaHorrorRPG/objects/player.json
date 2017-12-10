@@ -9,7 +9,6 @@
 	"animationSpeed": 2,
 	"direction": 0,
 	"health": 100,
-	"moveType": 0,
 	"frameLength": 6,
 	"gender": 0
 }

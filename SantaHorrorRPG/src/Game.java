@@ -42,12 +42,15 @@ public class Game extends Observer{
 				state.render(model);
 				state = state.getNextState();
 				model.getFrame().setFocusable(true);
-				Position playerPos = model.getPlayer().getPosition();
 				
-				for(int index = 0; index<model.getNextZoneTrigger().size();index++) {
-					Trigger potential = model.getNextZoneTrigger().get(index);
-					if(potential.inRange(playerPos)) {
-						Game.loadLevel(FileManager.loadZone( potential.getNextZone() + ".json"));
+				if(model.getPlayer() != null) {
+					Position playerPos = model.getPlayer().getPosition();
+				
+					for(int index = 0; index<model.getNextZoneTrigger().size();index++) {
+						Trigger potential = model.getNextZoneTrigger().get(index);
+						if(potential.inRange(playerPos)) {
+							Game.loadLevel(FileManager.loadZone( potential.getNextZone() + ".json"));
+						}
 					}
 				}
 				//System.out.println(model.getFrame().getKeyListeners()[0]);
@@ -56,7 +59,15 @@ public class Game extends Observer{
 		}
 	}
 	
+	public static void clearLevel() {
+		model.setActors(new ArrayList<Actor>());
+		model.setNextZoneTrigger(new ArrayList<Trigger>());
+		model.setObjects(new ArrayList<GameObj>());
+		
+	}
+	
 	public static void loadLevel(JSONObject zone) {
+		clearLevel();
 		int zone_id = toIntExact((Long) zone.get("zone_id"));
 		model.setZone_id(zone_id);
 		//objects
@@ -143,7 +154,6 @@ public class Game extends Observer{
 		for (int i=0; i < triggers.size(); i++) {
 			JSONObject jsonObj = (JSONObject) triggers.get(i);
 			String nextZone = (String) jsonObj.get("next_zone");
-			
 			JSONArray triggerPosition = (JSONArray) jsonObj.get("position");
 			int[] triggerPos = new int[2];
 			for (int j=0; j < triggerPosition.size(); j++) {

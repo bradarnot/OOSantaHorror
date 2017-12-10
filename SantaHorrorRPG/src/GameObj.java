@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 /**
@@ -118,6 +119,19 @@ public class GameObj {
 		this.setSolid((boolean) json.get("solid"));
 		this.setPosition(position);
 		this.setSwapInTo((String) json.get("swapInTo"));
+		
+
+		JSONArray fileInteractions = (JSONArray) json.get("nonPlayerInteractions");
+		ArrayList<Interaction> nonPlayerInteractions = new ArrayList<Interaction>();
+		for (int i=0; i < fileInteractions.size(); i++) {
+			JSONObject jsonObj = (JSONObject) triggers.get(i);
+			String nextZone = (String) jsonObj.get("next_zone");
+			int[] position = (int[]) jsonObj.get("position");
+			Interaction temp = new Interaction();
+			nonplayerInteractions.add(temp);
+		}
+		this.setNonPlayerInteractions(nonPlayerInteractions);
+		
 	}
 	
 	public Interaction interact(boolean byPlayer, String direction) {

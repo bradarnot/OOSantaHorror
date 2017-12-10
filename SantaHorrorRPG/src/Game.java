@@ -52,6 +52,7 @@ public class Game extends Observer{
 	public static void loadLevel(JSONObject zone) {
 		int zone_id = (int) zone.get("zone_id");
 		model.setZone_id(zone_id);
+		//objects
 		JSONArray objects = (JSONArray) zone.get("objects");
 		ArrayList<GameObj> gameObjects = new ArrayList<GameObj>();
 		for (int i=0; i < objects.size(); i++) {
@@ -63,6 +64,52 @@ public class Game extends Observer{
 			temp.loadFromFile(name, pos);
 			gameObjects.add(temp);
 		}
+		model.setObjects(gameObjects);
+		//Monster
+		JSONArray monsters = (JSONArray) zone.get("monsters");
+		ArrayList<Monster> gameMonsters = new ArrayList<Monster>();
+		for (int i=0; i < monsters.size(); i++) {
+			JSONObject jsonObj = (JSONObject) monsters.get(i);
+			String name = (String) jsonObj.get("name");
+			int[] position = (int[]) jsonObj.get("position");
+			Position pos = new Position(position[0], position[1]);
+			int speed = (int) jsonObj.get("speed");
+			int direction = (int) jsonObj.get("direction");
+			int health = (int) jsonObj.get("health");
+			int moveType = (int) jsonObj.get("moveType");
+			int attackPower = (int) jsonObj.get("attackPower");
+			Monster temp = new Monster(speed, 0, direction, health, moveType, attackPower);
+			temp.loadFromFile(name, pos);
+			gameMonsters.add(temp);
+		}	
+		//NPC
+		JSONArray npcs = (JSONArray) zone.get("npcs");
+		ArrayList<NPC> gameNPCs = new ArrayList<NPC>();
+		for (int i=0; i < npcs.size(); i++) {
+			JSONObject jsonObj = (JSONObject) npcs.get(i);
+			String name = (String) jsonObj.get("name");
+			int[] position = (int[]) jsonObj.get("position");
+			Position pos = new Position(position[0], position[1]);
+			int speed = (int) jsonObj.get("speed");
+			int direction = (int) jsonObj.get("direction");
+			int health = (int) jsonObj.get("health");
+			int moveType = (int) jsonObj.get("moveType");
+			int fear = (int) jsonObj.get("fear");
+			NPC temp = new NPC(speed, 0, direction, health, moveType, fear);
+			temp.loadFromFile(name, pos);
+			gameNPCs.add(temp);
+		}
+		
+		ArrayList<Actor> gameActors = new ArrayList<Actor>();
+		for(int index = 0; index < gameMonsters.size(); index++) {
+			gameActors.add(gameMonsters.get(index));
+		}
+		for(int index = 0; index < gameNPCs.size(); index++) {
+			gameActors.add(gameNPCs.get(index));
+		}
+		
+		model.setActors(gameActors);		
+		
 		JSONArray triggers = (JSONArray) zone.get("triggers");
 		ArrayList<Trigger> gameTriggers = new ArrayList<Trigger>();
 		for (int i=0; i < triggers.size(); i++) {

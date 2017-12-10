@@ -172,12 +172,17 @@ public class GameModel {
 	}*/
 	
 	public boolean canMoveTo(Position tile, String ignore) {
+		Position topLeft = new Position(tile.getX() - (tile.getX() % this.getTileSize()),
+				tile.getY() - (tile.getY() % this.getTileSize()));
+		
+		ArrayList<GameObj> objectsTopLeft = this.getObjectsAtPosition(topLeft);
+		
+		tile.setX(tile.getX()+this.getTileSize()-1);
+		tile.setY(tile.getY()+this.getTileSize()-1);
+
 		tile.setX(tile.getX() - (tile.getX() % this.getTileSize()));
 		tile.setY(tile.getY() - (tile.getY() % this.getTileSize()));
 		
-		ArrayList<GameObj> objectsTopLeft = this.getObjectsAtPosition(tile);
-		tile.setX(tile.getX()+this.getTileSize());
-		tile.setY(tile.getY()+this.getTileSize());
 		
 		ArrayList<GameObj> objectsBotRight = this.getObjectsAtPosition(tile);
 		

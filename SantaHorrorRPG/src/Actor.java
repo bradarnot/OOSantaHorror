@@ -101,6 +101,7 @@ public abstract class Actor extends GameObj {
 		} else {
 			this.position.setY(this.position.getY()+32-ydir);
 		}
+		
 	}
 	
 	public void render(GameModel gm, Graphics g) {

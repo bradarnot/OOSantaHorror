@@ -5,6 +5,14 @@ public class Input {
 	private boolean right;
 	private boolean interact; 
 	
+	public Input() {
+		up = false;
+		down = false;
+		left = false;
+		right = false;
+		interact = false;
+	}
+	
 	public boolean isInteract() {
 		return interact;
 	}

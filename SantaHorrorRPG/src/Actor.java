@@ -12,7 +12,7 @@ public abstract class Actor extends GameObj {
 	protected int health;
 	protected int moveType;
 	protected Random random;
-	protected boolean canMove = false;
+	protected boolean canMove = true;
 	
 	public Actor(int speed, int currentTic, int direction, int health, int moveType) {
 		super();
@@ -76,12 +76,13 @@ public abstract class Actor extends GameObj {
 	public void update(GameModel gm, Input input) {
 		if(input.isDown()) this.setDirection(4);
 		if(input.isUp()) this.setDirection(0);
-		if(input.isRight()) this.setDirection(6);
-		if(input.isLeft()) this.setDirection(2);
+		if(input.isRight()) this.setDirection(2);
+		if(input.isLeft()) this.setDirection(4);
 		
+		//System.out.println("move? " + input.movement());
 		if(input.movement()) {
 			if(gm.canMoveTo(this.potentialMove())) this.executeMove();
-			System.out.println("Moving");
+			//System.out.println("Moving: " + gm.canMoveTo(this.potentialMove()));
 		} else {
 			this.clipToTile(gm);
 		}
@@ -113,6 +114,7 @@ public abstract class Actor extends GameObj {
 	public Position potentialMove() {
 		int x = this.position.getX();
 		int y = this.position.getY();
+		System.out.println(this.direction);
 		if(this.direction == 0 || this.direction == 1 || this.direction == 7)
 			y+=speed;
 		if(this.direction == 3 || this.direction == 4 || this.direction == 5)
@@ -128,6 +130,7 @@ public abstract class Actor extends GameObj {
 	public void executeMove() {
 		if(canMove) {
 			this.position = this.potentialMove();
+			
 		}
 	}
 	

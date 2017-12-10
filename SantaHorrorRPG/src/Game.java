@@ -18,6 +18,7 @@ public class Game extends Observer{
 		model = new GameModel(keyboard);
 		state = new MainMenu(model, 900, 500);
 		zoneid = 0;
+		input = new Input();
 	}
 	
 	public void startGame() {
@@ -26,7 +27,8 @@ public class Game extends Observer{
 	
 	public void gameLoop() {
 		while(!model.stop) {
-			state.update(model, null);
+			//System.out.println(input);
+			state.update(model, input);
 			state.render(model);
 			state = state.getNextState();
 			model.getFrame().setFocusable(true);
@@ -55,6 +57,7 @@ public class Game extends Observer{
 	@Override
 	public void update(Input input) {
 		// TODO Auto-generated method stub
+		System.out.println(input);
 		this.input = input;
 	}
 

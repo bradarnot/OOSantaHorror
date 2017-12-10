@@ -3,5 +3,9 @@
 	"objects": [{
 		"name": "fireplace",
 		"position": [0, 1]
+	}],
+	"triggers": [{
+		"next_zone": "2",
+		"position": [32,32]
 	}]
 }

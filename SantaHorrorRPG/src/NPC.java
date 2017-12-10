@@ -1,8 +1,10 @@
+import static java.lang.Math.toIntExact;
+
+import org.json.simple.JSONObject;
 
 public class NPC extends Actor {
-	public NPC(int speed, int direction, int health, int moveType, int animLength, int fear) {
-		super(speed, direction, health, moveType, animLength);
-		this.setFear(fear);
+	public NPC() {
+		super();
 	}
 
 	private int fear;
@@ -42,6 +44,9 @@ public class NPC extends Actor {
 	
 	public void loadFromFile(String name, Position position) {
 		super.loadFromFile(name, position);
+		JSONObject json = JsonParser.getJson("objects", name + ".json");
+		int fear = toIntExact((Long) json.get("fear"));
+		this.setFear(fear);
 	}
 
 }

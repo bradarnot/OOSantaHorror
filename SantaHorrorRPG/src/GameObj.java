@@ -1,3 +1,5 @@
+import static java.lang.Math.toIntExact;
+
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -9,9 +11,6 @@ import javax.imageio.ImageIO;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.omg.CORBA.SystemException;
-
-import static java.lang.Math.toIntExact;
 /**
  * 
  */
@@ -141,7 +140,15 @@ public class GameObj {
 		boolean solid = (toIntExact((Long) json.get("solid")) != 0);
 		this.setSolid(solid);
 		this.setPosition(position);
-		this.setSwapInTo((String) json.get("swapInTo"));	
+		this.setSwapInTo((String) json.get("swapInTo"));
+		int imageSize;
+		try {
+		    imageSize = toIntExact((Long) json.get("imageSize"));
+		}
+		catch(Exception e){
+			imageSize = 32;
+		}
+		this.setImageSize(imageSize);
 
 		JSONArray fileInteractions = (JSONArray) json.get("nonPlayerInteractions");
 		ArrayList<Interaction> nonPlayerInteractions = new ArrayList<Interaction>();

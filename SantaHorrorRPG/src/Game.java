@@ -71,16 +71,8 @@ public class Game extends Observer{
 			for (int j=0; j < jsonPosition.size(); j++) {
 				position[j] = toIntExact((Long) jsonPosition.get(j));
 			}
-			int imageSize;
-			try {
-			    imageSize = toIntExact((Long) jsonObj.get("imageSize"));
-			}
-			catch(Exception e){
-				imageSize = model.getTileSize();
-			}
 			Position pos = new Position(position[0], position[1]);
 			GameObj temp = new GameObj();
-			temp.setImageSize(imageSize);
 			temp.loadFromFile(name, pos);
 			gameObjects.add(temp);
 		}
@@ -98,21 +90,7 @@ public class Game extends Observer{
 				position[j] = toIntExact((Long) jsonPosition.get(j));
 			}
 			Position pos = new Position(position[0], position[1]);
-			int speed = toIntExact((Long) jsonObj.get("speed"));
-			int direction = toIntExact((Long) jsonObj.get("direction"));
-			int health = toIntExact((Long) jsonObj.get("health"));
-			int moveType = toIntExact((Long) jsonObj.get("moveType"));
-			int attackPower = toIntExact((Long) jsonObj.get("attackPower"));
-			int frame = toIntExact((long) jsonObj.get("frameLength"));
-			int imageSize;
-			try {
-			    imageSize = toIntExact((Long) jsonObj.get("imageSize"));
-			}
-			catch(Exception e){
-				imageSize = model.getTileSize();
-			}
-			Monster temp = new Monster(speed, direction, health, moveType, frame, attackPower);
-			temp.setImageSize(imageSize);
+			Monster temp = new Monster();
 			temp.loadFromFile(name, pos);
 			gameMonsters.add(temp);
 		}	
@@ -128,21 +106,7 @@ public class Game extends Observer{
 				position[j] = toIntExact((Long) jsonPosition.get(j));
 			}
 			Position pos = new Position(position[0], position[1]);
-			int speed = toIntExact((Long) jsonObj.get("speed"));
-			int direction = toIntExact((Long) jsonObj.get("direction"));
-			int health = toIntExact((Long) jsonObj.get("health"));
-			int moveType = toIntExact((Long) jsonObj.get("moveType"));
-			int fear = toIntExact((Long) jsonObj.get("fear"));
-			int frame = toIntExact((long) jsonObj.get("frameLength"));
-			int imageSize;
-			try {
-			    imageSize = toIntExact((Long) jsonObj.get("imageSize"));
-			}
-			catch(Exception e){
-				imageSize = model.getTileSize();
-			}
-			NPC temp = new NPC(speed, direction, health, moveType, frame, fear);
-			temp.setImageSize(imageSize);
+			NPC temp = new NPC();
 			temp.loadFromFile(name, pos);
 			gameNPCs.add(temp);
 		}

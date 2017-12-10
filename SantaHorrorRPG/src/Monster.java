@@ -1,9 +1,12 @@
+import static java.lang.Math.toIntExact;
+
 import java.util.ArrayList;
 
+import org.json.simple.JSONObject;
+
 public class Monster extends Actor {
-	public Monster(int speed, int direction, int health, int moveType, int animLength, int attackPower) {
-		super(speed, direction, health, moveType, animLength);
-		this.setAttackPower(attackPower);
+	public Monster() {
+		super();
 	}
 
 	private int attackPower;
@@ -30,6 +33,9 @@ public class Monster extends Actor {
 	
 	public void loadFromFile(String name, Position position) {
 		super.loadFromFile(name, position);
+		JSONObject json = JsonParser.getJson("objects", name + ".json");
+		int attackDamage = toIntExact((Long) json.get("attackPower"));
+		this.setAttackPower(attackDamage);
 	}
 
 	public void attack(Actor victim) {

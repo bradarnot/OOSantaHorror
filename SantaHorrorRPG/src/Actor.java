@@ -1,8 +1,12 @@
+import static java.lang.Math.toIntExact;
+
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.File;
 import java.util.Random;
+
+import org.json.simple.JSONObject;
 
 public abstract class Actor extends GameObj {
 	protected int speed;
@@ -15,16 +19,8 @@ public abstract class Actor extends GameObj {
 	protected Random random;
 	protected boolean canMove = true;
 	
-	public Actor(int speed, int direction, int health, int moveType, int animLength) {
+	public Actor() {
 		super();
-		this.setSpeed(speed);
-		this.setDirection(direction);
-		this.setHealth(health);
-		this.setMoveType(moveType);
-		this.random = new Random();
-		this.imageFrame = new Position();
-		this.animLength = animLength;
-		this.currentTic = 0;
 	}
 
 	
@@ -165,6 +161,17 @@ public abstract class Actor extends GameObj {
 	
 	public void loadFromFile(String name, Position position) {
 		super.loadFromFile(name, position);
+		JSONObject json = JsonParser.getJson("objects", name + ".json");
+		int speed = toIntExact((Long) json.get("speed"));
+		int direction = toIntExact((Long) json.get("direction"));
+		int health = toIntExact((Long) json.get("health"));
+		int moveType = toIntExact((Long) json.get("moveType"));
+		int frame = toIntExact((long) json.get("frameLength"));
+		this.setSpeed(speed);
+		this.setDirection(direction);
+		this.setHealth(health);
+		this.setMoveType(moveType);
+		this.setAnimLength(frame);
 	}
 
 }

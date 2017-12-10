@@ -1,9 +1,12 @@
+import static java.lang.Math.toIntExact;
+
 import java.awt.Graphics;
 
+import org.json.simple.JSONObject;
+
 public class Player extends Actor {
-	public Player(int speed, int direction, int health, int moveType, int animLength, int gender) {
-		super(speed, direction, health, moveType, animLength);
-		this.setGender(gender);
+	public Player() {
+		super();
 	}
 
 	private int gender;
@@ -66,6 +69,8 @@ public class Player extends Actor {
 	
 	public void loadFromFile(String name, Position position) {
 		super.loadFromFile(name, position);
+		JSONObject json = JsonParser.getJson("objects", name + ".json");
+		int gender = toIntExact((Long) json.get("gender"));
 	}
 
 }

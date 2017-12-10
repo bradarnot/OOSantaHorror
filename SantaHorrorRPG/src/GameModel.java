@@ -88,7 +88,7 @@ public class GameModel {
 		Position position;
 		for(int i = -this.getTileSize(); i<=this.width; i+=this.getTileSize()) {
 			GameObj borderTop = new GameObj();
-			position = new Position(i,-32);
+			position = new Position(i,0);
 			borderTop.loadFromFile("border", position);
 			this.objects.add(borderTop);
 			
@@ -99,7 +99,7 @@ public class GameModel {
 		}
 		for(int i = 0; i<this.height; i+=this.getTileSize()) {
 			GameObj borderLeft = new GameObj();
-			position = new Position(0,-32);
+			position = new Position(0,i);
 			borderLeft.loadFromFile("border", position);
 			this.objects.add(borderLeft);
 			

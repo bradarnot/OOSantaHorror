@@ -126,12 +126,16 @@ public class Game extends Observer{
 		
 		JSONObject playerObj = (JSONObject) zone.get("player");
 		String name = (String) playerObj.get("name");
-		int[] playerPosition = (int[]) playerObj.get("position");
+		JSONArray jsonPosition = (JSONArray) playerObj.get("position");
+		int[] playerPosition = new int[2];
+		for (int i=0; i < jsonPosition.size(); i++) {
+			playerPosition[i] = toIntExact((Long) jsonPosition.get(i));
+		}
 		Position playerPos = new Position(playerPosition[0], playerPosition[1]);
-		int speed = (int) playerObj.get("speed");
-		int direction = (int) playerObj.get("direction");
-		int health = (int) playerObj.get("health");
-		int moveType = (int) playerObj.get("moveType");
+		int speed = toIntExact((Long) playerObj.get("speed"));
+		int direction = toIntExact((Long) playerObj.get("direction"));
+		int health = toIntExact((Long) playerObj.get("health"));
+		int moveType = toIntExact((Long) playerObj.get("moveType"));
 		Player player = new Player(speed, 0, direction, health, moveType, 0);
 		player.loadFromFile(name, playerPos);
 		
@@ -142,8 +146,14 @@ public class Game extends Observer{
 		for (int i=0; i < triggers.size(); i++) {
 			JSONObject jsonObj = (JSONObject) triggers.get(i);
 			String nextZone = (String) jsonObj.get("next_zone");
-			int[] position = (int[]) jsonObj.get("position");
-			Trigger temp = new Trigger(position[0], position[1], nextZone);
+			
+			JSONArray triggerPosition = (JSONArray) jsonObj.get("position");
+			int[] triggerPos = new int[2];
+			for (int j=0; j < triggerPosition.size(); j++) {
+				triggerPos[j] = toIntExact((Long) triggerPosition.get(j));
+			}
+			
+			Trigger temp = new Trigger(triggerPos[0], triggerPos[1], nextZone);
 			gameTriggers.add(temp);
 		}
 		model.setNextZoneTrigger(gameTriggers);

@@ -180,5 +180,9 @@ public abstract class Actor extends GameObj {
 		}
 		
 	}
+	
+	public void loadFromFile(String name, Position position) {
+		super.loadFromFile(name, position);
+	}
 
 }

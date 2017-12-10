@@ -9,6 +9,8 @@ import javax.imageio.ImageIO;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.omg.CORBA.SystemException;
+
 import static java.lang.Math.toIntExact;
 /**
  * 
@@ -199,6 +201,8 @@ public class GameObj {
 	}
 	
 	public boolean isObject(String name) {
+		System.out.println(name);
+		System.out.println(this.getName());
 		return name.equals(this.getName());
 	}
 	

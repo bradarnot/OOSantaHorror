@@ -1,10 +1,10 @@
 {
+	"name":"player",
 	"nonPlayerInteractState": 0,
 	"playerInteractState": 0,
 	"nonPlayerInteractions": [],
 	"playerInteractions": [],
 	"swapInTo": "",
 	"src": "alicesheet.png",
-	"solid": 1,
-	"frameLength":6
+	"solid": 1
 }

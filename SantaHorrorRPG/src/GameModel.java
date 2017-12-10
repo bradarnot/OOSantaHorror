@@ -93,7 +93,7 @@ public class GameModel {
 			this.objects.add(borderTop);
 			
 			GameObj borderBot = new GameObj();
-			position = new Position(i, this.height - 32);
+			position = new Position(i, this.height - (this.height%32) - 32);
 			borderBot.loadFromFile("border", position);
 			this.objects.add(borderBot);
 		}
@@ -104,7 +104,7 @@ public class GameModel {
 			this.objects.add(borderLeft);
 			
 			GameObj borderRight = new GameObj();
-			position = new Position(this.width-32, i);
+			position = new Position(this.width - (this.width%32) -32, i);
 			borderRight.loadFromFile("border", position);
 			this.objects.add(borderRight);
 		}		

@@ -6,9 +6,9 @@ public class DrawPanel extends JPanel {
 	Image cSprite;
 	GameModel gm;
 	
-	public DrawPanel(Image character, GameModel model) {
+	public DrawPanel(GameModel model) {
 		super();
-		cSprite = character;
+		//cSprite = character;
 		gm = model;
 	}
 	

@@ -18,16 +18,9 @@ public class Zone extends GameState {
 		screenHeight = height;
 
 		//Image character = Toolkit.getDefaultToolkit().createImage("img" + File.separator +"alicesheet.png");
-		BufferedImage character = null;
-		try {
-			character = ImageIO.read(new File("img" + File.separator +"alicesheet.jpg"));
-		} catch (IOException e) {
-			System.out.println("Could not load character image");
-			e.printStackTrace();
-		}
-		screen = new DrawPanel(character, gm);
+		screen = new DrawPanel(gm);
 		
-		gm.getPlayer().loadImage("alicesheet.jpg");
+		gm.getPlayer().loadImage("alicesheet.png");
 		
 		gm.getFrame().add(screen);
 		

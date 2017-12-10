@@ -2,7 +2,7 @@
 	"zone_id": 1,
 	"objects": [{
 		"name": "fireplace",
-		"position": [0, 1]
+		"position": [128, 128]
 	}],
 	"triggers": [{
 		"next_zone": "2",
@@ -14,7 +14,7 @@
 		"direction": 0,
 		"health": 100,
 		"moveType": 0,
-		"position": [526,526],
+		"position": [64,128],
 		"attackPower": 40,
 		"frameLength":3
 	}],

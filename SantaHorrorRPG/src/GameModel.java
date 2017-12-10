@@ -176,8 +176,8 @@ public class GameModel {
 		tile.setY(tile.getY() - (tile.getY() % this.getTileSize()));
 		
 		ArrayList<GameObj> objectsTopLeft = this.getObjectsAtPosition(tile);
-		tile.setX(tile.getX()+this.getTileSize());
-		tile.setY(tile.getY()+this.getTileSize());
+		tile.setX(tile.getX()+this.getTileSize()-1);
+		tile.setY(tile.getY()+this.getTileSize()-1);
 		
 		ArrayList<GameObj> objectsBotRight = this.getObjectsAtPosition(tile);
 		

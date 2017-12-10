@@ -130,7 +130,6 @@ public abstract class Actor extends GameObj {
 	public Position potentialMove() {
 		int x = this.position.getX();
 		int y = this.position.getY();
-		System.out.println(this.direction);
 		if(this.direction == 0 || this.direction == 1 || this.direction == 7)
 			y+=speed;
 		if(this.direction == 3 || this.direction == 4 || this.direction == 5)
@@ -139,7 +138,6 @@ public abstract class Actor extends GameObj {
 			x+=speed;
 		if(this.direction == 5 || this.direction == 6 || this.direction == 7)
 			x-=speed;
-		System.out.println(new Position(x,y));
 		return new Position(x,y);
 		
 	}

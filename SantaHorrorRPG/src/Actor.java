@@ -30,7 +30,7 @@ public abstract class Actor extends GameObj {
 		this.random = new Random();
 	}
 
-	int getAnimLength() {
+	public int getAnimLength() {
 		return this.animLength;
 	}
 	

@@ -176,6 +176,7 @@ public class GameModel {
 		for(int index = 0; index < objects.size(); index++) {
 			GameObj object = objects.get(index);
 			if(object != null && object.isSolid()) {
+				System.out.println("no move");
 				return false;
 			}	
 		}

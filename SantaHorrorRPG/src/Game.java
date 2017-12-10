@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import static java.lang.Math.toIntExact;
 import java.util.Iterator;
 
 import org.json.simple.JSONArray;
@@ -56,7 +57,7 @@ public class Game extends Observer{
 	}
 	
 	public static void loadLevel(JSONObject zone) {
-		int zone_id = (int) zone.get("zone_id");
+		int zone_id = toIntExact((Long) zone.get("zone_id"));
 		model.setZone_id(zone_id);
 		//objects
 		JSONArray objects = (JSONArray) zone.get("objects");
@@ -64,7 +65,12 @@ public class Game extends Observer{
 		for (int i=0; i < objects.size(); i++) {
 			JSONObject jsonObj = (JSONObject) objects.get(i);
 			String name = (String) jsonObj.get("name");
-			int[] position = (int[]) jsonObj.get("position");
+			
+			JSONArray jsonPosition = (JSONArray) jsonObj.get("position");
+			int[] position = new int[2];
+			for (int j=0; j < jsonPosition.size(); j++) {
+				position[i] = toIntExact((Long) jsonPosition.get(i));
+			}
 			Position pos = new Position(position[0], position[1]);
 			GameObj temp = new GameObj();
 			temp.loadFromFile(name, pos);

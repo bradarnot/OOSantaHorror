@@ -9,7 +9,7 @@ import javax.imageio.ImageIO;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-
+import static java.lang.Math.toIntExact;
 /**
  * 
  */
@@ -114,10 +114,11 @@ public class GameObj {
 	public void loadFromFile(String filename, Position position) {
 		JSONObject json = JsonParser.getJson("objects", filename);
 		this.setName(filename);
-		this.setNonPlayerInteractState((int) json.get("nonPlayerInteractState"));
-		this.setPlayerInteractState((int) json.get("playerInteractState"));
+		this.setNonPlayerInteractState(toIntExact((Long) json.get("nonPlayerInteractState")));
+		this.setPlayerInteractState(toIntExact((Long) json.get("playerInteractState")));
 		this.loadImage((String) json.get("src"));
-		this.setSolid((boolean) json.get("solid"));
+		boolean solid = (toIntExact((Long) json.get("solid")) != 0);
+		this.setSolid(solid);
 		this.setPosition(position);
 		this.setSwapInTo((String) json.get("swapInTo"));	
 

@@ -1,6 +1,7 @@
-import java.awt.event.*;
-import java.util.*;
-import javax.swing.*;
+import java.awt.event.KeyListener;
+import java.util.ArrayList;
+
+import javax.swing.JFrame;
 
 public class GameModel {
 	
@@ -105,24 +106,31 @@ public class GameModel {
 		return null;
 	}
 	
-	public GameObj getObjectAtPosition(Position position) {
+	public ArrayList<GameObj> getObjectsAtPosition(Position position) {
+		ArrayList<GameObj> results = new ArrayList<GameObj>();
 		for(int index=0;index<this.objects.size();index++) {
 			if (this.objects.get(index).getPosition().equalPos(position)) {
-				return this.objects.get(index);
+				results.add(this.objects.get(index));
 			}
 		}
-		return null;
+		return results;
 	}
 	
-	public GameObj getObject(Position pos) {
+	/*public ArrayList<GameObj> getObject(Position pos) {
 		return new GameObj();
-	}
+	}*/
 	
 	public boolean canMoveTo(Position tile) {
-		GameObj object = this.getObject(tile);
-		if(object != null && object.isSolid()) {
-			return false;
+		tile.setX(tile.getX() - (tile.getX() % 32) + 32);
+		tile.setY(tile.getY() - (tile.getY() % 32) + 32);
+		ArrayList<GameObj> objects = this.getObjectsAtPosition(tile);
+		for(int index = 0; index < objects.size(); index++) {
+			GameObj object = objects.get(index);
+			if(object != null && object.isSolid()) {
+				return false;
+			}	
 		}
+		
 		return true;
 		
 	}
@@ -131,9 +139,11 @@ public class GameModel {
 		ArrayList<GameObj> result = new ArrayList<GameObj>();
 		for(int x = -range; x<range+1; x++) {
 			for(int y = -range; y<range+1; y++) {
-				GameObj temp = this.getObject(new Position(tile.getX() + x, tile.getY()+y));
-				if((x != 0 || y !=0) && temp != null) {
-					result.add(temp);
+				ArrayList<GameObj> temp = this.getObjectsAtPosition(new Position(tile.getX() + (x*32), tile.getY()+(y*32)));
+				if((x != 0 || y !=0) && temp.size() !=  0) {
+					for(int index = 0; index < temp.size(); index++) {
+						result.add(temp.get(index));	
+					}
 				}
 			}
 		}

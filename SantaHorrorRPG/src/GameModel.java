@@ -139,9 +139,11 @@ public class GameModel {
 		ArrayList<GameObj> result = new ArrayList<GameObj>();
 		for(int x = -range; x<range+1; x++) {
 			for(int y = -range; y<range+1; y++) {
-				GameObj temp = this.getObject(new Position(tile.getX() + x, tile.getY()+y));
-				if((x != 0 || y !=0) && temp != null) {
-					result.add(temp);
+				ArrayList<GameObj> temp = this.getObjectsAtPosition(new Position(tile.getX() + (x*32), tile.getY()+(y*32)));
+				if((x != 0 || y !=0) && temp.size() !=  0) {
+					for(int index = 0; index < temp.size(); index++) {
+						result.add(temp.get(index));	
+					}
 				}
 			}
 		}

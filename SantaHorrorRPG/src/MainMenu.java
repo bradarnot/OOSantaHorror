@@ -29,6 +29,7 @@ public class MainMenu extends GameState {
 		start.addActionListener(new ActionListener() {
 	         public void actionPerformed(ActionEvent e) {
 	            nextState = new Zone(gm, screenWidth, screenHeight);
+	            Game.loadLevel(FileManager.loadZone("0.json"));
 	            gm.getFrame().remove(mainMenu);
 	         }          
 	      });

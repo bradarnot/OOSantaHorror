@@ -1,7 +1,7 @@
 {
 	"zone_id": 1,
 	"objects": [{
-		"name": "fireplace.jpg",
+		"name": "fireplace.json",
 		"position": [0, 1]
 	}],
 	"triggers": [{

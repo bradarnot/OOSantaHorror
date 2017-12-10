@@ -16,7 +16,7 @@ public class Zone extends GameState {
 	public Zone(GameModel gm, int width, int height) {
 		screenWidth = width;
 		screenHeight = height;
-
+		gm.setDimensions(width, height);
 		//Image character = Toolkit.getDefaultToolkit().createImage("img" + File.separator +"alicesheet.png");
 		screen = new DrawPanel(gm, width, height);
 		

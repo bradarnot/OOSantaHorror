@@ -16,6 +16,8 @@ public class GameModel {
 	private int zone_id;
 	public boolean stop = false;
 	private ArrayList<Trigger> nextZoneTrigger;
+	private int width;
+	private int height;
 
 
 	public GameModel(KeyListener k) {
@@ -65,6 +67,16 @@ public class GameModel {
 	
 	public void setObjects(ArrayList<GameObj> objects) {
 		this.objects = objects;
+		System.out.println(this.width);
+		System.out.println(this.height);
+		for (int i=0; i < (width / 32); i++) {
+			for (int j=0; j < (height / 32); j++) {
+				GameObj border = new GameObj();
+				Position position = new Position(i*32, j*32);
+				border.loadFromFile("border.json", position);
+				this.objects.add(border);
+			}
+		}
 	}
 	
 	public ArrayList<Actor> getActors() {
@@ -149,6 +161,11 @@ public class GameModel {
 			}
 		}
 		return result;
+	}
+	
+	public void setDimensions(int width, int height) {
+		this.width = width;
+		this.height = height;
 	}
 	
 }

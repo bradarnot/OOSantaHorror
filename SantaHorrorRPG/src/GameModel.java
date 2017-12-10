@@ -137,6 +137,14 @@ public class GameModel {
 				results.add(this.objects.get(index));
 			}
 		}
+		for(int index=0;index<this.actors.size();index++) {
+			if (this.actors.get(index).getPosition().equalPos(position)) {
+				results.add(this.actors.get(index));
+			}
+		}
+		if (this.player.getPosition().equalPos(position)) {
+			results.add(this.player);
+		}
 		return results;
 	}
 	

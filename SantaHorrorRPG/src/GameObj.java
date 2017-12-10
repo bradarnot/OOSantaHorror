@@ -112,9 +112,13 @@ public class GameObj {
 	}
 	
 	public void loadFromFile(String filename, Position position) {
-		JSONObject json = JsonParser.getJson("objects", filename);
+		System.out.println(filename);
+		JSONObject json = JsonParser.getJson("objects", filename + ".json");
 		this.setName(filename);
-		this.setNonPlayerInteractState(toIntExact((Long) json.get("nonPlayerInteractState")));
+		this.setNonPlayerInteractState(
+				toIntExact(
+						(Long) 
+						json.get("nonPlayerInteractState")));
 		this.setPlayerInteractState(toIntExact((Long) json.get("playerInteractState")));
 		this.loadImage((String) json.get("src"));
 		boolean solid = (toIntExact((Long) json.get("solid")) != 0);

@@ -172,11 +172,12 @@ public class GameModel {
 		tile.setY(tile.getY() - (tile.getY() % 32));
 		
 		ArrayList<GameObj> objects = this.getObjectsAtPosition(tile);
+		System.out.println(tile.getX());
+		System.out.println(tile.getY());
+		
 		for(int index = 0; index < objects.size(); index++) {
 			GameObj object = objects.get(index);
 			if(object != null && object.isSolid() && !object.isObject(ignore)) {
-				System.out.println(tile.getX());
-				System.out.println(tile.getY());
 				return false;
 			}	
 		}

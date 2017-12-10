@@ -26,8 +26,13 @@ public abstract class Actor extends GameObj {
 		this.animLength = animLength;
 		this.currentTic = 0;
 	}
+
 	
-	public int getAnimLength() {
+
+
+
+
+	int getAnimLength() {
 		return this.animLength;
 	}
 	
@@ -84,8 +89,9 @@ public abstract class Actor extends GameObj {
 	}
 
 	public void update(GameModel gm, Input input) {
-		if(this.currentTic%(speed*3)==0)
-			this.getImageFrame().setX((this.getImageFrame().getX()-1)<=0?animLength-1:(this.getImageFrame().getX()-1));
+		this.currentTic++;
+		if(this.currentTic%(speed*15)==0)
+			this.getImageFrame().setX((this.getImageFrame().getX()+1)%animLength);
 	}
 	
 	public void clipToTile(GameModel gm) {
@@ -106,7 +112,7 @@ public abstract class Actor extends GameObj {
 	
 	public void render(GameModel gm, Graphics g) {
 		g.drawImage(appearance, this.position.getX(), this.position.getY(), (this.position.getX()+32), (this.position.getY()+32),
-				this.imageFrame.getX()*32, this.imageFrame.getY()*32, (this.imageFrame.getX()+1)*32, (this.imageFrame.getY()+1)*32, null);
+				this.imageFrame.getX()*this.getImageSize(), this.imageFrame.getY()*this.getImageSize(), (this.imageFrame.getX()+1)*this.getImageSize(), (this.imageFrame.getY()+1)*this.getImageSize(), null);
 	}
 	
 	//If it dies it returns false

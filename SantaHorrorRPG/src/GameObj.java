@@ -30,6 +30,7 @@ public class GameObj {
 	protected BufferedImage appearance;
 	protected boolean solid;
 	protected Position position;
+	protected int imageSize;
 	
 	public void loadImage(String filename) {
 		try {
@@ -41,6 +42,20 @@ public class GameObj {
 		//System.out.println("Image Loaded");
 	}
 	
+	
+	
+	public int getImageSize() {
+		return imageSize;
+	}
+
+
+
+	public void setImageSize(int imageSize) {
+		this.imageSize = imageSize;
+	}
+
+
+
 	public Image getAppearance() {
 		return appearance;
 	}
@@ -193,7 +208,8 @@ public class GameObj {
 	}
 	
 	public void render(GameModel gm, Graphics g) {
-		g.drawImage(appearance, this.position.getX(), this.position.getY(), null);
+		g.drawImage(appearance, this.position.getX(), this.position.getY(), this.position.getX()+32, this.position.getY()+32,
+				0, 0, imageSize, imageSize, null);
 	}
 	
 	public void swap() {

@@ -1,6 +1,7 @@
+import java.awt.Graphics;
 
 public class Player extends Actor {
-	public Player(int speed, int direction, int health, int moveType, int gender, int animLength) {
+	public Player(int speed, int direction, int health, int moveType, int animLength, int gender) {
 		super(speed, direction, health, moveType, animLength);
 		this.setGender(gender);
 	}
@@ -56,6 +57,11 @@ public class Player extends Actor {
 			this.clipToTile(gm);
 		}
 		
+	}
+	
+	public void render(GameModel gm, Graphics g) {
+		g.drawImage(appearance, this.position.getX(), this.position.getY(), (this.position.getX()+32), (this.position.getY()+32),
+				this.imageFrame.getX()*32, this.imageFrame.getY()*32, (this.imageFrame.getX()+1)*32, (this.imageFrame.getY()+1)*32, null);
 	}
 	
 	public void loadFromFile(String name, Position position) {

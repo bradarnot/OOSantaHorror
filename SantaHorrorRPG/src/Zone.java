@@ -44,6 +44,9 @@ public class Zone extends GameState {
 		screen.setBounds(0,0,screenWidth-20,screenHeight-20);  
 		
 		gm.getPlayer().update(gm, input);
+		for(Actor a : gm.getActors()) {
+			a.update(gm, input);
+		}
         
 		gm.getFrame().setSize(screenWidth, screenHeight);  
 		gm.getFrame().setLayout(null);  

@@ -77,7 +77,7 @@ public abstract class Actor extends GameObj {
 		if(input.isDown()) this.setDirection(4);
 		if(input.isUp()) this.setDirection(0);
 		if(input.isRight()) this.setDirection(2);
-		if(input.isLeft()) this.setDirection(4);
+		if(input.isLeft()) this.setDirection(6);
 		
 		//System.out.println("move? " + input.movement());
 		if(input.movement()) {
@@ -86,6 +86,7 @@ public abstract class Actor extends GameObj {
 		} else {
 			this.clipToTile(gm);
 		}
+		System.out.println(this.position);
 //		this.currentTic = (this.currentTic+1)%this.speed;
 //		if(this.currentTic == 0) {
 //			this.move();
@@ -123,6 +124,7 @@ public abstract class Actor extends GameObj {
 			x+=speed;
 		if(this.direction == 5 || this.direction == 6 || this.direction == 7)
 			x-=speed;
+		System.out.println(new Position(x,y));
 		return new Position(x,y);
 		
 	}

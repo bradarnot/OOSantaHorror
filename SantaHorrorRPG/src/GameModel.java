@@ -18,7 +18,7 @@ public class GameModel {
 		objects = new ArrayList<GameObj>();
 		actors = new ArrayList<Actor>();
 		fileManager = new FileManager();
-		player = new Player(0, 0, 0, 0, 0, 0);
+		player = new Player(2, 0, 0, 0, 0, 0);
 		player.setPosition(new Position(3,3));
 		f = new JFrame();
 		kl = k;

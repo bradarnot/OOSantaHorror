@@ -20,14 +20,13 @@ public class GameModel {
 	private int height;
 
 
-	public GameModel(KeyListener k) {
+	public GameModel(KeyListener kl) {
 		this.setNextZoneTrigger(new ArrayList<Trigger>());
 		objects = new ArrayList<GameObj>();
 		actors = new ArrayList<Actor>();
 		fileManager = new FileManager();
 		player = new Player(2, 0, 0, 0, 0, 6);
 		f = new JFrame();
-		kl = k;
 		f.addKeyListener(kl);
 		tileSize = 32;
 	}

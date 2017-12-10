@@ -90,7 +90,8 @@ public class Game extends Observer{
 			int health = (int) jsonObj.get("health");
 			int moveType = (int) jsonObj.get("moveType");
 			int attackPower = (int) jsonObj.get("attackPower");
-			Monster temp = new Monster(speed, 0, direction, health, moveType, attackPower);
+			int frame = toIntExact((long) jsonObj.get("frameLength"));
+			Monster temp = new Monster(speed, direction, health, moveType, frame, attackPower);
 			temp.loadFromFile(name, pos);
 			gameMonsters.add(temp);
 		}	
@@ -107,7 +108,8 @@ public class Game extends Observer{
 			int health = (int) jsonObj.get("health");
 			int moveType = (int) jsonObj.get("moveType");
 			int fear = (int) jsonObj.get("fear");
-			NPC temp = new NPC(speed, 0, direction, health, moveType, fear);
+			int frame = toIntExact((long) jsonObj.get("frameLength"));
+			NPC temp = new NPC(speed, direction, health, moveType, frame, fear);
 			temp.loadFromFile(name, pos);
 			gameNPCs.add(temp);
 		}
@@ -136,7 +138,8 @@ public class Game extends Observer{
 		int direction = toIntExact((Long) playerObj.get("direction"));
 		int health = toIntExact((Long) playerObj.get("health"));
 		int moveType = toIntExact((Long) playerObj.get("moveType"));
-		Player player = new Player(speed, direction, health, moveType, 0, 6);
+		int frameLength = toIntExact((Long) playerObj.get("frameLength") );
+		Player player = new Player(speed, direction, health, moveType, 0, frameLength);
 		player.loadFromFile(name, playerPos);
 		
 		model.setPlayer(player);

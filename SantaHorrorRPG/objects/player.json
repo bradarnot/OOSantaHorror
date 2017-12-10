@@ -1,4 +1,5 @@
 {
+	"name":"player",
 	"nonPlayerInteractState": 0,
 	"playerInteractState": 0,
 	"nonPlayerInteractions": [],

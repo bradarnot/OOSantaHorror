@@ -28,6 +28,7 @@ public class Interaction {
 		this.effectDirection = effectDirection;
 	}
 	
+	
 	public int getNextInteraction(String direction) {
 		if(direction.equals("north")) {
 			return northInteraction;

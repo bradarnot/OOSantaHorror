@@ -18,6 +18,7 @@ public class GameModel {
 	private ArrayList<Trigger> nextZoneTrigger;
 	private int width;
 	private int height;
+	private ArrayList<InteractMoment> moments;
 
 
 	public GameModel(KeyListener kl) {
@@ -25,11 +26,26 @@ public class GameModel {
 		objects = new ArrayList<GameObj>();
 		actors = new ArrayList<Actor>();
 		fileManager = new FileManager();
+		moments = new ArrayList<InteractMoment>();
 		f = new JFrame();
 		f.addKeyListener(kl);
 		tileSize = 32;
 	}
 	
+	
+	
+	public ArrayList<InteractMoment> getMoments() {
+		return moments;
+	}
+
+
+
+	public void setMoments(InteractMoment moments) {
+		this.moments.add(moments);
+	}
+
+
+
 	public int getWidth() {
 		return this.width;
 	}
@@ -80,6 +96,13 @@ public class GameModel {
 		ArrayList<GameObj> objectsToInteractWith = this.getObjectsAtPosition(tile);
 		for(GameObj o : objectsToInteractWith) {
 			Interaction i = o.interact(byPlayer, invertDirection(direction));
+			if(i != null) {
+				System.out.println(i.getDialogue());
+				if(i.isSwap()) {
+					o.swap();
+				}
+				
+			}
 		}
 		
 	}

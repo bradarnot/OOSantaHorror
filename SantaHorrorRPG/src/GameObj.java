@@ -72,7 +72,10 @@ public class GameObj {
 	}
 
 	public void setNonPlayerInteractState(int nonPlayerInteractState) {
-		this.nonPlayerInteractState = nonPlayerInteractState;
+		if(nonPlayerInteractState != -1) {
+			this.nonPlayerInteractState = nonPlayerInteractState;			
+		}
+
 	}
 
 	public ArrayList<Interaction> getNonPlayerInteractions() {
@@ -88,7 +91,9 @@ public class GameObj {
 	}
 
 	public void setPlayerInteractState(int playerInteractState) {
-		this.playerInteractState = playerInteractState;
+		if(playerInteractState != -1) {
+			this.playerInteractState = playerInteractState;	
+		}
 	}
 
 	public ArrayList<Interaction> getPlayerInteractions() {
@@ -315,12 +320,19 @@ public class GameObj {
 	}
 	
 	public Interaction interact(boolean byPlayer, String direction) {
+		if((this.getNonPlayerInteractState() >= this.getNonPlayerInteractions().size() && !byPlayer) 
+				|| this.getPlayerInteractState() >= this.getPlayerInteractions().size() && byPlayer) {
+			return null;
+		}
+		
+		
+		
 		Interaction result = nonPlayerInteractions.get(nonPlayerInteractState);
 		if(byPlayer) {
 			result = playerInteractions.get(playerInteractState);
-			playerInteractState = result.getNextInteraction(direction);
+			this.setPlayerInteractState(result.getNextInteraction(direction));
 		}else {
-			nonPlayerInteractState = result.getNextInteraction(direction);
+			this.setNonPlayerInteractState(result.getNextInteraction(direction));
 		}		
 		return result;
 		

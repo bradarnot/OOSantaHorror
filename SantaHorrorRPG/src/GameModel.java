@@ -26,7 +26,6 @@ public class GameModel {
 		actors = new ArrayList<Actor>();
 		fileManager = new FileManager();
 		player = new Player(2, 0, 0, 0, 0, 6);
-		player.setPosition(new Position(64,64));
 		f = new JFrame();
 		kl = k;
 		f.addKeyListener(kl);

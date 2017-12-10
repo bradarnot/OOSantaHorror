@@ -130,15 +130,7 @@ public class GameObj {
 	public void loadFromFile(String filename, Position position) {
 		//System.out.println(filename);
 		JSONObject json = JsonParser.getJson("objects", filename + ".json");
-		this.setName(filename);
-		try{
-			
-		}
-		catch(Exception e) {
-			
-		}
-		
-		
+		this.setName(filename);		
 		try{
 			this.setNonPlayerInteractState(toIntExact((Long) json.get("nonPlayerInteractState")));			
 		}
@@ -166,14 +158,14 @@ public class GameObj {
 		}
 		this.setSolid(solid);
 		try{
-			
+			this.setSwapInTo((String) json.get("swapInTo"));
 		}
 		catch(Exception e) {
-			
+			this.setSwapInTo(null);
 		}
 		
 		this.setPosition(position);
-		this.setSwapInTo((String) json.get("swapInTo"));
+		
 		int imageSize;
 		try {
 		    imageSize = toIntExact((Long) json.get("imageSize"));
@@ -182,18 +174,43 @@ public class GameObj {
 			imageSize = 32;
 		}
 		this.setImageSize(imageSize);
-
+		
+		try{
+			
+		}
+		catch(Exception e) {
+			
+		}
 		JSONArray fileInteractions = (JSONArray) json.get("nonPlayerInteractions");
 		ArrayList<Interaction> nonPlayerInteractions = new ArrayList<Interaction>();
 		for (int i=0; i < fileInteractions.size(); i++) {
 			JSONObject jsonObj = (JSONObject) fileInteractions.get(i);
-			String dialogue = (String) jsonObj.get("dialog");
-			boolean swap = (boolean) jsonObj.get("swap");
-			String effectDirection = (String) jsonObj.get("effect");
+			String dialogue;
+			try{
+				dialogue = (String) jsonObj.get("dialog");
+			}
+			catch(Exception e) {
+				dialogue = "...";
+			}
+			boolean swap;
+			try{
+				swap = toIntExact((Long) jsonObj.get("swap")) != 0;
+			}
+			catch(Exception e) {
+				swap = false;
+			}
+			String effectDirection;
+			try{
+				effectDirection = (String) jsonObj.get("effect");
+			}
+			catch(Exception e) {
+				effectDirection = null;
+			}
 			int northInteraction = (int) jsonObj.get("north");
 			int eastInteraction = (int) jsonObj.get("east");
 			int southInteraction = (int) jsonObj.get("south");
-			int westInteraction = (int) jsonObj.get("west");	
+			int westInteraction = (int) jsonObj.get("west");
+			
 			Interaction temp = new Interaction();
 			
 			temp.setDialogue(dialogue);

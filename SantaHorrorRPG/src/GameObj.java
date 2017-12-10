@@ -38,7 +38,7 @@ public class GameObj {
 			System.out.println("Could not load image!!");
 			e.printStackTrace();
 		}
-		System.out.println("Image Loaded");
+		//System.out.println("Image Loaded");
 	}
 	
 	public Image getAppearance() {
@@ -201,8 +201,6 @@ public class GameObj {
 	}
 	
 	public boolean isObject(String name) {
-		System.out.println(name);
-		System.out.println(this.getName());
 		return name.equals(this.getName());
 	}
 	

@@ -86,25 +86,25 @@ public class GameModel {
 		System.out.println(this.height);
 		
 		Position position;
-		for(int i = -32; i<=this.width; i+=32) {
+		for(int i = -this.getTileSize(); i<=this.width; i+=this.getTileSize()) {
 			GameObj borderTop = new GameObj();
 			position = new Position(i,0);
 			borderTop.loadFromFile("border", position);
 			this.objects.add(borderTop);
 			
 			GameObj borderBot = new GameObj();
-			position = new Position(i, this.height - (this.height%32) - 32);
+			position = new Position(i, this.height - (this.height%this.getTileSize()));
 			borderBot.loadFromFile("border", position);
 			this.objects.add(borderBot);
 		}
-		for(int i = 0; i<this.height; i+=32) {
+		for(int i = 0; i<this.height; i+=this.getTileSize()) {
 			GameObj borderLeft = new GameObj();
 			position = new Position(0,i);
 			borderLeft.loadFromFile("border", position);
 			this.objects.add(borderLeft);
 			
 			GameObj borderRight = new GameObj();
-			position = new Position(this.width - (this.width%32) -32, i);
+			position = new Position(this.width - (this.width%this.getTileSize()), i);
 			borderRight.loadFromFile("border", position);
 			this.objects.add(borderRight);
 		}		
@@ -172,15 +172,24 @@ public class GameModel {
 	}*/
 	
 	public boolean canMoveTo(Position tile, String ignore) {
-		tile.setX(tile.getX() - (tile.getX() % 32));
-		tile.setY(tile.getY() - (tile.getY() % 32));
+		tile.setX(tile.getX() - (tile.getX() % this.getTileSize()));
+		tile.setY(tile.getY() - (tile.getY() % this.getTileSize()));
 		
-		ArrayList<GameObj> objects = this.getObjectsAtPosition(tile);
-		System.out.println(tile.getX());
-		System.out.println(tile.getY());
+		ArrayList<GameObj> objectsTopLeft = this.getObjectsAtPosition(tile);
+		tile.setX(tile.getX()+this.getTileSize());
+		tile.setY(tile.getY()+this.getTileSize());
 		
-		for(int index = 0; index < objects.size(); index++) {
-			GameObj object = objects.get(index);
+		ArrayList<GameObj> objectsBotRight = this.getObjectsAtPosition(tile);
+		
+		for(int index = 0; index < objectsTopLeft.size(); index++) {
+			GameObj object = objectsTopLeft.get(index);
+			if(object != null && object.isSolid() && !object.isObject(ignore)) {
+				return false;
+			}	
+		}
+		
+		for(int index = 0; index < objectsBotRight.size(); index++) {
+			GameObj object = objectsBotRight.get(index);
 			if(object != null && object.isSolid() && !object.isObject(ignore)) {
 				return false;
 			}	
@@ -194,7 +203,7 @@ public class GameModel {
 		ArrayList<GameObj> result = new ArrayList<GameObj>();
 		for(int x = -range; x<range+1; x++) {
 			for(int y = -range; y<range+1; y++) {
-				ArrayList<GameObj> temp = this.getObjectsAtPosition(new Position(tile.getX() + (x*32), tile.getY()+(y*32)));
+				ArrayList<GameObj> temp = this.getObjectsAtPosition(new Position(tile.getX() + (x*this.getTileSize()), tile.getY()+(y*this.getTileSize())));
 				if((x != 0 || y !=0) && temp.size() !=  0) {
 					for(int index = 0; index < temp.size(); index++) {
 						result.add(temp.get(index));	

@@ -58,7 +58,6 @@ public class Player extends Actor {
 			if(this.currentTic%(12/speed)==0)
 				this.getImageFrame().setX((this.getImageFrame().getX()-1)<0?animLength-1:(this.getImageFrame().getX()-1));
 			if(gm.canMoveTo(this.potentialMove(), this)) this.executeMove();
-			System.out.println(this.currentTic);
 		} else {
 			this.getImageFrame().setX(1);
 			this.clipToTile(gm);

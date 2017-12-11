@@ -4,7 +4,7 @@ import javax.swing.*;
 
 public class Menu extends JPanel {
 
-	Image bgImage;
+	private Image bgImage;
 	
 	public Menu(Image background) {
 		super();

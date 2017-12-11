@@ -7,9 +7,9 @@ import java.io.IOException;
 
 public class DrawPanel extends JPanel {
 
-	GameModel gm;
-	int width;
-	int height;
+	private GameModel gm;
+	private int width;
+	private int height;
 	
 	public DrawPanel(GameModel model, int width, int height) {
 		super();

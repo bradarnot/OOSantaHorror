@@ -10,6 +10,8 @@ import org.json.simple.parser.ParseException;
 
 public class JsonParser {
 	
+	private String filepath;
+	
 	public static JSONObject getJson(String directory, String filename) {
 		String file = System.getProperty("user.dir") + "/" + directory + "/" + filename;
 		JSONParser parser = new JSONParser();
